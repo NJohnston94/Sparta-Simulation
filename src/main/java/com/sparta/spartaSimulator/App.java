@@ -1,4 +1,4 @@
-package org.example;
+package com.sparta.spartaSimulator;
 
 /**
  * Hello world!
