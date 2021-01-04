@@ -1,6 +1,11 @@
 package com.sparta.spartaSimulator.model;
 
-public class Trainee {
+import com.sparta.spartaSimulator.controller.CreationInt;
+
+public class Trainee implements CreationInt {
+
+    private TraineeStatus traineeStatus;
+    private int traineeID;
 
     public enum TraineeStatus{
         PLACED,
@@ -8,8 +13,9 @@ public class Trainee {
         UNPLACED
     }
 
-    private TraineeStatus traineeStatus;
-    private int traineeID;
+    public Trainee() {
+        this.traineeStatus = TraineeStatus.UNPLACED;
+    }
 
     public TraineeStatus getTraineeStatus() {
         return traineeStatus;
