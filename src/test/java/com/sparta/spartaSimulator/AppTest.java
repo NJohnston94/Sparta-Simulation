@@ -3,7 +3,7 @@ package com.sparta.spartaSimulator;
 
 import org.junit.jupiter.api.Assertions;
 
-class Test {
+class AppTest {
 
     @org.junit.jupiter.api.Test
     public void shouldAnswerWithTrue() {
