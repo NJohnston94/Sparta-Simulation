@@ -1,6 +1,8 @@
 package com.sparta.spartaSimulator.model;
 
-public class Trainee {
+import com.sparta.spartaSimulator.controller.CreationInt;
+
+public class Trainee implements CreationInt {
 
     public enum TraineeStatus{
         PLACED,
