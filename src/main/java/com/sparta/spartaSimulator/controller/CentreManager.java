@@ -9,8 +9,8 @@ public class CentreManager {
     // Calls factory to have centre object creates
     // Maintain how many centre objects
     // Create centres
-    public static Centre createCentre() {
-        Centre centre = new Centre;
-        return centre;
+    public static TraineeCentre createCentre() {
+        TraineeCentre traineeCentre = new TraineeCentre();
+        return traineeCentre;
     }
 }
