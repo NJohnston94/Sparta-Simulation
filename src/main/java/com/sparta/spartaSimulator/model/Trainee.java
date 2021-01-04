@@ -2,14 +2,18 @@ package com.sparta.spartaSimulator.model;
 
 public class Trainee {
 
+    private TraineeStatus traineeStatus;
+    private int traineeID;
+
     public enum TraineeStatus{
         PLACED,
         WAITING,
         UNPLACED
     }
 
-    private TraineeStatus traineeStatus;
-    private int traineeID;
+    public Trainee() {
+        this.traineeStatus = TraineeStatus.UNPLACED;
+    }
 
     public TraineeStatus getTraineeStatus() {
         return traineeStatus;
