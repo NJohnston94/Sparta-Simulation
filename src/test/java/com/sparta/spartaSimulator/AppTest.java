@@ -1,20 +1,12 @@
-//package org.example;
-//
-//import static org.junit.Assert.assertTrue;
-//
-//import org.junit.Test;
-//
-///**
-// * Unit test for simple App.
-// */
-//public class AppTest
-//{
-//    /**
-//     * Rigorous Test :-)
-//     */
-//    @Test
-//    public void shouldAnswerWithTrue()
-//    {
-//        assertTrue( true );
-//    }
-//}
+package com.sparta.spartaSimulator;
+
+
+import org.junit.jupiter.api.Assertions;
+
+public class Test {
+
+    @org.junit.jupiter.api.Test
+    public void shouldAnswerWithTrue() {
+        Assertions.assertEquals(1,1);
+    }
+}
