@@ -54,4 +54,11 @@ public class TraineeCentre implements CreationInt {
         return MAX_CAPACITY;
     }
 
+    public HashSet<Trainee> getTrainees(){
+        return allTrainees;
+    }
+
+
+
+
 }
