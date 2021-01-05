@@ -55,6 +55,7 @@ public class UserInterface {
      * Test via reading back in the input, if there is additional time
      */
 
+
     public static void displayResults(){
 //        number of open centres
         // Get number of centres in HashMap
