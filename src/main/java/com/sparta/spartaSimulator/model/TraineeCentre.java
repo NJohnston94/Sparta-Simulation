@@ -1,10 +1,10 @@
 package com.sparta.spartaSimulator.model;
 
-import com.sparta.spartaSimulator.controller.CreationInt;
+import com.sparta.spartaSimulator.controller.CentreManager;
 
 import java.util.HashSet;
 
-public class TraineeCentre implements CreationInt {
+public class TraineeCentre {
 
     private HashSet<Trainee> allTrainees = new HashSet<>();
     private final static int MAX_CAPACITY = 100;
@@ -18,6 +18,16 @@ public class TraineeCentre implements CreationInt {
 
     public TraineeCentre() {
         this.centreStatus = CentreStatus.NOT_FULL;
+    }
+
+    //Used to test full capacity of centre in CentreManager class and the checkCentreStatus method works as intended
+    public TraineeCentre(int cap) {
+        for(int i = 0; i < cap;i++)
+        {
+            Trainee newOne = new Trainee();
+            allTrainees.add(newOne);
+        }
+        checkCentreStatus();
     }
 
     public CentreStatus getCentreStatus() {
