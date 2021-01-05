@@ -5,35 +5,53 @@ import com.sparta.spartaSimulator.controller.CreationInt;
 import java.util.HashSet;
 
 public class TraineeCentre implements CreationInt {
-    private int centreID;
+
     private HashSet<Trainee> allTrainees = new HashSet<>();
     private final static int MAX_CAPACITY = 100;
-    private int currentCapacity;
-    private int availablePlaces = MAX_CAPACITY;
-    private boolean isFull;
+    private CentreStatus centreStatus;
 
-    private static int numOfCentres = 0;
-
-    public TraineeCentre(){
-        numOfCentres++;
-        centreID = numOfCentres;
+    public enum CentreStatus{
+        FULL,
+        NEARLY_FULL,
+        NOT_FULL
     }
 
-    public TraineeCentre(int centreID) {
-        this.centreID = centreID;
+    public TraineeCentre() {
+        this.centreStatus = CentreStatus.NOT_FULL;
+    }
+
+    public CentreStatus getCentreStatus() {
+        return centreStatus;
+    }
+
+    private void setCentreStatus(CentreStatus centreStatus) {
+        this.centreStatus = centreStatus;
+    }
+
+    private void checkCentreStatus() {
+        if(allTrainees.size() == MAX_CAPACITY) {
+            setCentreStatus(CentreStatus.FULL);
+        } else if (allTrainees.size() >= 80) {
+            setCentreStatus(CentreStatus.NEARLY_FULL);
+        }
     }
 
     public void addTrainee(Trainee trainee){
         allTrainees.add(trainee);
-        currentCapacity++;
-        availablePlaces--;
+        checkCentreStatus();
+    }
+
+    public void addAllTrainees(HashSet<Trainee> trainees) {
+        allTrainees.addAll(trainees);
+        checkCentreStatus();
     }
 
     public int getCurrentCapacity() {
-        return currentCapacity;
+        return allTrainees.size();
     }
 
-    public int getAvailablePlaces() {
-        return availablePlaces;
+    public static int getMaxCapacity() {
+        return MAX_CAPACITY;
     }
+
 }
