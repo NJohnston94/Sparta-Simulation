@@ -73,15 +73,8 @@ public class UserInterface {
         // Waiting list size
         System.out.println("Number of trainees on the waiting list: "+WaitingList.waitingList.size());
 
-    public static void main(String[] args) {
-        System.out.println("Months: " + getDurationInput());
+ 
     }
-
-
-
-
-
-
 
 
 
