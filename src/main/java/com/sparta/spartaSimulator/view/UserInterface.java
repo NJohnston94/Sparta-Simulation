@@ -51,10 +51,6 @@ public class UserInterface {
      * Test via reading back in the input, if there is additional time
      */
 
-    public static void main(String[] args) {
-        System.out.println("Months: " + getDurationInput());
-    }
-
 
 
 
