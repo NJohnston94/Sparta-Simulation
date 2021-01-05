@@ -34,6 +34,7 @@ public class CentreManager {
         for (TraineeCentre centre: openCentres.values()) {
             countTrainees += centre.getCurrentCapacity();
         }
+        totalNumberOfTrainees = countTrainees;
         return countTrainees;
     }
 
