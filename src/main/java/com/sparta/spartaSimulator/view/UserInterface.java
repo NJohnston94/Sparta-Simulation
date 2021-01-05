@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class UserInterface {
 
-    public static int getDurationInput(){
+    public static int getNumberOfIterations(){
         System.out.println("Enter duration of simulation in months:");
         int months = 0;
         boolean validInput =false;
