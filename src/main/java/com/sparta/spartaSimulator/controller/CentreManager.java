@@ -28,4 +28,13 @@ public class CentreManager {
         return false;
     }
 
+    public static int getTrainees() {
+        int countTrainees = 0;
+
+        for (TraineeCentre centre: openCentres.values()) {
+            countTrainees += centre.getCurrentCapacity();
+        }
+        return countTrainees;
+    }
+
 }
