@@ -1,29 +1,33 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
+import com.sparta.spartaSimulator.model.WaitingList;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+
+import java.util.Random;
 
 public class CentreManager {
-    public static HashMap<Integer, TraineeCentre> openCentres = new HashMap<>();
+    public static ArrayList<TraineeCentre> openCentres = new ArrayList<>();
     public static int numberOfFullCentres = 0;
     public static int totalNumberOfTrainees = 0;
-    static int centreCount = 0;
+
 
     
     public static TraineeCentre createCentre()
     {
-        centreCount++;
+
         TraineeCentre centre = new TraineeCentre();
-        openCentres.put((centreCount), centre);
+        openCentres.add(centre);
         return centre;
     }
 
     public static TraineeCentre createCentre(int cap)
     {
-        centreCount++;
+
         TraineeCentre centre = new TraineeCentre(cap);
-        openCentres.put(centreCount, centre);
+        openCentres.add(centre);
         return centre;
     }
 
@@ -40,11 +44,29 @@ public class CentreManager {
     public static int getTrainees() {
         int countTrainees = 0;
 
-        for (TraineeCentre centre: openCentres.values()) {
+        for (TraineeCentre centre: openCentres) {
             countTrainees += centre.getCurrentCapacity();
         }
         totalNumberOfTrainees = countTrainees;
         return countTrainees;
+    }
+
+
+
+    private static int generateNumberOfTrainees(){
+        Random random = new Random();
+        int randomNumber = random.nextInt(21);
+        return randomNumber;
+    }
+
+
+
+    public static void addTrainee(TraineeCentre traineeCentre, Trainee trainee){
+
+        if (WaitingList.getWaitingListSize()!= 0 ){
+            WaitingList.addTraineesToCentre(traineeCentre,generateNumberOfTrainees());
+        }
+
     }
 
 
