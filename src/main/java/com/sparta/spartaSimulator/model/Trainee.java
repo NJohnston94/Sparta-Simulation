@@ -1,8 +1,6 @@
 package com.sparta.spartaSimulator.model;
 
-import com.sparta.spartaSimulator.controller.CreationInt;
-
-public class Trainee implements CreationInt {
+public class Trainee {
 
     private TraineeStatus traineeStatus;
     private int traineeID;
