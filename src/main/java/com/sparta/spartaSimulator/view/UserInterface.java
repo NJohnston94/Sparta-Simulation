@@ -55,6 +55,7 @@ public class UserInterface {
      * Test via reading back in the input, if there is additional time
      */
 
+
     public static void displayResults(){
 //        number of open centres
         System.out.println("Number of open centres: "+CentreManager.openCentres.size());
@@ -69,12 +70,8 @@ public class UserInterface {
         System.out.println("Number of trainees on the waiting list: "+WaitingList.waitingList.size());
 
 
-
-
-
-
-
-
+ 
+    }
 
 
 

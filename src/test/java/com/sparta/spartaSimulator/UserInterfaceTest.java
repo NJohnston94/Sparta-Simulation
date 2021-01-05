@@ -16,7 +16,7 @@ public class UserInterfaceTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        Assertions.assertEquals(10, UserInterface.getDurationInput());
+        Assertions.assertEquals(10, UserInterface.getNumberOfIterations());
     }
 
     
