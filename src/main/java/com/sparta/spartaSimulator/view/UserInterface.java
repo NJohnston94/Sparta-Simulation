@@ -9,25 +9,25 @@ import java.util.Scanner;
 
 public class UserInterface {
 
-    public static int getNumberOfIterations(){
+    public static int getNumberOfIterations() {
         System.out.println("Enter duration of simulation in months:");
         int months = 0;
-        boolean validInput =false;
+        boolean validInput = false;
 
-        while(!validInput){
+        while (!validInput) {
             Scanner scanner = new Scanner(System.in);
-            try{
+            try {
                 months = scanner.nextInt();
                 //if wanting an upper limit: edit statement below to an OR statement with upper bound
-                while(months < 1){
+                while (months < 1) {
                     System.out.println("Enter valid number!");
-                    months =scanner.nextInt();
+                    months = scanner.nextInt();
                 }
                 validInput = true;
 
-            }catch(InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("Enter a number!");
-                validInput =false;
+                validInput = false;
             }
         }
 
@@ -37,12 +37,12 @@ public class UserInterface {
 
     //Additional method: setting frequency of creation of centres (only use when MVP is complete!)
 
-    public static int getFrequencyOfCentresInput(){
+    public static int getFrequencyOfCentresInput() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter how frequent new centres should be created in months:");
         int frequency = scanner.nextInt();
 
-        while(frequency < 1){
+        while (frequency < 1) {
             System.out.println("Enter valid number:");
             frequency = scanner.nextInt();
         }
@@ -56,24 +56,21 @@ public class UserInterface {
      */
 
 
-    public static void displayResults(){
+    public static void displayResults() {
 //        number of open centres
-        System.out.println("Number of open centres: "+CentreManager.openCentres.size());
+        System.out.println("Number of open centres: " + CentreManager.openCentres.size());
 
 //        number of full centres
-        System.out.println("Number of full centres: "+CentreManager.numberOfFullCentres);
+        System.out.println("Number of full centres: " + CentreManager.numberOfFullCentres);
 
 //        number of trainees currently training
-        System.out.println("Number of trainees currently training: "+CentreManager.totalNumberOfTrainees);
+        System.out.println("Number of trainees currently training: " + CentreManager.totalNumberOfTrainees);
 
 //        number of trainees on the waiting list
-        System.out.println("Number of trainees on the waiting list: "+WaitingList.waitingList.size());
+        System.out.println("Number of trainees on the waiting list: " + WaitingList.getWaitingListSize());
 
 
- 
     }
-
-
 
 
 }
