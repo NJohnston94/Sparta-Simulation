@@ -12,4 +12,16 @@ public class TraineeManagerTest {
         Trainee[] test = TraineeManager.createTrainees(10);
         Assertions.assertEquals(10, test.length);
     }
+
+    @Test
+    void checkLowerBound() {
+        Assertions.assertTrue(TraineeManager.createTrainees().size()>=20);
+    }
+
+    @Test
+    void checkUpperBound() {
+        Assertions.assertTrue(TraineeManager.createTrainees().size()<=30);
+    }
+
+
 }
