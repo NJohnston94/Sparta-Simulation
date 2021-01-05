@@ -14,6 +14,6 @@ public class CentreManagerTest {
 
     @Test
     public void centreCreation() {
-        Assertions.assertNotNull(CentreManager.createCentre());
+        Assertions.assertNotNull(CentreManager.creatingFactory());
     }
 }
