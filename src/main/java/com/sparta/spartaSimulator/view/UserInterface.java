@@ -9,6 +9,34 @@ import java.util.Scanner;
 
 public class UserInterface {
 
+    private static final Scanner scanner = new Scanner(System.in);
+    private static int openingFrequency = 2;
+
+    public static int getUserInput(){
+
+        return scanner.nextInt();
+
+    }
+
+    public static void setCentreOpeningFrequency() {
+
+        System.out.print("How often (in months) should a new Training Centre open?  ");
+        int userInput = getUserInput();
+        if(userInput > 0) {
+            openingFrequency = userInput;
+        }else {
+            System.out.println("This value must be greater than 0.");
+            setCentreOpeningFrequency();
+        }
+
+    }
+
+    public static int getCentreFrequencyOpening() {
+
+        return openingFrequency;
+
+    }
+
     public static int getNumberOfIterations() {
         System.out.println("Enter duration of simulation in months:");
         int months = 0;
@@ -71,6 +99,10 @@ public class UserInterface {
 
 
     }
+
+
+
+
 
 
 }
