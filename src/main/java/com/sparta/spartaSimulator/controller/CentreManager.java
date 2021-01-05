@@ -8,7 +8,6 @@ public class CentreManager {
     public static HashMap<Integer, TraineeCentre> openCentres;
     public static int numberOfFullCentres = 0;
     public static int totalNumberOfTrainees = 0;
-    private HashMap<Integer, TraineeCentre> openCentres;
 
     // Capacity
     // Getters &
@@ -23,22 +22,20 @@ public class CentreManager {
         for(TraineeCentre centre: openCentres.values()) {
             if(centre.getCentreStatus() == TraineeCentre.CentreStatus.FULL) {
                 numberOfFullCentres++;
-    public static CreationInt creatingFactory()
-    {
-        return Factory.factory(2);
-    }
-
-    public boolean isFull()
-    {
-        for(TraineeCentre centre: openCentres.values())
-        {
-            if(centre.getCentreStatus() == TraineeCentre.CentreStatus.FULL)
-            {
                 return true;
             }
         }
         return false;
     }
 
-}
+    public static int getTrainees() {
+        int countTrainees = 0;
+
+        for (TraineeCentre centre: openCentres.values()) {
+            countTrainees += centre.getCurrentCapacity();
+        }
+        totalNumberOfTrainees = countTrainees;
+        return countTrainees;
+    }
+
 }
