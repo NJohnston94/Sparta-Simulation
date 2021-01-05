@@ -1,10 +1,5 @@
 package com.sparta.spartaSimulator.controller;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-
 public class TimeManager implements Runnable {
 
     private static long currentTime;
@@ -19,6 +14,18 @@ public class TimeManager implements Runnable {
         TimeManager.currentTime = currentTime;
     }
 
+    public static long getSystemTime() {
+        return System.currentTimeMillis();
+    }
+
+    public static long delayTime(long separation, long iteration, long startTime) {
+
+        long temp = (getSystemTime() - startTime);
+
+        // Calculate delay in milliseconds
+        return (separation * iteration) - temp;
+    }
+
     public int getNumberOfIterations() {
         return numberOfIterations;
     }
@@ -26,19 +33,6 @@ public class TimeManager implements Runnable {
     public void setNumberOfIterations(int numberOfIterations) {
         TimeManager.numberOfIterations = numberOfIterations;
     }
-
-    public static long getSystemTime() {
-        return System.currentTimeMillis();
-    }
-
-    public static long delayTime(long separation, long iteration, long startTime) {
-
-        long temp = (getSystemTime()-startTime);
-
-        // Calculate delay in milliseconds
-        return (separation * iteration) - temp;
-    }
-
 
     @Override
     public void run() {
