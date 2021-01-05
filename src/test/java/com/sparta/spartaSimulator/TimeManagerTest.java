@@ -14,7 +14,8 @@ public class TimeManagerTest {
 
     @Test
     public void delayTimeTest() {
-        TimeManager.delayTime(2, 4);
-        Assertions.assertEquals(8, TimeManager.getCurrentTime());
+        long startTime = TimeManager.getSystemTime();
+        long delay = TimeManager.delayTime(2000, 4, startTime);
+        Assertions.assertEquals(8000, delay);
     }
 }

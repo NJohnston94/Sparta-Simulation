@@ -1,9 +1,13 @@
 package com.sparta.spartaSimulator;
 
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import com.sparta.spartaSimulator.controller.TimeManager;
+
+public class App {
+    public static void main(String[] args) {
+        TimeManager timeManager = new TimeManager();
+
+        Thread thread = new Thread(timeManager);
+
+        thread.start();
     }
 }

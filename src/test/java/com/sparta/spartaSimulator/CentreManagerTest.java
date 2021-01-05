@@ -16,4 +16,11 @@ public class CentreManagerTest {
     public void centreCreation() {
         Assertions.assertNotNull(CentreManager.createCentre());
     }
+
+    @Test
+    public void centreIsFull()
+    {
+        Assertions.assertNotNull(CentreManager.createCentre(100));
+        Assertions.assertTrue(CentreManager.isFull(1));
+    }
 }

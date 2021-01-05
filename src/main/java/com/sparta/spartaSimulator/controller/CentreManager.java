@@ -5,28 +5,47 @@ import com.sparta.spartaSimulator.model.TraineeCentre;
 import java.util.HashMap;
 
 public class CentreManager {
-    private HashMap<Integer, TraineeCentre> openCentres;
+    public static HashMap<Integer, TraineeCentre> openCentres = new HashMap<>();
+    public static int numberOfFullCentres = 0;
+    public static int totalNumberOfTrainees = 0;
+    static int centreCount = 0;
 
-    // Capacity
-    // Getters &
-    // Parameters
-    // Calls factory to have centre object creates
-    // Maintain how many centre objects
-    public static CreationInt creatingFactory()
+    
+    public static TraineeCentre createCentre()
     {
-        return Factory.factory(2);
+        centreCount++;
+        TraineeCentre centre = new TraineeCentre();
+        openCentres.put((centreCount), centre);
+        return centre;
     }
 
-    public boolean isFull()
+    public static TraineeCentre createCentre(int cap)
     {
-        for(TraineeCentre centre: openCentres.values())
+        centreCount++;
+        TraineeCentre centre = new TraineeCentre(cap);
+        openCentres.put(centreCount, centre);
+        return centre;
+    }
+
+    public static boolean isFull(int centreId)
+    {
+        if(openCentres.get(centreId).getCentreStatus() == TraineeCentre.CentreStatus.FULL)
         {
-            if(centre.getCentreStatus() == TraineeCentre.CentreStatus.FULL)
-            {
-                return true;
-            }
+            numberOfFullCentres++;
+            return true;
         }
         return false;
     }
+
+    public static int getTrainees() {
+        int countTrainees = 0;
+
+        for (TraineeCentre centre: openCentres.values()) {
+            countTrainees += centre.getCurrentCapacity();
+        }
+        totalNumberOfTrainees = countTrainees;
+        return countTrainees;
+    }
+
 
 }
