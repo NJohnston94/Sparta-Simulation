@@ -5,29 +5,29 @@ import java.util.HashSet;
 
 public class WaitingList {
 
-    private ArrayList<Trainee> waitingList = new ArrayList<>();
+    private static ArrayList<Trainee> waitingList = new ArrayList<>();
 
 
-    public ArrayList<Trainee> getWaitingList() {
+    public static ArrayList<Trainee> getWaitingList() {
         return waitingList;
     }
 
-    public void addTrainees(Trainee trainee){
+    public static void addTrainees(Trainee trainee){
         waitingList.add(trainee);
     }
 
 
-    public void addAllTrainees(HashSet<Trainee>  trainees){
+    public static void addAllTrainees(HashSet<Trainee>  trainees){
         waitingList.addAll(trainees);
     }
 
 
-    public int getWaitingListSize(){
+    public static int getWaitingListSize(){
         return waitingList.size();
     }
 
 
-    public HashSet<Trainee> addTraineesToCentre(TraineeCentre traineeCentre, int numberOfTrainees){
+    public static HashSet<Trainee> addTraineesToCentre(TraineeCentre traineeCentre, int numberOfTrainees){
 
         for (int i = 0; i < numberOfTrainees; i++) {
             traineeCentre.addTrainee(waitingList.get(i));
