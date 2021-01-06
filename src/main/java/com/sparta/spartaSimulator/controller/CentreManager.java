@@ -18,7 +18,6 @@ public class CentreManager {
     public static Centres createCentre()
     {
         Centres centre = Factory.centreFactory(randomGeneration());
-
         if(centre.getClass().getSimpleName().equals("TrainingHub"))
         {
             openCentres.add(Factory.centreFactory(1));
@@ -95,12 +94,12 @@ public class CentreManager {
         if (WaitingList.getWaitingListSize() > 0) {
 
             openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
-            System.out.println("Trainee added from Waiting List");
+            //System.out.println("Trainee added from Waiting List");
 
         } else if (TraineeManager.getUnplacedTrainees().size() > 0) {
 
             openCentre.addTrainee(TraineeManager.getTrainee(TraineeManager.getUnplacedTrainees()));
-            System.out.println("Trainee added from Unplaced List");
+            //System.out.println("Trainee added from Unplaced List");
 
         } else {
 
