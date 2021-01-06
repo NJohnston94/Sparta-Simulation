@@ -74,12 +74,18 @@ public class CentreManager {
     }
 
     public static void addTrainees(ArrayList<Centres> openCentres) {
-        for (Centres openCentre : openCentres) {
-            for (int i = 0; i < generateNumberOfTrainees(); i++) {
-                addTrainee(openCentre);
-            }
-        }
+        if (openCentres.size()!=0) {
 
+            for (Centres openCentre : openCentres) {
+
+                if (!isFull(openCentre)) {
+                    for (int i = 0; i < generateNumberOfTrainees(); i++) {
+                        addTrainee(openCentre);
+                    }
+                }
+            }
+
+        }
         addUnplacedTraineesToWaitingList();
         System.out.println("Current Waiting List size: " + WaitingList.getWaitingListSize());
     }
