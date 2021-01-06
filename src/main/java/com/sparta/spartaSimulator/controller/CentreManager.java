@@ -151,6 +151,7 @@ public class CentreManager {
             if (centre.getCurrentCapacity() < 25) {
                 //and not in safe period!
                 toDelete.add(centre);
+                
             }
 
         }
@@ -200,12 +201,12 @@ public class CentreManager {
             }
 
         }
-        //add left over to waiting list
+
 //        for(Centres centres: openCentres){
 //            System.out.println("OPEN CENTRE after reallocation : " + centres.getCurrentCapacity());
 //        }
 
-
+        //add left over to waiting list
         trainees.removeAll(traineesAdded);
         if (trainees.size() > 0) {
             ArrayList<Trainee> traineeArrayList = new ArrayList<>(trainees);
