@@ -1,5 +1,6 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.model.BootCamp;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
 import com.sparta.spartaSimulator.model.WaitingList;
@@ -18,6 +19,11 @@ public class CentreManager {
     public static Centres createCentre()
     {
         Centres centre = Factory.centreFactory(randomGeneration());
+        if(centre.getClass().getSimpleName().equals("TrainingHub"))
+        {
+            openCentres.add(Factory.centreFactory(1));
+            openCentres.add(Factory.centreFactory(1));
+        }
         openCentres.add(centre);
         System.out.println("Centre created:  " + centre.getClass().getSimpleName());
         return centre;
@@ -42,8 +48,7 @@ public class CentreManager {
         {
             range = (3-1)+1;
         }
-        int ran = (int)(Math.random() * range) + 1;
-        return ran;
+        return (int)(Math.random() * range) + 1;
     }
 
     //This Constructor is for testing purposes only
@@ -51,6 +56,8 @@ public class CentreManager {
         Centres centre = Factory.centreFactory(1);
         //centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
 
+        Centres centre = Factory.centreFactory(3);
+        //centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
         openCentres.add(centre);
         return centre;
     }
@@ -68,6 +75,19 @@ public class CentreManager {
         totalNumberOfTrainees = countTrainees;
         return countTrainees;
     }
+
+    public static int getTrainees(Trainee.TraineeCourse course){
+        int countTrainees = 0;
+
+        for (Centres centre: openCentres) {
+            for(Trainee trainee: centre.getTrainees()){
+                if(trainee.getTraineeCourse() == course){
+                    countTrainees++;
+                }
+            }
+        }
+        return countTrainees;
+    }//returns number of trainees in a particular stream
 
     private static int generateNumberOfTrainees() {
         Random random = new Random();
@@ -91,12 +111,12 @@ public class CentreManager {
         if (WaitingList.getWaitingListSize() > 0) {
 
             openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
-            System.out.println("Trainee added from Waiting List");
+            //System.out.println("Trainee added from Waiting List");
 
         } else if (TraineeManager.getUnplacedTrainees().size() > 0) {
 
             openCentre.addTrainee(TraineeManager.getTrainee(TraineeManager.getUnplacedTrainees()));
-            System.out.println("Trainee added from Unplaced List");
+            //System.out.println("Trainee added from Unplaced List");
 
         } else {
 
@@ -128,6 +148,10 @@ public class CentreManager {
         return numberOfFullCentres;
     }
 
+    //this method is purely for testing purposes
+    public static void destroyAllCentres(){
+        openCentres.clear();
+    }
 
     public static void addCentreToOpenCentres(Centres centre){
         openCentres.add(centre);
