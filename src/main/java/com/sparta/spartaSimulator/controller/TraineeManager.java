@@ -26,6 +26,10 @@ public class TraineeManager {
         return unplacedTrainees;
     }
 
+    public static void emptyUnplacedTrainees() {
+        unplacedTrainees.clear();
+    }
+
     public static HashSet<Trainee> createTrainees(){
 
         HashSet<Trainee> newTrainees = new HashSet<>();
