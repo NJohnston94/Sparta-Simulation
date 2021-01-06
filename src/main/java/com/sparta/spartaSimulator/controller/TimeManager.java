@@ -1,10 +1,13 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.view.UserInterface;
+
 public class TimeManager implements Runnable {
 
     private static long currentTime;
     private static long counter = 0;
     private static int numberOfIterations;
+    private static int centreOpeningFrequency = 2;
 
     public static long getCurrentTime() {
         return currentTime;
@@ -34,31 +37,43 @@ public class TimeManager implements Runnable {
         TimeManager.numberOfIterations = numberOfIterations;
     }
 
+
+
     @Override
     public void run() {
 
+        long monthlyOrEnd = UserInterface.dataPresentationTime();
+
+        System.out.println("");
+        numberOfIterations = UserInterface.getNumberOfIterations();
+        System.out.println("");
+        long separation = UserInterface.getTimeSeparation() * 1000;
+
+        UserInterface.setCentreOpeningFrequency();
+
+
         long startTime = getSystemTime();
-        long separation = 1000;
         long delay = 0;
-
-        numberOfIterations = 10;
-
-        // Need to set numberOfIterations via the value from userInterface
-
-        // Could also set the separation here using an input from userInterface
 
         while (counter < numberOfIterations) {
 
             // Do Stuff
+
+            System.out.println("");
             System.out.println("Start of each iteration : " + (getSystemTime() - startTime));
 
             // Every Two months generate Centres
-            if (counter % 2 == 0) {
+            if ((counter % centreOpeningFrequency == 0) && (counter != 0)) {
                 //CentreManager.generateCentre;
+                CentreManager.createCentre();
             }
 
             // Every month generate employees
+            TraineeManager.createTrainees();
             // Use centreManager to move trainees
+            CentreManager.addTrainees(CentreManager.openCentres);
+
+            UserInterface.printOpenCentresAndSize();
 
 
             // counter++
@@ -74,6 +89,16 @@ public class TimeManager implements Runnable {
             }
 
         }
+
+        System.out.println("");
+        UserInterface.displayResults();
+    }
+
+    public static void setCentreOpeningFrequency(int centreOpeningFrequency) {
+        TimeManager.centreOpeningFrequency = centreOpeningFrequency;
+    }
+    public static int getCentreFrequencyOpening() {
+        return centreOpeningFrequency;
     }
 
 }
