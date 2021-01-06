@@ -17,6 +17,11 @@ public class CentreManager {
     public static Centres createCentre()
     {
         Centres centre = Factory.centreFactory(randomGeneration());
+        if(centre.getClass().getSimpleName().equals("TrainingHub"))
+        {
+            openCentres.add(Factory.centreFactory(1));
+            openCentres.add(Factory.centreFactory(1));
+        }
         openCentres.add(centre);
         System.out.println("Centre created:  " + centre.getClass().getSimpleName());
         return centre;

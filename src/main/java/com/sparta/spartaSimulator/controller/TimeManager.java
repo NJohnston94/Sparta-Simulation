@@ -7,6 +7,7 @@ public class TimeManager implements Runnable {
     private static long currentTime;
     private static long counter = 0;
     private static int numberOfIterations;
+    private static int centreOpeningFrequency = 2;
 
     public static long getCurrentTime() {
         return currentTime;
@@ -36,6 +37,8 @@ public class TimeManager implements Runnable {
         TimeManager.numberOfIterations = numberOfIterations;
     }
 
+
+
     @Override
     public void run() {
 
@@ -45,6 +48,9 @@ public class TimeManager implements Runnable {
         numberOfIterations = UserInterface.getNumberOfIterations();
         System.out.println("");
         long separation = UserInterface.getTimeSeparation() * 1000;
+
+        UserInterface.setCentreOpeningFrequency();
+
 
         long startTime = getSystemTime();
         long delay = 0;
@@ -57,7 +63,7 @@ public class TimeManager implements Runnable {
             System.out.println("Start of each iteration : " + (getSystemTime() - startTime));
 
             // Every Two months generate Centres
-            if ((counter % 2 == 0) && (counter != 0)) {
+            if ((counter % centreOpeningFrequency == 0) && (counter != 0)) {
                 //CentreManager.generateCentre;
                 CentreManager.createCentre();
             }
@@ -66,6 +72,8 @@ public class TimeManager implements Runnable {
             TraineeManager.createTrainees();
             // Use centreManager to move trainees
             CentreManager.addTrainees(CentreManager.openCentres);
+
+            UserInterface.printOpenCentresAndSize();
 
 
             // counter++
@@ -84,6 +92,13 @@ public class TimeManager implements Runnable {
 
         System.out.println("");
         UserInterface.displayResults();
+    }
+
+    public static void setCentreOpeningFrequency(int centreOpeningFrequency) {
+        TimeManager.centreOpeningFrequency = centreOpeningFrequency;
+    }
+    public static int getCentreFrequencyOpening() {
+        return centreOpeningFrequency;
     }
 
 }
