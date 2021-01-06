@@ -32,7 +32,7 @@ public class CentreManager {
     public static int randomGeneration()
     {
         int count = 0;
-        int range = 0;
+        int range;
         for(Centres centre: openCentres)
         {
             if(centre.getClass().getSimpleName().equals("BootCamp"))

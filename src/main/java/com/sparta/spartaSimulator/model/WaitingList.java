@@ -7,7 +7,8 @@ import java.util.HashSet;
 
 public class WaitingList {
 
-    private static ArrayList<Trainee> waitingList = new ArrayList<>();
+    //made this public for tests in TechCentreTestsClass
+    public static ArrayList<Trainee> waitingList = new ArrayList<>();
 
 
     public static ArrayList<Trainee> getWaitingList() {

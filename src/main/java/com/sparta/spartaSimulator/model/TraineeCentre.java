@@ -2,19 +2,39 @@ package com.sparta.spartaSimulator.model;
 
 import com.sparta.spartaSimulator.controller.CentreManager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Random;
 
 public abstract class TraineeCentre {
 
     private HashSet<Trainee> allTrainees = new HashSet<>();
     private int MAX_CAPACITY;
     private CentreStatus centreStatus;
+    private CentreSpecialism centreSpecialism;
+    private static final Random RANDOM = new Random();
 
     public enum CentreStatus{
         FULL,
         NEARLY_FULL,
         NOT_FULL
     }
+
+    public enum CentreSpecialism {
+        JAVA,
+        CSHARP,
+        DATA,
+        DEVOPS,
+        BUSINESS
+    }
+
+    private static final ArrayList<CentreSpecialism> courses = new ArrayList<>(Arrays.asList(
+            CentreSpecialism.JAVA,
+            CentreSpecialism.CSHARP,
+            CentreSpecialism.DATA,
+            CentreSpecialism.DEVOPS,
+            CentreSpecialism.BUSINESS));
 
     public TraineeCentre() {
         this.centreStatus = CentreStatus.NOT_FULL;
@@ -46,8 +66,20 @@ public abstract class TraineeCentre {
         }
     }
 
+    //Changes to this method to check specialism against centres
     public void addTrainee(Trainee trainee){
-        allTrainees.add(trainee);
+        String specialism = "";
+        try
+        {
+            specialism = getCentreSpecialism().toString();
+        } catch (NullPointerException ex)
+        {
+            allTrainees.add(trainee);
+        }
+        if(trainee.getTraineeCourse().toString().equals(specialism))
+        {
+            allTrainees.add(trainee);
+        }
         checkCentreStatus();
     }
 
@@ -70,6 +102,20 @@ public abstract class TraineeCentre {
 
     public HashSet<Trainee> getTrainees(){
         return allTrainees;
+    }
+
+    public CentreSpecialism getCentreSpecialism() {
+        return centreSpecialism;
+    }
+
+    //This is going to be used in actual program
+    public void setCentreSpecialism() {
+        this.centreSpecialism = courses.get(RANDOM.nextInt(5));
+    }
+
+    //This is the test setter method so I could test against a specific specialism || Delete when happy with results
+    public void setCentreSpecialism(CentreSpecialism centreSpecialism) {
+        this.centreSpecialism = centreSpecialism;
     }
 
 }

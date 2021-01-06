@@ -10,7 +10,9 @@ public class TraineeManager {
     private static final int MIN_TRAINEES = 20;
     private static final int MAX_TRAINEES = 30;
     private static final int RANGE = MAX_TRAINEES-MIN_TRAINEES+1;
-    private static ArrayList<Trainee> unplacedTrainees = new ArrayList<>();
+
+    //Made this public for testing purposes in TechCentreTests || change back when happy
+    public static ArrayList<Trainee> unplacedTrainees = new ArrayList<>();
 
     public static Trainee[] createTrainees(int randomNumber){
         //done as array as size is passed through, but can be changed to what is used in other classes
