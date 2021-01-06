@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" name="MyApp" packages="">
+    <Appenders>
+        <File name="MyFile" fileName="target/log/sortLog.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        <Async name="Async">
+            <AppenderRef ref="MyFile"/>
+        </Async>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="Async"/>
+        </Root>
+    </Loggers>
+</Configuration>

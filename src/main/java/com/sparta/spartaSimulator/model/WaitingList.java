@@ -19,7 +19,7 @@ public class WaitingList {
     }
 
 
-    public static void addAllTrainees(HashSet<Trainee>  trainees){
+    public static void addAllTrainees(ArrayList<Trainee>  trainees){
         waitingList.addAll(trainees);
     }
 
@@ -38,7 +38,6 @@ public class WaitingList {
         waitingList.removeAll(traineeCentre.getTrainees());
         return traineeCentre.getTrainees();
     }
-
 
 
 }

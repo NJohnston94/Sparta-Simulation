@@ -77,4 +77,17 @@ public class CentreManagerTest {
         }
         Assertions.assertEquals(count2,CentreManager.getTrainees(Trainee.TraineeCourse.JAVA));
     }//fine individually, not all together
+    public void randomChecking()
+    {
+        Centres bootCamp1 = CentreManager.createCentre(3);
+        Centres bootCamp2 = CentreManager.createCentre(3);
+        String random1 = CentreManager.createCentre().getClass().getSimpleName();
+        String random2 = CentreManager.createCentre().getClass().getSimpleName();
+        String random3 = CentreManager.createCentre().getClass().getSimpleName();
+        String random4 = CentreManager.createCentre().getClass().getSimpleName();
+        String random5 = CentreManager.createCentre().getClass().getSimpleName();
+        String random6 = CentreManager.createCentre().getClass().getSimpleName();
+        //Testing using console window to see if the value is random
+        System.out.println(random1 + " " + random2 + " " + random3 + " " + random4 + " " + random5 + " " + random6);
+    }
 }
