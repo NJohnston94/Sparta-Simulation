@@ -14,10 +14,10 @@ public class Factory {
                     return new TrainingHub();
 
                 case 2:
-                    return new BootCamp();
+                    return new TechCentre();
 
                 case 3:
-                    return new TechCentre();
+                    return new BootCamp();
             }
             return null;
         }

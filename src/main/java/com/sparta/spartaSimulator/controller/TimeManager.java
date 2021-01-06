@@ -53,12 +53,15 @@ public class TimeManager implements Runnable {
             System.out.println("Start of each iteration : " + (getSystemTime() - startTime));
 
             // Every Two months generate Centres
-            if (counter % 2 == 0) {
+            if ((counter % 2 == 0) && (counter != 0)) {
                 //CentreManager.generateCentre;
+                CentreManager.createCentre();
             }
 
             // Every month generate employees
+            TraineeManager.createTrainees();
             // Use centreManager to move trainees
+            CentreManager.addTrainees(CentreManager.openCentres);
 
 
             // counter++
