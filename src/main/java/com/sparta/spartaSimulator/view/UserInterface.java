@@ -13,9 +13,13 @@ public class UserInterface {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static int getUserInput(){
-
-        return scanner.nextInt();
-
+        try {
+            Scanner inputScanner = new Scanner(System.in);
+            return inputScanner.nextInt();
+        }catch (InputMismatchException e){
+            System.out.print("Please enter a number: \n");
+        }
+        return getUserInput();
     }
 
     public static void setCentreOpeningFrequency() {
@@ -58,19 +62,6 @@ public class UserInterface {
     }
 
     //Additional method: setting frequency of creation of centres (only use when MVP is complete!)
-
-    public static int getFrequencyOfCentresInput() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter how frequent new centres should be created in months:");
-        int frequency = scanner.nextInt();
-
-        while (frequency < 1) {
-            System.out.println("Enter valid number:");
-            frequency = scanner.nextInt();
-        }
-
-        return frequency;
-    }
 
     public static int dataPresentationTime(){
         int value = 0;
@@ -115,10 +106,29 @@ public class UserInterface {
         System.out.println("Number of full centres: " + CentreManager.numberOfFullCentres);
 
 //        number of trainees currently training
-        System.out.println("Number of trainees currently training: " + CentreManager.totalNumberOfTrainees);
+        System.out.println("Number of trainees currently training: " + CentreManager.getTrainees());
 
 //        number of trainees on the waiting list
         System.out.println("Number of trainees on the waiting list: " + WaitingList.getWaitingListSize());
+
+
+    }
+
+
+    public static long getTimeSeparation() {
+
+        System.out.print("How long in seconds would you like one month to be during the simulator? \n" +
+                "As an example, an answer of 1 would cause the simulator to run for 1 second before moving on to the second month. \n");
+        int userInput = getUserInput();
+        int separation = 0;
+        if(userInput > 0) {
+            separation = userInput;
+        }else {
+            System.out.println("This value must be greater than 0.");
+            setCentreOpeningFrequency();
+        }
+
+        return separation;
 
 
     }
