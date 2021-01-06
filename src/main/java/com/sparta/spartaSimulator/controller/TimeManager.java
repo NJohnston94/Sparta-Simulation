@@ -55,10 +55,13 @@ public class TimeManager implements Runnable {
             // Every Two months generate Centres
             if (counter % 2 == 0) {
                 //CentreManager.generateCentre;
+                CentreManager.createCentre();
             }
 
             // Every month generate employees
+            TraineeManager.createTrainees();
             // Use centreManager to move trainees
+            CentreManager.addTrainees(CentreManager.openCentres);
 
 
             // counter++
