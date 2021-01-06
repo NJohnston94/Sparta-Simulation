@@ -55,8 +55,6 @@ public class CentreManager {
     public static Centres createCentre(int cap) {
         Centres centre = Factory.centreFactory(1);
         //centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
-
-        Centres centre = Factory.centreFactory(3);
         //centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
         openCentres.add(centre);
         return centre;
