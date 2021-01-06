@@ -89,8 +89,6 @@ public class CentreManagerTest {
         Assertions.assertEquals(2,CentreManager.openCentres.size());
         Assertions.assertEquals(74, CentreManager.openCentres.get(1).getCurrentCapacity());
 
-
-
     }
 
     @Test
@@ -116,6 +114,38 @@ public class CentreManagerTest {
         Assertions.assertEquals(2,CentreManager.openCentres.size());
 
         Assertions.assertEquals(14, WaitingList.getWaitingListSize());
+
+    }
+
+    @Test
+    public void multipleCentresToDelete(){
+        Centres trainingHub = Factory.centreFactory(1);
+        for(int i = 0; i < 100; i++){
+            trainingHub.addTrainee(new Trainee());
+        }
+        Centres techCentre = Factory.centreFactory(2);
+        for(int i = 0; i < 190; i++){
+            techCentre.addTrainee(new Trainee());
+        }
+        Centres third = Factory.centreFactory(2);
+        for(int i = 0; i < 24; i++){
+            third.addTrainee(new Trainee());
+        }
+
+        Centres multiple = Factory.centreFactory(3);
+        for(int i = 0; i < 20;i++){
+            multiple.addTrainee(new Trainee());
+        }
+
+        CentreManager.addCentreToOpenCentres(trainingHub);
+        CentreManager.addCentreToOpenCentres(techCentre);
+        CentreManager.addCentreToOpenCentres(third);
+        CentreManager.addCentreToOpenCentres(multiple);
+
+        CentreManager.monthlyCheck();
+        Assertions.assertEquals(3,CentreManager.openCentres.size());
+
+        //Assertions.assertEquals(14, WaitingList.getWaitingListSize());
 
     }
 }

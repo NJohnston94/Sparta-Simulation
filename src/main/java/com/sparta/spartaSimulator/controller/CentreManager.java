@@ -144,26 +144,34 @@ public class CentreManager {
     }
 
     public static void monthlyCheck() {
-        ArrayList<Centres> toDelete = new ArrayList<>();
-
-        for(Centres centre :openCentres) {
-  //       System.out.println(centre.getCurrentCapacity());
-            if (centre.getCurrentCapacity() < 25) {
-                //and not in safe period!
-                toDelete.add(centre);
-                
-            }
-
-        }
+        ArrayList<Centres> toDelete = getCentresToDelete();
 
         for(Centres centre : toDelete){
             deleteCentre(centre);
-        }
+            toDelete = getCentresToDelete();
+            if(toDelete.size() == 0){
+                break;
+            }
 
+        }
+    }
+
+    public static ArrayList<Centres> getCentresToDelete(){
+        ArrayList<Centres> toDelete = new ArrayList<>();
+
+        for(Centres centre :openCentres) {
+            System.out.println("OPEN CENTRES : " + centre.getCurrentCapacity());
+            if (centre.getCurrentCapacity() < 25) {
+                //and not in safe period!
+                toDelete.add(centre);
+            }
+
+        }
+        return toDelete;
     }
 
     public static void deleteCentre(Centres centre) {
-     //   System.out.println("DELETE CALLED with centre cap:"+ centre.getCurrentCapacity());
+        System.out.println("DELETE CALLED with centre capacity: "+ centre.getCurrentCapacity());
         HashSet<Trainee> traineesToRelocate = centre.getTrainees();
         openCentres.remove(centre);
 
@@ -177,13 +185,13 @@ public class CentreManager {
         ArrayList<Centres> freeCentres = getFreeCentres();
         HashSet<Trainee> traineesAdded = new HashSet<>();
 
-//        for(Centres centres: openCentres){
-//            System.out.println("OPEN CENTRE : " + centres.getCurrentCapacity());
-//        }
-//
-//        for(Centres centres: freeCentres){
-//            System.out.println("FREE Centre " + centres.getCurrentCapacity());
-//        }
+        for(Centres centres: openCentres){
+            System.out.println("OPEN CENTRE : " + centres.getCurrentCapacity());
+        }
+
+        for(Centres centres: freeCentres){
+            System.out.println("FREE Centre " + centres.getCurrentCapacity());
+        }
 
         if (freeCentres.size() > 0) {
             for (Trainee trainee : trainees) {
@@ -202,9 +210,9 @@ public class CentreManager {
 
         }
 
-//        for(Centres centres: openCentres){
-//            System.out.println("OPEN CENTRE after reallocation : " + centres.getCurrentCapacity());
-//        }
+        for(Centres centres: openCentres){
+            System.out.println("OPEN CENTRE after reallocation : " + centres.getCurrentCapacity());
+        }
 
         //add left over to waiting list
         trainees.removeAll(traineesAdded);
