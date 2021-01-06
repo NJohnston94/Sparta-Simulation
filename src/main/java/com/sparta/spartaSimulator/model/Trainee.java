@@ -43,6 +43,10 @@ public class Trainee {
         return traineeCourse;
     }
 
+    public static void setTraineeCourse(TraineeCourse traineeCourse) {
+        traineeCourse = courses.get(RANDOM.nextInt(5));
+    }
+
     public TraineeStatus getTraineeStatus() {
         return traineeStatus;
     }
