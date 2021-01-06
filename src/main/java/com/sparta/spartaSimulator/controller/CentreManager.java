@@ -6,6 +6,7 @@ import com.sparta.spartaSimulator.model.TraineeCentre;
 import com.sparta.spartaSimulator.model.WaitingList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class CentreManager {
@@ -24,6 +25,7 @@ public class CentreManager {
             openCentres.add(Factory.centreFactory(1));
         }
         openCentres.add(centre);
+        System.out.println("Centre created:  " + centre.getClass().getSimpleName());
         return centre;
     }
 
@@ -83,6 +85,9 @@ public class CentreManager {
                 addTrainee(openCentre);
             }
         }
+
+        addUnplacedTraineesToWaitingList();
+        System.out.println("Current Waiting List size: " + WaitingList.getWaitingListSize());
     }
 
     public static void addTrainee(Centres openCentre) {
@@ -103,6 +108,11 @@ public class CentreManager {
 
         }
 
+    }
+
+    public static void addUnplacedTraineesToWaitingList() {
+        WaitingList.addAllTrainees(TraineeManager.getUnplacedTrainees());
+        TraineeManager.emptyUnplacedTrainees();
     }
 
     public static void addTrainee(Centres centre, Trainee trainee) {

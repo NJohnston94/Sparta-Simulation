@@ -69,7 +69,7 @@ public class WaitingListTest {
         Trainee trainee3 = new Trainee();
 
 
-        HashSet<Trainee> testSet = new HashSet<>();
+        ArrayList<Trainee> testSet = new ArrayList<>();
         testSet.add(trainee1);
         testSet.add(trainee2);
         testSet.add(trainee3);
