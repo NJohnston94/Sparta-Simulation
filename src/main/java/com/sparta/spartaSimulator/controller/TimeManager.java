@@ -1,10 +1,13 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.view.UserInterface;
+
 public class TimeManager implements Runnable {
 
     private static long currentTime;
     private static long counter = 0;
     private static int numberOfIterations;
+    private static int centreOpeningFrequency = 2;  //2 by default as per scope
 
     public static long getCurrentTime() {
         return currentTime;
@@ -34,6 +37,16 @@ public class TimeManager implements Runnable {
         TimeManager.numberOfIterations = numberOfIterations;
     }
 
+    public static void setCentreOpeningFrequency(int centreOpeningFrequency) {
+        TimeManager.centreOpeningFrequency = centreOpeningFrequency;
+    }
+
+    public static int getCentreFrequencyOpening() {
+
+        return centreOpeningFrequency;
+
+    }
+
     @Override
     public void run() {
 
@@ -53,7 +66,7 @@ public class TimeManager implements Runnable {
             System.out.println("Start of each iteration : " + (getSystemTime() - startTime));
 
             // Every Two months generate Centres
-            if ((counter % 2 == 0) && (counter != 0)) {
+            if ((counter % centreOpeningFrequency == 0) && (counter != 0)) {
                 //CentreManager.generateCentre;
                 CentreManager.createCentre();
             }

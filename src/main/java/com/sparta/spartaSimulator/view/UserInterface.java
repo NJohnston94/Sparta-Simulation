@@ -1,6 +1,7 @@
 package com.sparta.spartaSimulator.view;
 
 import com.sparta.spartaSimulator.controller.CentreManager;
+import com.sparta.spartaSimulator.controller.TimeManager;
 import com.sparta.spartaSimulator.model.TraineeCentre;
 import com.sparta.spartaSimulator.model.WaitingList;
 
@@ -10,7 +11,6 @@ import java.util.Scanner;
 public class UserInterface {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static int openingFrequency = 2;
 
     public static int getUserInput(){
 
@@ -21,19 +21,13 @@ public class UserInterface {
     public static void setCentreOpeningFrequency() {
 
         System.out.print("How often (in months) should a new Training Centre open?  ");
-        int userInput = getUserInput();
+        int userInput = UserInterface.getUserInput();
         if(userInput > 0) {
-            openingFrequency = userInput;
+            TimeManager.setCentreOpeningFrequency(userInput);
         }else {
             System.out.println("This value must be greater than 0.");
             setCentreOpeningFrequency();
         }
-
-    }
-
-    public static int getCentreFrequencyOpening() {
-
-        return openingFrequency;
 
     }
 
