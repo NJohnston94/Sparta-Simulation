@@ -145,7 +145,6 @@ public class CentreManagerTest {
         CentreManager.monthlyCheck();
         Assertions.assertEquals(3,CentreManager.openCentres.size());
 
-        //Assertions.assertEquals(14, WaitingList.getWaitingListSize());
 
     }
 }
