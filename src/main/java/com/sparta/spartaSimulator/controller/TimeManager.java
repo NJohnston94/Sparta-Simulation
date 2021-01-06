@@ -1,5 +1,7 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.view.UserInterface;
+
 public class TimeManager implements Runnable {
 
     private static long currentTime;
@@ -37,19 +39,21 @@ public class TimeManager implements Runnable {
     @Override
     public void run() {
 
+        long monthlyOrEnd = UserInterface.dataPresentationTime();
+
+        System.out.println("");
+        numberOfIterations = UserInterface.getNumberOfIterations();
+        System.out.println("");
+        long separation = UserInterface.getTimeSeparation() * 1000;
+
         long startTime = getSystemTime();
-        long separation = 1000;
         long delay = 0;
-
-        numberOfIterations = 10;
-
-        // Need to set numberOfIterations via the value from userInterface
-
-        // Could also set the separation here using an input from userInterface
 
         while (counter < numberOfIterations) {
 
             // Do Stuff
+
+            System.out.println("");
             System.out.println("Start of each iteration : " + (getSystemTime() - startTime));
 
             // Every Two months generate Centres
@@ -77,6 +81,9 @@ public class TimeManager implements Runnable {
             }
 
         }
+
+        System.out.println("");
+        UserInterface.displayResults();
     }
 
 }
