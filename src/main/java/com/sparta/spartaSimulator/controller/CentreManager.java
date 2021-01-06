@@ -50,6 +50,19 @@ public class CentreManager {
         return countTrainees;
     }
 
+    public static int getTrainees(Trainee.TraineeCourse course){
+        int countTrainees = 0;
+
+        for (Centres centre: openCentres) {
+            for(Trainee trainee: centre.getTrainees()){
+                if(trainee.getTraineeCourse() == course){
+                    countTrainees++;
+                }
+            }
+        }
+        return countTrainees;
+    }//returns number of trainees in a particular stream
+
     private static int generateNumberOfTrainees(){
         Random random = new Random();
         int randomNumber = random.nextInt(21);
@@ -76,5 +89,9 @@ public class CentreManager {
         return numberOfFullCentres;
     }
 
+    //this method is purely for testing purposes
+    public static void destroyAllCentres(){
+        openCentres.clear();
+    }
 
 }
