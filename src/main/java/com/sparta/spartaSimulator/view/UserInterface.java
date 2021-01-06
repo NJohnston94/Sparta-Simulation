@@ -78,6 +78,35 @@ public class UserInterface {
         return frequency;
     }
 
+    public static int dataPresentationTime(){
+        int value = 0;
+
+        while(value != 1 && value != 2) {
+            System.out.println("Would you like to see the information monthly or only at the end of the simulation?");
+            System.out.println("1: Monthly");
+            System.out.println("2: End");
+            value = getUserInput();
+
+            if(value != 1 && value != 2){
+                System.out.println("error: not a valid number");
+                System.out.println();
+            }
+        }
+
+        return value;
+    }//created, not tested
+
+    public static void presentData(){
+        System.out.println("Open Centres: ");
+        System.out.println("Closed Centres: ");
+        System.out.println("Full Centres: ");
+        System.out.println("Trainees: ");
+        System.out.println("  Java: ");
+        System.out.println("  C#: ");
+        System.out.println("  Data: ");
+        System.out.println("  DevOps: ");
+        System.out.println("  Business: ");
+    }//where info name included, info location has not
 
     /**
      * Test via reading back in the input, if there is additional time

@@ -19,5 +19,23 @@ public class UserInterfaceTest {
         Assertions.assertEquals(10, UserInterface.getNumberOfIterations());
     }
 
-    
+    @Test
+    void dataPresentationTimeOneTest() {
+
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Assertions.assertEquals(1,UserInterface.dataPresentationTime());
+    }
+
+    @Test
+    void dataPresentationTimeTwoTest() {
+
+        String input = "2";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Assertions.assertEquals(2,UserInterface.dataPresentationTime());
+    }
 }
