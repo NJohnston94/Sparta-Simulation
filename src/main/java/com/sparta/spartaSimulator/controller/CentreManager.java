@@ -1,5 +1,6 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.model.BootCamp;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
 import com.sparta.spartaSimulator.model.WaitingList;
@@ -46,14 +47,13 @@ public class CentreManager {
         {
             range = (3-1)+1;
         }
-        int ran = (int)(Math.random() * range) + 1;
-        return ran;
+        return (int)(Math.random() * range) + 1;
     }
 
     //This Constructor is for testing purposes only
     public static Centres createCentre(int cap) {
-        Centres centre = Factory.centreFactory(1);
-        centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
+        Centres centre = Factory.centreFactory(3);
+        //centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
         openCentres.add(centre);
         return centre;
     }
