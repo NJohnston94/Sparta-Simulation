@@ -97,15 +97,21 @@ public class UserInterface {
     }//created, not tested
 
     public static void presentData(){
-        System.out.println("Open Centres: ");
-        System.out.println("Closed Centres: ");
-        System.out.println("Full Centres: ");
-        System.out.println("Trainees: ");
-        System.out.println("  Java: ");
-        System.out.println("  C#: ");
-        System.out.println("  Data: ");
-        System.out.println("  DevOps: ");
-        System.out.println("  Business: ");
+        System.out.println("Open Centres: " + CentreManager.openCentres.size());//todo: change to calling method
+        System.out.println("Closed Centres: ");// todo: either centres - open centres or add closed centres state to CentreManager
+        System.out.println("Full Centres: " + CentreManager.numberOfFullCentres);//todo: change to calling method
+        System.out.println("Trainees: " + CentreManager.totalNumberOfTrainees);//todo: change to calling method
+        System.out.println("  Java: " + CentreManager.getTrainees(/*enum status java*/));// todo
+        System.out.println("  C#: " + CentreManager.getTrainees(/*enum status java*/)); // todo
+        System.out.println("  Data: " + CentreManager.getTrainees(/*enum status java*/));//todo
+        System.out.println("  DevOps: " + CentreManager.getTrainees(/*enum status java*/));//todo
+        System.out.println("  Business: " + CentreManager.getTrainees(/*enum status java*/));//todo
+        System.out.println("Waiting List: " + WaitingList.getWaitingListSize());//todo: change to calling method
+        System.out.println("  Java: " + WaitingList.getWaitingListSize(/*enum status java*/));// todo
+        System.out.println("  C#: " + WaitingList.getWaitingListSize(/*enum status java*/)); // todo
+        System.out.println("  Data: " + WaitingList.getWaitingListSize(/*enum status java*/));//todo
+        System.out.println("  DevOps: " + WaitingList.getWaitingListSize(/*enum status java*/));//todo
+        System.out.println("  Business: " + WaitingList.getWaitingListSize(/*enum status java*/));//todo
     }//where info name included, info location has not
 
     /**
