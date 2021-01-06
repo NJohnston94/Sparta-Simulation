@@ -9,33 +9,32 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CentreManager {
-    public static ArrayList<TraineeCentre> openCentres = new ArrayList<>();
+    public static ArrayList<Centres> openCentres = new ArrayList<>();
     public static int numberOfFullCentres = 0;
     public static int totalNumberOfTrainees = 0;
 
 
     
-    public static TraineeCentre createCentre()
+    public static Centres createCentre()
     {
-
-        TraineeCentre centre = new TraineeCentre();
+        Centres centre = Factory.centreFactory(1);
         openCentres.add(centre);
         return centre;
     }
 
-    public static TraineeCentre createCentre(int cap)
+    //This Constructor is for testing purposes only
+    public static Centres createCentre(int cap)
     {
-
-        TraineeCentre centre = new TraineeCentre(cap);
+        Centres centre = Factory.centreFactory(1);
+        centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
         openCentres.add(centre);
         return centre;
     }
 
-    public static boolean isFull(int centreId)
+    public static boolean isFull(Centres centre)
     {
-        if(openCentres.get(centreId).getCentreStatus() == TraineeCentre.CentreStatus.FULL)
+        if(centre.getCentreStatus() == TraineeCentre.CentreStatus.FULL)
         {
-            numberOfFullCentres++;
             return true;
         }
         return false;
@@ -44,14 +43,12 @@ public class CentreManager {
     public static int getTrainees() {
         int countTrainees = 0;
 
-        for (TraineeCentre centre: openCentres) {
+        for (Centres centre: openCentres) {
             countTrainees += centre.getCurrentCapacity();
         }
         totalNumberOfTrainees = countTrainees;
         return countTrainees;
     }
-
-
 
     private static int generateNumberOfTrainees(){
         Random random = new Random();
@@ -59,14 +56,24 @@ public class CentreManager {
         return randomNumber;
     }
 
-
-
-    public static void addTrainee(TraineeCentre traineeCentre, Trainee trainee){
+    public static void addTrainee(Centres centre, Trainee trainee){
 
         if (WaitingList.getWaitingListSize()!= 0 ){
-            WaitingList.addTraineesToCentre(traineeCentre,generateNumberOfTrainees());
+            WaitingList.addTraineesToCentre(centre,generateNumberOfTrainees());
         }
 
+    }
+
+    public static int getNumberOfFullCentres()
+    {
+        for(Centres centre: openCentres)
+        {
+            if(CentreManager.isFull(centre))
+            {
+                numberOfFullCentres++;
+            }
+        }
+        return numberOfFullCentres;
     }
 
 

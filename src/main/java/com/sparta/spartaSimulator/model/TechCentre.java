@@ -1,6 +1,8 @@
 package com.sparta.spartaSimulator.model;
 
-public class TechCentre extends TraineeCentre {
+import com.sparta.spartaSimulator.controller.Centres;
+
+public class TechCentre extends TraineeCentre implements Centres {
 
     /*
         private TrainingType;
