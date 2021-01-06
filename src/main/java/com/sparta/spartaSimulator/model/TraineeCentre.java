@@ -4,10 +4,10 @@ import com.sparta.spartaSimulator.controller.CentreManager;
 
 import java.util.HashSet;
 
-public class TraineeCentre {
+public abstract class TraineeCentre {
 
     private HashSet<Trainee> allTrainees = new HashSet<>();
-    private final static int MAX_CAPACITY = 100;
+    private int MAX_CAPACITY;
     private CentreStatus centreStatus;
 
     public enum CentreStatus{
@@ -34,11 +34,11 @@ public class TraineeCentre {
         return centreStatus;
     }
 
-    private void setCentreStatus(CentreStatus centreStatus) {
+    public void setCentreStatus(CentreStatus centreStatus) {
         this.centreStatus = centreStatus;
     }
 
-    private void checkCentreStatus() {
+    public void checkCentreStatus() {
         if(allTrainees.size() == MAX_CAPACITY) {
             setCentreStatus(CentreStatus.FULL);
         } else if (allTrainees.size() >= 80) {
@@ -60,15 +60,16 @@ public class TraineeCentre {
         return allTrainees.size();
     }
 
-    public static int getMaxCapacity() {
+    public void setMaxCapacity(int maxCapacity) {
+        this.MAX_CAPACITY = maxCapacity;
+    }
+
+    public int getMaxCapacity() {
         return MAX_CAPACITY;
     }
 
     public HashSet<Trainee> getTrainees(){
         return allTrainees;
     }
-
-
-
 
 }

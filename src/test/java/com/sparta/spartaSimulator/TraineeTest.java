@@ -24,4 +24,26 @@ public class TraineeTest {
         trainee.setTraineeStatus(Trainee.TraineeStatus.WAITING);
         Assertions.assertSame(trainee.getTraineeStatus(), Trainee.TraineeStatus.WAITING);
     }
+
+    @Test
+    void doesTraineeGetAssignedCourse() {
+        Trainee trainee = new Trainee();
+        Trainee.TraineeCourse testCourse;
+
+        if (trainee.getTraineeCourse().equals(Trainee.TraineeCourse.JAVA)) {
+            testCourse = Trainee.TraineeCourse.JAVA;
+        } else if (trainee.getTraineeCourse().equals(Trainee.TraineeCourse.CSHARP)) {
+            testCourse = Trainee.TraineeCourse.CSHARP;
+        } else if (trainee.getTraineeCourse().equals(Trainee.TraineeCourse.DATA)) {
+            testCourse = Trainee.TraineeCourse.DATA;
+        } else if (trainee.getTraineeCourse().equals(Trainee.TraineeCourse.DEVOPS)) {
+            testCourse = Trainee.TraineeCourse.DEVOPS;
+        } else if (trainee.getTraineeCourse().equals(Trainee.TraineeCourse.BUSINESS)) {
+            testCourse = Trainee.TraineeCourse.BUSINESS;
+        } else {
+            testCourse = null;
+        }
+
+        Assertions.assertEquals(trainee.getTraineeCourse(), testCourse);
+    }
 }
