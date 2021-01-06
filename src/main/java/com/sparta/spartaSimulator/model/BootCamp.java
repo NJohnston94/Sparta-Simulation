@@ -2,11 +2,11 @@ package com.sparta.spartaSimulator.model;
 
 import com.sparta.spartaSimulator.controller.Centres;
 
-public class TrainingHub extends TraineeCentre implements Centres {
+public class BootCamp extends TraineeCentre implements Centres {
 
-    public TrainingHub() {
-        setMaxCapacity(100);
+    public BootCamp() {
         setCentreStatus(CentreStatus.NOT_FULL);
+        setMaxCapacity(500);
     }
 
 }

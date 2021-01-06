@@ -1,50 +1,129 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
+import com.sparta.spartaSimulator.model.WaitingList;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class CentreManager {
-    public static HashMap<Integer, TraineeCentre> openCentres = new HashMap<>();
+    public static ArrayList<Centres> openCentres = new ArrayList<>();
     public static int numberOfFullCentres = 0;
     public static int totalNumberOfTrainees = 0;
-    static int centreCount = 0;
+    public static Random random = new Random();
 
-    
-    public static TraineeCentre createCentre()
+    public static Centres createCentre()
     {
-        centreCount++;
-        TraineeCentre centre = new TraineeCentre();
-        openCentres.put((centreCount), centre);
+        Centres centre = Factory.centreFactory(randomGeneration());
+        openCentres.add(centre);
+        System.out.println("Centre created:  " + centre.getClass().getSimpleName());
         return centre;
     }
 
-    public static TraineeCentre createCentre(int cap)
+    public static int randomGeneration()
     {
-        centreCount++;
-        TraineeCentre centre = new TraineeCentre(cap);
-        openCentres.put(centreCount, centre);
-        return centre;
-    }
-
-    public static boolean isFull(int centreId)
-    {
-        if(openCentres.get(centreId).getCentreStatus() == TraineeCentre.CentreStatus.FULL)
+        int count = 0;
+        int range = 0;
+        for(Centres centre: openCentres)
         {
-            numberOfFullCentres++;
-            return true;
+            if(centre.getClass().getSimpleName().equals("BootCamp"))
+            {
+                count++;
+            }
         }
-        return false;
+        if(count > 1)
+        {
+            range = (2-1)+1;
+        }
+        else
+        {
+            range = (3-1)+1;
+        }
+        int ran = (int)(Math.random() * range) + 1;
+        return ran;
+    }
+
+    //This Constructor is for testing purposes only
+    public static Centres createCentre(int cap) {
+        Centres centre = Factory.centreFactory(1);
+        centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
+        openCentres.add(centre);
+        return centre;
+    }
+
+    public static boolean isFull(Centres centre) {
+        return centre.getCentreStatus() == TraineeCentre.CentreStatus.FULL;
     }
 
     public static int getTrainees() {
         int countTrainees = 0;
 
-        for (TraineeCentre centre: openCentres.values()) {
+        for (Centres centre : openCentres) {
             countTrainees += centre.getCurrentCapacity();
         }
         totalNumberOfTrainees = countTrainees;
         return countTrainees;
+    }
+
+    private static int generateNumberOfTrainees() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(21);
+        return randomNumber;
+    }
+
+    public static void addTrainees(ArrayList<Centres> openCentres) {
+        for (Centres openCentre : openCentres) {
+            for (int i = 0; i < generateNumberOfTrainees(); i++) {
+                addTrainee(openCentre);
+            }
+        }
+
+        addUnplacedTraineesToWaitingList();
+        System.out.println("Current Waiting List size: " + WaitingList.getWaitingListSize());
+    }
+
+    public static void addTrainee(Centres openCentre) {
+
+        if (WaitingList.getWaitingListSize() > 0) {
+
+            openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
+            //System.out.println("Trainee added from Waiting List");
+
+        } else if (TraineeManager.getUnplacedTrainees().size() > 0) {
+
+            openCentre.addTrainee(TraineeManager.getTrainee(TraineeManager.getUnplacedTrainees()));
+            //System.out.println("Trainee added from Unplaced List");
+
+        } else {
+
+            System.out.println("No trainees available for placement");
+
+        }
+
+    }
+
+    public static void addUnplacedTraineesToWaitingList() {
+        WaitingList.addAllTrainees(TraineeManager.getUnplacedTrainees());
+        TraineeManager.emptyUnplacedTrainees();
+    }
+
+    public static void addTrainee(Centres centre, Trainee trainee) {
+
+        if (WaitingList.getWaitingListSize() != 0) {
+            WaitingList.addTraineesToCentre(centre, generateNumberOfTrainees());
+        }
+
+    }
+
+    public static int getNumberOfFullCentres() {
+        for (Centres centre : openCentres) {
+            if (CentreManager.isFull(centre)) {
+                numberOfFullCentres++;
+            }
+        }
+        return numberOfFullCentres;
     }
 
 

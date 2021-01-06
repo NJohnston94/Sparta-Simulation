@@ -18,4 +18,10 @@ public class TimeManagerTest {
         long delay = TimeManager.delayTime(2000, 4, startTime);
         Assertions.assertEquals(8000, delay);
     }
+
+    @Test
+    public void canCentreOpeningFrequencyBeSet() {
+        TimeManager.setCentreOpeningFrequency(3);
+        Assertions.assertEquals(3,TimeManager.getCentreFrequencyOpening());
+    }
 }

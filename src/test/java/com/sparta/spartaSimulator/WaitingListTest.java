@@ -1,6 +1,8 @@
 package com.sparta.spartaSimulator;
 
 
+import com.sparta.spartaSimulator.controller.Centres;
+import com.sparta.spartaSimulator.controller.Factory;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
 import com.sparta.spartaSimulator.model.WaitingList;
@@ -46,11 +48,11 @@ public class WaitingListTest {
         WaitingList.addTrainees(trainee2);
         WaitingList.addTrainees(trainee3);
 
-        TraineeCentre traineeCentre = new TraineeCentre();
+        Centres centre = Factory.centreFactory(1);
 
-        WaitingList.addTraineesToCentre(traineeCentre, 3);
+        WaitingList.addTraineesToCentre(centre, 3);
 
-        Assertions.assertEquals(traineeCentre.getCurrentCapacity(), 3);
+        Assertions.assertEquals(centre.getCurrentCapacity(), 3);
         Assertions.assertEquals(WaitingList.getWaitingListSize(), 0);
 
     }
@@ -67,7 +69,7 @@ public class WaitingListTest {
         Trainee trainee3 = new Trainee();
 
 
-        HashSet<Trainee> testSet = new HashSet<>();
+        ArrayList<Trainee> testSet = new ArrayList<>();
         testSet.add(trainee1);
         testSet.add(trainee2);
         testSet.add(trainee3);

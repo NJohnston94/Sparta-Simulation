@@ -1,5 +1,7 @@
 package com.sparta.spartaSimulator.model;
 
+import com.sparta.spartaSimulator.controller.Centres;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -17,7 +19,7 @@ public class WaitingList {
     }
 
 
-    public static void addAllTrainees(HashSet<Trainee>  trainees){
+    public static void addAllTrainees(ArrayList<Trainee>  trainees){
         waitingList.addAll(trainees);
     }
 
@@ -27,7 +29,7 @@ public class WaitingList {
     }
 
 
-    public static HashSet<Trainee> addTraineesToCentre(TraineeCentre traineeCentre, int numberOfTrainees){
+    public static HashSet<Trainee> addTraineesToCentre(Centres traineeCentre, int numberOfTrainees){
 
         for (int i = 0; i < numberOfTrainees; i++) {
             traineeCentre.addTrainee(waitingList.get(i));
@@ -36,7 +38,6 @@ public class WaitingList {
         waitingList.removeAll(traineeCentre.getTrainees());
         return traineeCentre.getTrainees();
     }
-
 
 
 }
