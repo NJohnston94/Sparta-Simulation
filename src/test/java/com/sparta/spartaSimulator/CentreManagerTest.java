@@ -4,6 +4,7 @@ import com.sparta.spartaSimulator.controller.CentreManager;
 import com.sparta.spartaSimulator.controller.TraineeManager;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
+import com.sparta.spartaSimulator.model.WaitingList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +53,7 @@ public class CentreManagerTest {
     }
 
     @Test
-    public void monthyChecks(){
+    public void monthlyChecks(){
         CentreManager.createCentre(100);
         CentreManager.createCentre(50);
         CentreManager.createCentre(24);
@@ -62,6 +63,19 @@ public class CentreManagerTest {
         Assertions.assertEquals(74, CentreManager.openCentres.get(1).getCurrentCapacity());
 
 
+
+    }
+
+    @Test
+    public void monthlyChecksLeftOver(){
+        CentreManager.createCentre(100);
+        CentreManager.createCentre(90);
+        CentreManager.createCentre(24);
+
+        CentreManager.monthlyCheck();
+        Assertions.assertEquals(2,CentreManager.openCentres.size());
+
+        Assertions.assertEquals(14, WaitingList.getWaitingListSize());
 
     }
 

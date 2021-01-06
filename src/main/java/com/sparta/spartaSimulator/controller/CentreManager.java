@@ -88,19 +88,13 @@ public class CentreManager {
         openCentres.remove(index);
 
         relocateTrainees(traineesToRelocate);
-
     }
 
     public static void relocateTrainees(HashSet<Trainee> trainees) {
         //method function: takes in hashset of trainees and adds them to free centres. Left overs are added to waiting list
         //TO ADD: check if centre is tech centre (only takes a trainee of certain course)
 
-        System.out.println(trainees.size());
         ArrayList<TraineeCentre> freeCentres = getFreeCentres();
-
-        for (TraineeCentre centre : openCentres) {
-            System.out.println("Centre " + centre.getCurrentCapacity());
-        }
         HashSet<Trainee> traineesAdded = new HashSet<>();
 
         if (freeCentres.size() > 0) {
@@ -124,13 +118,6 @@ public class CentreManager {
         if (trainees.size() > 0) {
             WaitingList.addAllTrainees(trainees);
         }
-
-
-        for (TraineeCentre centre : openCentres) {
-            System.out.println("Centre " + centre.getCurrentCapacity());
-
-        }
-        System.out.println(WaitingList.getWaitingListSize());
 
     }
 }
