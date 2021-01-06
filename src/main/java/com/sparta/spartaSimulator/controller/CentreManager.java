@@ -1,11 +1,13 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.model.BootCamp;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
 import com.sparta.spartaSimulator.model.WaitingList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
 
 public class CentreManager {
@@ -17,6 +19,11 @@ public class CentreManager {
     public static Centres createCentre()
     {
         Centres centre = Factory.centreFactory(randomGeneration());
+        if(centre.getClass().getSimpleName().equals("TrainingHub"))
+        {
+            openCentres.add(Factory.centreFactory(1));
+            openCentres.add(Factory.centreFactory(1));
+        }
         openCentres.add(centre);
         System.out.println("Centre created:  " + centre.getClass().getSimpleName());
         return centre;
@@ -41,14 +48,14 @@ public class CentreManager {
         {
             range = (3-1)+1;
         }
-        int ran = (int)(Math.random() * range) + 1;
-        return ran;
+        return (int)(Math.random() * range) + 1;
     }
 
     //This Constructor is for testing purposes only
     public static Centres createCentre(int cap) {
         Centres centre = Factory.centreFactory(1);
-        centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
+        //centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
+        //centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
         openCentres.add(centre);
         return centre;
     }
@@ -66,6 +73,19 @@ public class CentreManager {
         totalNumberOfTrainees = countTrainees;
         return countTrainees;
     }
+
+    public static int getTrainees(Trainee.TraineeCourse course){
+        int countTrainees = 0;
+
+        for (Centres centre: openCentres) {
+            for(Trainee trainee: centre.getTrainees()){
+                if(trainee.getTraineeCourse() == course){
+                    countTrainees++;
+                }
+            }
+        }
+        return countTrainees;
+    }//returns number of trainees in a particular stream
 
     private static int generateNumberOfTrainees() {
         Random random = new Random();
@@ -95,12 +115,12 @@ public class CentreManager {
         if (WaitingList.getWaitingListSize() > 0) {
 
             openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
-            System.out.println("Trainee added from Waiting List");
+            //System.out.println("Trainee added from Waiting List");
 
         } else if (TraineeManager.getUnplacedTrainees().size() > 0) {
 
             openCentre.addTrainee(TraineeManager.getTrainee(TraineeManager.getUnplacedTrainees()));
-            System.out.println("Trainee added from Unplaced List");
+            //System.out.println("Trainee added from Unplaced List");
 
         } else {
 
@@ -131,6 +151,106 @@ public class CentreManager {
         }
         return numberOfFullCentres;
     }
+
+    //this method is purely for testing purposes
+    public static void destroyAllCentres(){
+        openCentres.clear();
+    }
+
+    public static void addCentreToOpenCentres(Centres centre){
+        openCentres.add(centre);
+    }
+
+    public static ArrayList<Centres> getFreeCentres() {
+        ArrayList<Centres> freeCentres = new ArrayList<>();
+        for(Centres centre :openCentres) {
+            if (!isFull(centre)) {
+                freeCentres.add(centre);
+            }
+        }
+        return freeCentres;
+    }
+
+    public static void monthlyCheck() {
+        ArrayList<Centres> toDelete = getCentresToDelete();
+
+        for(Centres centre : toDelete){
+            deleteCentre(centre);
+            toDelete = getCentresToDelete();
+            if(toDelete.size() == 0){
+                break;
+            }
+
+        }
+    }
+
+    public static ArrayList<Centres> getCentresToDelete(){
+        ArrayList<Centres> toDelete = new ArrayList<>();
+
+        for(Centres centre :openCentres) {
+            //System.out.println("OPEN CENTRES : " + centre.getCurrentCapacity());
+            if (centre.getCurrentCapacity() < 25) {
+                //and not in safe period!
+                toDelete.add(centre);
+            }
+
+        }
+        return toDelete;
+    }
+
+    public static void deleteCentre(Centres centre) {
+        System.out.println("DELETE CALLED with centre capacity: "+ centre.getCurrentCapacity());
+        HashSet<Trainee> traineesToRelocate = centre.getTrainees();
+        openCentres.remove(centre);
+
+        relocateTrainees(traineesToRelocate);
+    }
+
+    public static void relocateTrainees(HashSet<Trainee> trainees) {
+        //method function: takes in hashset of trainees and adds them to free centres. Left overs are added to waiting list
+        //TO ADD: check if centre is tech centre (only takes a trainee of certain course)
+
+        ArrayList<Centres> freeCentres = getFreeCentres();
+        HashSet<Trainee> traineesAdded = new HashSet<>();
+
+//        for(Centres centres: openCentres){
+//            System.out.println("OPEN CENTRE : " + centres.getCurrentCapacity());
+//        }
+//
+//        for(Centres centres: freeCentres){
+//            System.out.println("FREE Centre " + centres.getCurrentCapacity());
+//        }
+
+        if (freeCentres.size() > 0) {
+            for (Trainee trainee : trainees) {
+                Random random = new Random();
+                int centreToAdd = random.nextInt(freeCentres.size());
+
+                //add in check is centre is suitable for trainee
+                openCentres.get(openCentres.indexOf(freeCentres.get(centreToAdd))).addTrainee(trainee);
+                traineesAdded.add(trainee);
+                freeCentres = getFreeCentres();
+
+                if (freeCentres.size() == 0) {
+                    break;
+                }
+            }
+
+        }
+
+//        for(Centres centres: openCentres){
+//            System.out.println("OPEN CENTRE after reallocation : " + centres.getCurrentCapacity());
+//        }
+
+        //add left over to waiting list
+        trainees.removeAll(traineesAdded);
+        if (trainees.size() > 0) {
+            ArrayList<Trainee> traineeArrayList = new ArrayList<>(trainees);
+            WaitingList.addAllTrainees(traineeArrayList);
+        }
+
+    }
+
 
 
 }
