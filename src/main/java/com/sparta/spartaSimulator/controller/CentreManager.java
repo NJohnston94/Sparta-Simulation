@@ -6,6 +6,7 @@ import com.sparta.spartaSimulator.model.WaitingList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
 
 public class CentreManager {
@@ -48,7 +49,8 @@ public class CentreManager {
     //This Constructor is for testing purposes only
     public static Centres createCentre(int cap) {
         Centres centre = Factory.centreFactory(1);
-        centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
+        //centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
+
         openCentres.add(centre);
         return centre;
     }
@@ -125,6 +127,93 @@ public class CentreManager {
         }
         return numberOfFullCentres;
     }
+
+
+    public static void addCentreToOpenCentres(Centres centre){
+        openCentres.add(centre);
+    }
+
+    public static ArrayList<Centres> getFreeCentres() {
+        ArrayList<Centres> freeCentres = new ArrayList<>();
+        for(Centres centre :openCentres) {
+            if (!isFull(centre)) {
+                freeCentres.add(centre);
+            }
+        }
+        return freeCentres;
+    }
+
+    public static void monthlyCheck() {
+        ArrayList<Centres> toDelete = new ArrayList<>();
+
+        for(Centres centre :openCentres) {
+  //       System.out.println(centre.getCurrentCapacity());
+            if (centre.getCurrentCapacity() < 25) {
+                //and not in safe period!
+                toDelete.add(centre);
+            }
+
+        }
+
+        for(Centres centre : toDelete){
+            deleteCentre(centre);
+        }
+
+    }
+
+    public static void deleteCentre(Centres centre) {
+     //   System.out.println("DELETE CALLED with centre cap:"+ centre.getCurrentCapacity());
+        HashSet<Trainee> traineesToRelocate = centre.getTrainees();
+        openCentres.remove(centre);
+
+        relocateTrainees(traineesToRelocate);
+    }
+
+    public static void relocateTrainees(HashSet<Trainee> trainees) {
+        //method function: takes in hashset of trainees and adds them to free centres. Left overs are added to waiting list
+        //TO ADD: check if centre is tech centre (only takes a trainee of certain course)
+
+        ArrayList<Centres> freeCentres = getFreeCentres();
+        HashSet<Trainee> traineesAdded = new HashSet<>();
+
+//        for(Centres centres: openCentres){
+//            System.out.println("OPEN CENTRE : " + centres.getCurrentCapacity());
+//        }
+//
+//        for(Centres centres: freeCentres){
+//            System.out.println("FREE Centre " + centres.getCurrentCapacity());
+//        }
+
+        if (freeCentres.size() > 0) {
+            for (Trainee trainee : trainees) {
+                Random random = new Random();
+                int centreToAdd = random.nextInt(freeCentres.size());
+
+                //add in check is centre is suitable for trainee
+                openCentres.get(openCentres.indexOf(freeCentres.get(centreToAdd))).addTrainee(trainee);
+                traineesAdded.add(trainee);
+                freeCentres = getFreeCentres();
+
+                if (freeCentres.size() == 0) {
+                    break;
+                }
+            }
+
+        }
+        //add left over to waiting list
+//        for(Centres centres: openCentres){
+//            System.out.println("OPEN CENTRE after reallocation : " + centres.getCurrentCapacity());
+//        }
+
+
+        trainees.removeAll(traineesAdded);
+        if (trainees.size() > 0) {
+            ArrayList<Trainee> traineeArrayList = new ArrayList<>(trainees);
+            WaitingList.addAllTrainees(traineeArrayList);
+        }
+
+    }
+
 
 
 }
