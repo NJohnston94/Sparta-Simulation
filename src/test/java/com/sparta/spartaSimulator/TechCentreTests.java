@@ -5,6 +5,7 @@ import com.sparta.spartaSimulator.controller.Centres;
 import com.sparta.spartaSimulator.controller.Factory;
 import com.sparta.spartaSimulator.controller.TraineeManager;
 import com.sparta.spartaSimulator.model.Trainee;
+import com.sparta.spartaSimulator.model.TrainingCourse;
 import com.sparta.spartaSimulator.model.WaitingList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,10 +28,10 @@ public class TechCentreTests {
         //Due to randomisation of centres taking in Trainees, this sometimes fails, but it does work i think
         Centres centres = Factory.centreFactory(2);
         CentreManager.addCentreToOpenCentres(centres);
-        Trainee trainee = new Trainee(Trainee.TraineeCourse.JAVA);
-        Trainee trainee1 = new Trainee(Trainee.TraineeCourse.DATA);
-        Trainee trainee2 = new Trainee(Trainee.TraineeCourse.DATA);
-        Trainee trainee3 = new Trainee(Trainee.TraineeCourse.BUSINESS);
+        Trainee trainee = new Trainee(TrainingCourse.CourseType.JAVA);
+        Trainee trainee1 = new Trainee(TrainingCourse.CourseType.DATA);
+        Trainee trainee2 = new Trainee(TrainingCourse.CourseType.DATA);
+        Trainee trainee3 = new Trainee(TrainingCourse.CourseType.BUSINESS);
         TraineeManager.unplacedTrainees.add(trainee);
         TraineeManager.unplacedTrainees.add(trainee1);
         TraineeManager.unplacedTrainees.add(trainee2);
@@ -46,10 +47,10 @@ public class TechCentreTests {
         Centres bootCamp = Factory.centreFactory(3);
         CentreManager.addCentreToOpenCentres(techCentre);
         CentreManager.addCentreToOpenCentres(bootCamp);
-        Trainee trainee = new Trainee(Trainee.TraineeCourse.JAVA);
-        Trainee trainee1 = new Trainee(Trainee.TraineeCourse.DATA);
-        Trainee trainee2 = new Trainee(Trainee.TraineeCourse.DATA);
-        Trainee trainee3 = new Trainee(Trainee.TraineeCourse.BUSINESS);
+        Trainee trainee = new Trainee(TrainingCourse.CourseType.JAVA);
+        Trainee trainee1 = new Trainee(TrainingCourse.CourseType.DATA);
+        Trainee trainee2 = new Trainee(TrainingCourse.CourseType.DATA);
+        Trainee trainee3 = new Trainee(TrainingCourse.CourseType.BUSINESS);
         TraineeManager.unplacedTrainees.add(trainee);
         TraineeManager.unplacedTrainees.add(trainee1);
         TraineeManager.unplacedTrainees.add(trainee2);
