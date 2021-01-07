@@ -138,46 +138,41 @@ public class CentreManager {
     public static void addTrainee(Centres openCentre) {
 
         if (WaitingList.getWaitingListSize() > 0) {
-            if(openCentre.getClass().getSimpleName().equals("TechCentre"))
-            {
+            if (openCentre.getClass().getSimpleName().equals("TechCentre")) {
                 Trainee trainee = TraineeManager.getTraineeTechCentre(WaitingList.getWaitingList(), openCentre.getCentreSpecialism());
-                if(trainee != null && trainee.getTraineeCourse().toString().equals(openCentre.getCentreSpecialism().toString()))
-                {
+                if (trainee != null && trainee.getTraineeCourse().toString().equals(openCentre.getCentreSpecialism().toString())) {
                     openCentre.addTrainee(trainee);
-                }
-                else
-                {
+                } else {
                     TraineeManager.getUnplacedTrainees().add(trainee);
                 }
-            }
-            else{
+            } else {
                 openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
             }
             //System.out.println("Trainee added from Waiting List");
-        if (!isFull(openCentre)) {
+            if (!isFull(openCentre)) {
 
-            if (WaitingList.getWaitingListSize() > 0) {
+                if (WaitingList.getWaitingListSize() > 0) {
 
-                openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
-                //System.out.println("Trainee added from Waiting List");
+                    openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
+                    //System.out.println("Trainee added from Waiting List");
 
-            } else if (TraineeManager.getUnplacedTrainees().size() > 0) {
+                } else if (TraineeManager.getUnplacedTrainees().size() > 0) {
 
-                openCentre.addTrainee(TraineeManager.getTrainee(TraineeManager.getUnplacedTrainees()));
-                //System.out.println("Trainee added from Unplaced List");
+                    openCentre.addTrainee(TraineeManager.getTrainee(TraineeManager.getUnplacedTrainees()));
+                    //System.out.println("Trainee added from Unplaced List");
 
-            } else {
+                } else {
 
-                //System.out.println("No trainees available for placement");
-                LoggerClass.logTrace("No trainees available for placement");
+                    //System.out.println("No trainees available for placement");
+                    LoggerClass.logTrace("No trainees available for placement");
 
+                }
             }
+
+            openCentre.checkCentreStatus();
+
         }
-
-        openCentre.checkCentreStatus();
-
     }
-
     public static void addUnplacedTraineesToWaitingList() {
         WaitingList.addAllTrainees(TraineeManager.getUnplacedTrainees());
         TraineeManager.emptyUnplacedTrainees();

@@ -5,12 +5,11 @@ import com.sparta.spartaSimulator.controller.TraineeManager;
 import java.util.*;
 
 public class Trainee {
-
     private TraineeStatus traineeStatus;
     private int traineeID;
     private TraineeCourse traineeCourse;
 
-    public enum TraineeStatus{
+    public enum TraineeStatus {
         PLACED,
         WAITING,
         UNPLACED
@@ -30,7 +29,6 @@ public class Trainee {
             TraineeCourse.DATA,
             TraineeCourse.DEVOPS,
             TraineeCourse.BUSINESS));
-
     private static final Random RANDOM = new Random();
 
     public Trainee() {
@@ -38,7 +36,6 @@ public class Trainee {
         this.traineeCourse = courses.get(RANDOM.nextInt(5));
     }
 
-    //testing purposes so I could set the course type for Trainee when testing in TechCentreTests
     public Trainee(TraineeCourse course) {
         this.traineeStatus = TraineeStatus.UNPLACED;
         this.traineeCourse = course;
