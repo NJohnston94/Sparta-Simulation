@@ -24,7 +24,7 @@ public interface Centres {
 
     public void addTrainee(Trainee trainee);
 
-    public void addAllTrainees(HashSet<Trainee> trainees);
+//    public void addAllTrainees(HashSet<Trainee> trainees);
 
     public int getCurrentCapacity();
 

@@ -1,5 +1,6 @@
 package com.sparta.spartaSimulator;
 
+import com.sparta.spartaSimulator.controller.CentreManager;
 import com.sparta.spartaSimulator.controller.Centres;
 import com.sparta.spartaSimulator.controller.Factory;
 import com.sparta.spartaSimulator.model.BootCamp;
@@ -38,7 +39,23 @@ public class TraineeCentreTest {
 
         Assertions.assertEquals(TraineeCentre.CentreStatus.FULL, centres.getCentreStatus());
     }
-    public void checkCanSetAge(){
+
+    @Test
+    void checkDoesNotAddIfFull(){
+        Centres centres = Factory.centreFactory(1);
+
+        centres.setCentreStatus(TraineeCentre.CentreStatus.FULL);
+
+        Trainee trainee = new Trainee();
+
+        centres.addTrainee(trainee);
+
+        Assertions.assertEquals(0, centres.getCurrentCapacity());
+
+    }
+  
+    @Test
+    void checkCanSetAge(){
         BootCamp bootCamp = new BootCamp();
         bootCamp.setAge(5);
 
@@ -58,7 +75,7 @@ public class TraineeCentreTest {
     }
 
     @Test
-    public void checkSafePeriodIsSet(){
+    void checkSafePeriodIsSet(){
 
         BootCamp bootCamp = new BootCamp();
 
@@ -75,6 +92,5 @@ public class TraineeCentreTest {
         Assertions.assertEquals(2, techCentre.getSafePeriod());
 
     }
-
 
 }
