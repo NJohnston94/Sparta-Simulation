@@ -76,8 +76,15 @@ public class TimeManager implements Runnable {
             UserInterface.printOpenCentresAndSize();
 
 
+
             // counter++
             counter++;
+
+            CentreManager.updateCentreAge();
+
+
+
+
 
             delay = delayTime(separation, counter, startTime);
 
