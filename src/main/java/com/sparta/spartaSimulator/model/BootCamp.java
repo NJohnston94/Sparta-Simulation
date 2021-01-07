@@ -7,6 +7,7 @@ public class BootCamp extends TraineeCentre implements Centres {
     public BootCamp() {
         setCentreStatus(CentreStatus.NOT_FULL);
         setMaxCapacity(500);
+        setSafePeriod(3);
     }
 
 }
