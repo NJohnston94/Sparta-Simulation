@@ -113,8 +113,21 @@ public class CentreManager {
     public static void addTrainee(Centres openCentre) {
 
         if (WaitingList.getWaitingListSize() > 0) {
-
-            openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
+            if(openCentre.getClass().getSimpleName().equals("TechCentre"))
+            {
+                Trainee trainee = TraineeManager.getTraineeTechCentre(WaitingList.getWaitingList(), openCentre.getCentreSpecialism());
+                if(trainee != null && trainee.getTraineeCourse().toString().equals(openCentre.getCentreSpecialism().toString()))
+                {
+                    openCentre.addTrainee(trainee);
+                }
+                else
+                {
+                    TraineeManager.getUnplacedTrainees().add(trainee);
+                }
+            }
+            else{
+                openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
+            }
             //System.out.println("Trainee added from Waiting List");
 
         } else if (TraineeManager.getUnplacedTrainees().size() > 0) {
