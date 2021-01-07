@@ -183,6 +183,10 @@ public class CentreManager {
         return numberOfFullCentres;
     }
 
+    public static int getNumberOfClosedCentres(){
+        return 0;
+    }
+
     //this method is purely for testing purposes
     public static void destroyAllCentres(){
         openCentres.clear();
