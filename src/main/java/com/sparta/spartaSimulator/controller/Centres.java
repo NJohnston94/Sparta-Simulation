@@ -31,4 +31,8 @@ public interface Centres {
     public int getMaxCapacity();
 
     public HashSet<Trainee> getTrainees();
+
+    //Added to let the factory created centres access this in the TraineeCentre abstract class in their own
+    //concrete classes
+    public TraineeCentre.CentreSpecialism getCentreSpecialism();
 }

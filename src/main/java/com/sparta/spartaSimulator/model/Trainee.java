@@ -36,11 +36,12 @@ public class Trainee {
     public Trainee() {
         this.traineeStatus = TraineeStatus.UNPLACED;
         this.traineeCourse = courses.get(RANDOM.nextInt(5));
-
     }
 
-    public static void setCentreTraineeCourse(TraineeCourse centreTraineeCourse) {
-        centreTraineeCourse = courses.get(RANDOM.nextInt(5));
+    //testing purposes so I could set the course type for Trainee when testing in TechCentreTests
+    public Trainee(TraineeCourse course) {
+        this.traineeStatus = TraineeStatus.UNPLACED;
+        this.traineeCourse = course;
     }
 
     public TraineeCourse getTraineeCourse() {
