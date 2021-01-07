@@ -36,29 +36,29 @@ public class PropertiesReader {
         return Long.parseLong(properties.getProperty("centreOpeningFrequency"));
     }
 
-    public static long getBootcampMaxCapacity() {
+    public static int getBootcampMaxCapacity() {
         createProperties();
-        return Long.parseLong(properties.getProperty("bootcampCapacity"));
+        return Integer.parseInt(properties.getProperty("bootcampCapacity"));
     }
 
-    public static long getTrainingHubMaxCapacity() {
+    public static int getTrainingHubMaxCapacity() {
         createProperties();
-        return Long.parseLong(properties.getProperty("trainingHubCapacity"));
+        return Integer.parseInt(properties.getProperty("trainingHubCapacity"));
     }
 
-    public static long getTechCentreMaxCapacity() {
+    public static int getTechCentreMaxCapacity() {
         createProperties();
-        return Long.parseLong(properties.getProperty("techCentreCapacity"));
+        return Integer.parseInt(properties.getProperty("techCentreCapacity"));
     }
 
-    public static long getMaxNumberOfBootcamps() {
+    public static int getMaxNumberOfBootcamps() {
         createProperties();
-        return Long.parseLong(properties.getProperty("maxNumberOfBootcamps"));
+        return Integer.parseInt(properties.getProperty("maxNumberOfBootcamps"));
     }
 
-    public static long getMinTraineesCreated() {
+    public static int getMinTraineesCreated() {
         createProperties();
-        return Long.parseLong(properties.getProperty("minTrainees"));
+        return Integer.parseInt(properties.getProperty("minTrainees"));
     }
 
     public static long getMaxTraineesCreated() {

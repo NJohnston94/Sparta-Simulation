@@ -1,10 +1,7 @@
 package com.sparta.spartaSimulator.controller;
 
-import com.sparta.spartaSimulator.model.Trainee;
-import com.sparta.spartaSimulator.model.TraineeCentre;
-import com.sparta.spartaSimulator.model.WaitingList;
+import com.sparta.spartaSimulator.model.*;
 import com.sparta.spartaSimulator.view.LoggerClass;
-import com.sparta.spartaSimulator.model.TrainingCourse;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -64,7 +61,7 @@ public class CentreManager {
                 count++;
             }
         }
-        if(count > 1)
+        if(count >= PropertiesReader.getMaxNumberOfBootcamps())
         {
             range = (2-1)+1;
         }
