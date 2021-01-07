@@ -6,10 +6,11 @@ import java.util.Properties;
 
 public class PropertiesReader {
     private static final Properties properties = new Properties();
+    private static final String PROPERTIES_PATH = "src/main/resources/settings.properties";
 
     private static void createProperties() {
         try {
-            properties.load(new FileReader("src/main/resources/settings.properties"));
+            properties.load(new FileReader(PROPERTIES_PATH));
         } catch (IOException e) {
             e.printStackTrace();
         }

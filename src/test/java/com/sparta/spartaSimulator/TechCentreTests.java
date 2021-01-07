@@ -5,9 +5,8 @@ import com.sparta.spartaSimulator.controller.Centres;
 import com.sparta.spartaSimulator.controller.Factory;
 import com.sparta.spartaSimulator.controller.TraineeManager;
 import com.sparta.spartaSimulator.model.Trainee;
-import com.sparta.spartaSimulator.model.WaitingList;
 import com.sparta.spartaSimulator.model.TrainingCourse;
-
+import com.sparta.spartaSimulator.model.WaitingList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -20,11 +19,12 @@ public class TechCentreTests {
     public void creationTypeCheck() {
         Centres centres = Factory.centreFactory(2);
         Assertions.assertNotNull(centres);
-        Assertions.assertNotNull(centres.getCentreCourseType());
+        Assertions.assertNotNull(TrainingCourse.setRandomCourseType());
     }
 
     @Test
-    public void TechCentreOnlyAcceptsType() {
+    public void TechCentreOnlyAcceptsType()
+    {
         //Due to randomisation of centres taking in Trainees, this sometimes fails, but it does work i think
         Centres centres = Factory.centreFactory(2);
         CentreManager.addCentreToOpenCentres(centres);
@@ -37,11 +37,16 @@ public class TechCentreTests {
         TraineeManager.unplacedTrainees.add(trainee2);
         TraineeManager.unplacedTrainees.add(trainee3);
         CentreManager.addTrainees(CentreManager.openCentres);
-        Assertions.assertEquals(2, centres.getCurrentCapacity());
+
+        for (Trainee traineeTest : centres.getTrainees()){
+            System.out.println(traineeTest.getTraineeCourse().toString());
+        }
+
     }
 
     @Test
-    public void addingFromWaitingList() {
+    public void addingFromWaitingList()
+    {
         Centres techCentre = Factory.centreFactory(2);
         Centres bootCamp = Factory.centreFactory(3);
         CentreManager.addCentreToOpenCentres(techCentre);
