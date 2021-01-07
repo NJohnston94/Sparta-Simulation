@@ -1,6 +1,9 @@
 package com.sparta.spartaSimulator;
 
+import com.sparta.spartaSimulator.controller.Centres;
+import com.sparta.spartaSimulator.controller.Factory;
 import com.sparta.spartaSimulator.model.BootCamp;
+import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TechCentre;
 import com.sparta.spartaSimulator.model.TraineeCentre;
 import com.sparta.spartaSimulator.model.TrainingHub;
@@ -22,6 +25,19 @@ public class TraineeCentreTest {
     }
 
     @Test
+    void doCentresGetAssignedFull() {
+        Centres centres = Factory.centreFactory(3);
+        for (int i = 0; i < 500; i++) {
+            Trainee trainee = new Trainee();
+            centres.addTrainee(trainee);
+
+            if (i == 498) {
+                Assertions.assertEquals(TraineeCentre.CentreStatus.NOT_FULL, centres.getCentreStatus());
+            }
+        }
+
+        Assertions.assertEquals(TraineeCentre.CentreStatus.FULL, centres.getCentreStatus());
+    }
     public void checkCanSetAge(){
         BootCamp bootCamp = new BootCamp();
         bootCamp.setAge(5);

@@ -22,7 +22,7 @@ public abstract class TraineeCentre implements Centres {
 
     public enum CentreStatus{
         FULL,
-        NEARLY_FULL,
+        //NEARLY_FULL,
         NOT_FULL
     }
 
@@ -86,9 +86,9 @@ public abstract class TraineeCentre implements Centres {
     public void checkCentreStatus() {
         if(allTrainees.size() == MAX_CAPACITY) {
             setCentreStatus(CentreStatus.FULL);
-        } else if (allTrainees.size() >= 80) {
-            setCentreStatus(CentreStatus.NEARLY_FULL);
-        }
+        } //else if (allTrainees.size() >= 80) {
+//            setCentreStatus(CentreStatus.NEARLY_FULL);
+//        }
     }
 
     //Changes to this method to check specialism against centres

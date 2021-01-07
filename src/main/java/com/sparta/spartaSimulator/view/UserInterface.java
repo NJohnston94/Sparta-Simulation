@@ -27,7 +27,7 @@ public class UserInterface {
 
 
     public static void setCentreOpeningFrequency() {
-        System.out.print("How often (in months) should a new Training Centre open?  ");
+        System.out.print("How often (in months) should a new Training Centre open?  \n");
         int userInput = getUserInput();
         if(userInput > 0) {
             TimeManager.setCentreOpeningFrequency(userInput);
@@ -54,13 +54,13 @@ public class UserInterface {
                 months = scanner.nextInt();
                 //if wanting an upper limit: edit statement below to an OR statement with upper bound
                 while (months < 1) {
-                    System.out.println("Enter valid number!");
+                    System.out.println("Please enter a valid number!");
                     months = scanner.nextInt();
                 }
                 validInput = true;
 
             } catch (InputMismatchException e) {
-                System.out.println("Enter a number!");
+                System.out.println("Please enter a number!");
                 validInput = false;
             }
         }
@@ -111,7 +111,7 @@ public class UserInterface {
         System.out.println("Number of open centres: " + CentreManager.openCentres.size());
 
 //        number of full centres
-        System.out.println("Number of full centres: " + CentreManager.numberOfFullCentres);
+        System.out.println("Number of full centres: " + (CentreManager.openCentres.size() - CentreManager.getFreeCentres().size()));
 
 //        number of trainees currently training
         System.out.println("Number of trainees currently training: " + CentreManager.getTrainees());
@@ -145,7 +145,8 @@ public class UserInterface {
     public static void printOpenCentresAndSize() {
 
         for (Centres centre : CentreManager.openCentres) {
-            System.out.println("Centre type : " + centre.getClass().getSimpleName() + ", Size : " + centre.getCurrentCapacity());
+            //System.out.println("Centre type : " + centre.getClass().getSimpleName() + ", Size : " + centre.getCurrentCapacity());
+            LoggerClass.logTrace("Centre type : " + centre.getClass().getSimpleName() + ", Size : " + centre.getCurrentCapacity());
         }
     }
 

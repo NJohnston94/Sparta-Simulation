@@ -44,6 +44,10 @@ public class Trainee {
         this.traineeCourse = course;
     }
 
+    public static void setCentreTraineeCourse(TraineeCourse centreTraineeCourse) {
+        centreTraineeCourse = courses.get(RANDOM.nextInt(5));
+    }
+
     public TraineeCourse getTraineeCourse() {
         return traineeCourse;
     }
