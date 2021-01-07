@@ -96,6 +96,24 @@ public class TimeManager implements Runnable {
                     Thread.currentThread().interrupt();
                     System.out.println("Thread was interrupted due to exception");
                 }
+
+
+            // counter++
+            counter++;
+
+            CentreManager.updateCentreAge();
+
+
+
+
+
+            delay = delayTime(separation, counter, startTime);
+
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.out.println("Thread was interrupted due to exception");
             }
 
         }

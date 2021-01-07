@@ -14,6 +14,14 @@ public interface Centres {
 
     void checkCentreStatus();
 
+    void setAge(int age);
+
+    int getAge();
+
+    void setSafePeriod(int safePeriod);
+
+    int getSafePeriod();
+
     public void addTrainee(Trainee trainee);
 
     public void addAllTrainees(HashSet<Trainee> trainees);
@@ -23,4 +31,8 @@ public interface Centres {
     public int getMaxCapacity();
 
     public HashSet<Trainee> getTrainees();
+
+    //Added to let the factory created centres access this in the TraineeCentre abstract class in their own
+    //concrete classes
+    public TraineeCentre.CentreSpecialism getCentreSpecialism();
 }

@@ -7,6 +7,7 @@ public class TrainingHub extends TraineeCentre implements Centres {
     public TrainingHub() {
         setMaxCapacity(100);
         setCentreStatus(CentreStatus.NOT_FULL);
+        setSafePeriod(2);
     }
 
 }
