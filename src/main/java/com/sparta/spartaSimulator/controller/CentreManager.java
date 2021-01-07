@@ -60,6 +60,10 @@ public class CentreManager {
         return centre;
     }
 
+    public static boolean fixedIsFull(Centres centre){
+        return centre.getCurrentCapacity() >= centre.getMaxCapacity();
+    }
+
     public static boolean isFull(Centres centre) {
         return centre.getCentreStatus() == TraineeCentre.CentreStatus.FULL;
     }
@@ -89,7 +93,7 @@ public class CentreManager {
 
     private static int generateNumberOfTrainees() {
         Random random = new Random();
-        int randomNumber = random.nextInt(21);
+        int randomNumber = random.nextInt((20-10) + 1) +10;
         return randomNumber;
     }
 
@@ -97,10 +101,14 @@ public class CentreManager {
         if (openCentres.size()!=0) {
 
             for (Centres openCentre : openCentres) {
-
-                if (!isFull(openCentre)) {
-                    for (int i = 0; i < generateNumberOfTrainees(); i++) {
+                int randomNumber = generateNumberOfTrainees();
+                System.out.println(openCentre.getCurrentCapacity() + " " + isFull(openCentre));
+                if (!fixedIsFull(openCentre)) {
+                    for (int i = 0; i < randomNumber ; i++) {
                         addTrainee(openCentre);
+                        if(fixedIsFull(openCentre)){
+                            break;
+                        }
                     }
                 }
             }
@@ -124,7 +132,7 @@ public class CentreManager {
 
         } else {
 
-            System.out.println("No trainees available for placement");
+          //  System.out.println("No trainees available for placement");
 
         }
 
@@ -145,7 +153,7 @@ public class CentreManager {
 
     public static int getNumberOfFullCentres() {
         for (Centres centre : openCentres) {
-            if (CentreManager.isFull(centre)) {
+            if (CentreManager.fixedIsFull(centre)) {
                 numberOfFullCentres++;
             }
         }

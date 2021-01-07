@@ -110,7 +110,7 @@ public class UserInterface {
         System.out.println("Number of open centres: " + CentreManager.openCentres.size());
 
 //        number of full centres
-        System.out.println("Number of full centres: " + CentreManager.numberOfFullCentres);
+        System.out.println("Number of full centres: " + CentreManager.getNumberOfFullCentres());
 
 //        number of trainees currently training
         System.out.println("Number of trainees currently training: " + CentreManager.getTrainees());

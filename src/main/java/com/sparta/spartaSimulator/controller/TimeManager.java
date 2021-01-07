@@ -58,6 +58,7 @@ public class TimeManager implements Runnable {
         while (counter < numberOfIterations) {
 
             // Do Stuff
+            System.out.println("CENTRES AT START :" + CentreManager.openCentres.size());
 
             System.out.println("");
             System.out.println("Start of each iteration : " + (getSystemTime() - startTime));
