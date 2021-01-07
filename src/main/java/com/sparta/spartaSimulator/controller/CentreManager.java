@@ -265,7 +265,7 @@ public class CentreManager {
     public static int getNumberOfOpenCentres(String course){
         int count = 0;
         for(Centres centre: openCentres){
-            if(centre.getClass().getSimpleName()==course){
+            if(centre.getClass().getSimpleName().equals(course)){
                 count++;
             }
         }

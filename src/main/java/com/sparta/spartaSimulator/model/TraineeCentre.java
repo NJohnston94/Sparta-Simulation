@@ -93,10 +93,10 @@ public abstract class TraineeCentre implements Centres {
 
     //Changes to this method to check specialism against centres
     public void addTrainee(Trainee trainee){
-        if (this.getCentreStatus().equals(CentreStatus.NOT_FULL)) {
-            allTrainees.add(trainee);
-            checkCentreStatus();
-        }
+//        if (this.getCentreStatus().equals(CentreStatus.NOT_FULL)) {
+//            allTrainees.add(trainee);
+//            checkCentreStatus();
+//        }
         String specialism = "";
         try
         {

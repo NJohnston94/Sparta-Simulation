@@ -59,14 +59,15 @@ public class TraineeManager {
     }
 
     public static Trainee getTraineeTechCentre(ArrayList<Trainee> traineeList, TraineeCentre.CentreSpecialism specialism) {
-        for(Trainee trainee: traineeList)
+        Trainee trainee = traineeList.get(0);
+        for(Trainee trainees: traineeList)
         {
             if(trainee.getTraineeCourse().toString().equals(specialism.toString()))
             {
-                traineeList.remove(trainee);
-                return trainee;
+                traineeList.remove(trainees);
+                return trainees;
             }
         }
-        return null;
+        return trainee;
     }
 }

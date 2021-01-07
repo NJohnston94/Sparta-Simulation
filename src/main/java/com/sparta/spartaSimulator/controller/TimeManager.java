@@ -85,24 +85,12 @@ public class TimeManager implements Runnable {
             UserInterface.printOpenCentresAndSize();
 
             counter++;
+
+            //CentreManager.updateCentreAge();
+
             if (monthlyOrEnd == 1) {
-                UserInterface.displayResults();
-
-                delay = delayTime(separation, counter, startTime);
-                try {
-                    Thread.sleep(delay);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    System.out.println("Thread was interrupted due to exception");
-                }
-
-
-                // counter++
-                counter++;
-
-                CentreManager.updateCentreAge();
-
-
+                //UserInterface.displayResults();
+                UserInterface.presentData();
                 delay = delayTime(separation, counter, startTime);
 
                 try {
@@ -114,9 +102,11 @@ public class TimeManager implements Runnable {
 
             }
 
-            System.out.println("");
-            UserInterface.displayResults();
         }
+
+        System.out.println("");
+        //UserInterface.displayResults();
+        UserInterface.presentData();
     }
 
     public static void setCentreOpeningFrequency(int centreOpeningFrequency) {
