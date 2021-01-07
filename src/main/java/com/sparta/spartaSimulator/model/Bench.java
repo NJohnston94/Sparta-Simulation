@@ -25,5 +25,12 @@ public class Bench {
         }
         return total;
     }
+    public static void removeTraineeFromBench(int index){
+        benchList.remove(index);
+    }
+
+    public static Trainee getTrainee(int index){
+        return benchList.get(index);
+    }
 
 }
