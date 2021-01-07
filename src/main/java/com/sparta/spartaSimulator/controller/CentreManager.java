@@ -3,6 +3,7 @@ package com.sparta.spartaSimulator.controller;
 import com.sparta.spartaSimulator.model.BootCamp;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
+import com.sparta.spartaSimulator.model.TrainingCourse;
 import com.sparta.spartaSimulator.model.WaitingList;
 import com.sparta.spartaSimulator.view.LoggerClass;
 
@@ -76,7 +77,7 @@ public class CentreManager {
         return countTrainees;
     }
 
-    public static int getTrainees(Trainee.TraineeCourse course){
+    public static int getTrainees(TrainingCourse.CourseType course){
         int countTrainees = 0;
 
         for (Centres centre: openCentres) {

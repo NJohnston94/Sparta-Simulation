@@ -4,12 +4,15 @@ import com.sparta.spartaSimulator.controller.Centres;
 
 public class TechCentre extends TraineeCentre implements Centres {
 
-    private Trainee.TraineeCourse centreTraineeCourse;
+    private final TrainingCourse.CourseType centreCourseType;
 
     public TechCentre() {
         setMaxCapacity(200);
         setCentreStatus(CentreStatus.NOT_FULL);
-        Trainee.setCentreTraineeCourse(centreTraineeCourse);
+        this.centreCourseType = TrainingCourse.setRandomCourseType();
     }
 
+    public TrainingCourse.CourseType getCentreCourseType() {
+        return centreCourseType;
+    }
 }

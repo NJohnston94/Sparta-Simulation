@@ -8,7 +8,7 @@ public class Trainee {
 
     private TraineeStatus traineeStatus;
     private int traineeID;
-    private TraineeCourse traineeCourse;
+    private final TrainingCourse.CourseType traineeCourse;
 
     public enum TraineeStatus{
         PLACED,
@@ -16,34 +16,14 @@ public class Trainee {
         UNPLACED
     }
 
-    public enum TraineeCourse {
-        JAVA,
-        CSHARP,
-        DATA,
-        DEVOPS,
-        BUSINESS
-    }
-
-    private static final ArrayList<TraineeCourse> courses = new ArrayList<>(Arrays.asList(
-            TraineeCourse.JAVA,
-            TraineeCourse.CSHARP,
-            TraineeCourse.DATA,
-            TraineeCourse.DEVOPS,
-            TraineeCourse.BUSINESS));
-
     private static final Random RANDOM = new Random();
 
     public Trainee() {
         this.traineeStatus = TraineeStatus.UNPLACED;
-        this.traineeCourse = courses.get(RANDOM.nextInt(5));
-
+        this.traineeCourse = TrainingCourse.setRandomCourseType();
     }
 
-    public static void setCentreTraineeCourse(TraineeCourse centreTraineeCourse) {
-        centreTraineeCourse = courses.get(RANDOM.nextInt(5));
-    }
-
-    public TraineeCourse getTraineeCourse() {
+    public TrainingCourse.CourseType getTraineeCourse() {
         return traineeCourse;
     }
 

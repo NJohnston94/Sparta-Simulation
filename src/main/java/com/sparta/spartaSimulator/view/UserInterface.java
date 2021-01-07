@@ -5,6 +5,7 @@ import com.sparta.spartaSimulator.controller.Centres;
 import com.sparta.spartaSimulator.controller.TimeManager;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
+import com.sparta.spartaSimulator.model.TrainingCourse;
 import com.sparta.spartaSimulator.model.WaitingList;
 
 import java.util.InputMismatchException;
@@ -94,11 +95,11 @@ public class UserInterface {
         System.out.println("Closed Centres: " + CentreManager.getNumberOfClosedCentres());
         System.out.println("Full Centres: " + CentreManager.getNumberOfFullCentres());
         System.out.println("Trainees: " + CentreManager.getTotalNumberOfTrainees());
-        System.out.println("  Java: " + CentreManager.getTrainees(Trainee.TraineeCourse.JAVA));
-        System.out.println("  C#: " + CentreManager.getTrainees(Trainee.TraineeCourse.CSHARP));
-        System.out.println("  Data: " + CentreManager.getTrainees(Trainee.TraineeCourse.DATA));
-        System.out.println("  DevOps: " + CentreManager.getTrainees(Trainee.TraineeCourse.DEVOPS));
-        System.out.println("  Business: " + CentreManager.getTrainees(Trainee.TraineeCourse.BUSINESS));
+        System.out.println("  Java: " + CentreManager.getTrainees(TrainingCourse.CourseType.JAVA));
+        System.out.println("  C#: " + CentreManager.getTrainees(TrainingCourse.CourseType.CSHARP));
+        System.out.println("  Data: " + CentreManager.getTrainees(TrainingCourse.CourseType.DATA));
+        System.out.println("  DevOps: " + CentreManager.getTrainees(TrainingCourse.CourseType.DEVOPS));
+        System.out.println("  Business: " + CentreManager.getTrainees(TrainingCourse.CourseType.BUSINESS));
     }//where info name included, info location has not
 
     /**

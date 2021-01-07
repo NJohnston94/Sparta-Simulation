@@ -6,6 +6,7 @@ import com.sparta.spartaSimulator.controller.Factory;
 import com.sparta.spartaSimulator.controller.TraineeManager;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
+import com.sparta.spartaSimulator.model.TrainingCourse;
 import com.sparta.spartaSimulator.model.WaitingList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -51,12 +52,12 @@ public class CentreManagerTest {
         Centres centre = CentreManager.createCentre();
         for(int i = 0; i<20;i++){
             Trainee trainee = new Trainee();
-            if(trainee.getTraineeCourse() == Trainee.TraineeCourse.JAVA ){
+            if(trainee.getTraineeCourse() == TrainingCourse.CourseType.JAVA ){
                 count++;
             }
             centre.addTrainee(trainee);
         }
-        Assertions.assertEquals(count,CentreManager.getTrainees(Trainee.TraineeCourse.JAVA));
+        Assertions.assertEquals(count,CentreManager.getTrainees(TrainingCourse.CourseType.JAVA));
     }
 
     @Test
@@ -66,7 +67,7 @@ public class CentreManagerTest {
         Centres centre1 = CentreManager.createCentre();
         for(int i = 0; i<20;i++){
             Trainee trainee = new Trainee();
-            if(trainee.getTraineeCourse() == Trainee.TraineeCourse.JAVA ){
+            if(trainee.getTraineeCourse() == TrainingCourse.CourseType.JAVA ){
                 count2++;
             }
             centre1.addTrainee(trainee);
@@ -74,12 +75,12 @@ public class CentreManagerTest {
         Centres centre2 = CentreManager.createCentre();
         for(int i = 0; i<20;i++){
             Trainee trainee = new Trainee();
-            if(trainee.getTraineeCourse() == Trainee.TraineeCourse.JAVA ){
+            if(trainee.getTraineeCourse() == TrainingCourse.CourseType.JAVA ){
                 count2++;
             }
             centre2.addTrainee(trainee);
         }
-        Assertions.assertEquals(count2,CentreManager.getTrainees(Trainee.TraineeCourse.JAVA));
+        Assertions.assertEquals(count2,CentreManager.getTrainees(TrainingCourse.CourseType.JAVA));
     }//fine individually, not all together
     public void randomChecking()
     {
