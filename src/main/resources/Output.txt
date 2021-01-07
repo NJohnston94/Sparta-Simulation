@@ -1,0 +1,20 @@
+End of simulation data:
+        Open Centres: 0
+  Tech Centres: 0
+      Bootcamp: 0
+  Training Hub: 0
+      Closed Centres: 0
+        Full Centres: 0
+Trainees in Training: 0
+          Java: 0
+            C#: 0
+          Data: 0
+        DevOps: 0
+      Business: 0
+
+        Waiting List: 0
+          Java: 0
+            C#: 0
+          Data: 0
+        DevOps: 0
+      Business: 0
