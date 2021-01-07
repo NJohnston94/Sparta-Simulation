@@ -4,6 +4,7 @@ import com.sparta.spartaSimulator.model.BootCamp;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
 import com.sparta.spartaSimulator.model.WaitingList;
+import com.sparta.spartaSimulator.view.LoggerClass;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +26,8 @@ public class CentreManager {
             openCentres.add(Factory.centreFactory(1));
         }
         openCentres.add(centre);
-        System.out.println("Centre created:  " + centre.getClass().getSimpleName());
+        //System.out.println("Centre created:  " + centre.getClass().getSimpleName());
+        LoggerClass.logTrace("Centre Created of type : " + centre.getClass().getSimpleName());
         return centre;
     }
 
@@ -107,26 +109,33 @@ public class CentreManager {
 
         }
         addUnplacedTraineesToWaitingList();
-        System.out.println("Current Waiting List size: " + WaitingList.getWaitingListSize());
+        //System.out.println("Current Waiting List size: " + WaitingList.getWaitingListSize());
+        LoggerClass.logTrace("Current Waiting List size: " + WaitingList.getWaitingListSize());
     }
 
     public static void addTrainee(Centres openCentre) {
 
-        if (WaitingList.getWaitingListSize() > 0) {
+        if (!isFull(openCentre)) {
 
-            openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
-            //System.out.println("Trainee added from Waiting List");
+            if (WaitingList.getWaitingListSize() > 0) {
 
-        } else if (TraineeManager.getUnplacedTrainees().size() > 0) {
+                openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
+                //System.out.println("Trainee added from Waiting List");
 
-            openCentre.addTrainee(TraineeManager.getTrainee(TraineeManager.getUnplacedTrainees()));
-            //System.out.println("Trainee added from Unplaced List");
+            } else if (TraineeManager.getUnplacedTrainees().size() > 0) {
 
-        } else {
+                openCentre.addTrainee(TraineeManager.getTrainee(TraineeManager.getUnplacedTrainees()));
+                //System.out.println("Trainee added from Unplaced List");
 
-            System.out.println("No trainees available for placement");
+            } else {
 
+                //System.out.println("No trainees available for placement");
+                LoggerClass.logTrace("No trainees available for placement");
+
+            }
         }
+
+        openCentre.checkCentreStatus();
 
     }
 
@@ -199,7 +208,8 @@ public class CentreManager {
     }
 
     public static void deleteCentre(Centres centre) {
-        System.out.println("DELETE CALLED with centre capacity: "+ centre.getCurrentCapacity());
+        //System.out.println("DELETE CALLED with centre capacity: "+ centre.getCurrentCapacity());
+        LoggerClass.logTrace("DELETE CALLED with centre capacity : " + centre.getCurrentCapacity());
         HashSet<Trainee> traineesToRelocate = centre.getTrainees();
         openCentres.remove(centre);
 
