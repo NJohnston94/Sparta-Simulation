@@ -8,7 +8,8 @@ public class Client {
     private int traineeRequirement = 15;
     private TrainingCourse.CourseType courseRequirement;
     private ClientHappiness clientHappiness;
-    private ArrayList<Trainee> clientTrainees = new ArrayList<Trainee>();
+    private ArrayList<Trainee> clientCurrentTrainees = new ArrayList<Trainee>();
+    private ArrayList<Trainee> previousTrainees = new ArrayList<Trainee>();
 
     private Random randomNumber = new Random();
 
@@ -40,10 +41,18 @@ public class Client {
     }
 
     public ArrayList<Trainee> getClientTrainees() {
-        return clientTrainees;
+        return clientCurrentTrainees;
     }
 
-    public void setClientTrainees(ArrayList<Trainee> clientTrainees) {
-        this.clientTrainees = clientTrainees;
+    public void addToClientCurrentTrainees(Trainee trainee) {
+        clientCurrentTrainees.add(trainee);
+    }
+
+    public ArrayList<Trainee> getPreviousTrainees() {
+        return previousTrainees;
+    }
+
+    public void addToPreviousTrainees(ArrayList<Trainee> clientCurrentTrainees) {
+        previousTrainees.addAll(clientCurrentTrainees);
     }
 }
