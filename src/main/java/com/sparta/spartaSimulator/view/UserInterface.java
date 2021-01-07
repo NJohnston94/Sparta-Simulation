@@ -3,6 +3,7 @@ package com.sparta.spartaSimulator.view;
 import com.sparta.spartaSimulator.controller.CentreManager;
 import com.sparta.spartaSimulator.controller.Centres;
 import com.sparta.spartaSimulator.controller.TimeManager;
+import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
 import com.sparta.spartaSimulator.model.WaitingList;
 
@@ -89,15 +90,15 @@ public class UserInterface {
     }//created, not tested
 
     public static void presentData(){
-        System.out.println("Open Centres: ");
-        System.out.println("Closed Centres: ");
-        System.out.println("Full Centres: ");
-        System.out.println("Trainees: ");
-        System.out.println("  Java: ");
-        System.out.println("  C#: ");
-        System.out.println("  Data: ");
-        System.out.println("  DevOps: ");
-        System.out.println("  Business: ");
+        System.out.println("Open Centres: " + CentreManager.getNumberOfOpenCentres());
+        System.out.println("Closed Centres: " + CentreManager.getNumberOfClosedCentres());
+        System.out.println("Full Centres: " + CentreManager.getNumberOfFullCentres());
+        System.out.println("Trainees: " + CentreManager.getTotalNumberOfTrainees());
+        System.out.println("  Java: " + CentreManager.getTrainees(Trainee.TraineeCourse.JAVA));
+        System.out.println("  C#: " + CentreManager.getTrainees(Trainee.TraineeCourse.CSHARP));
+        System.out.println("  Data: " + CentreManager.getTrainees(Trainee.TraineeCourse.DATA));
+        System.out.println("  DevOps: " + CentreManager.getTrainees(Trainee.TraineeCourse.DEVOPS));
+        System.out.println("  Business: " + CentreManager.getTrainees(Trainee.TraineeCourse.BUSINESS));
     }//where info name included, info location has not
 
     /**
