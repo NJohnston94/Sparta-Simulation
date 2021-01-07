@@ -16,6 +16,7 @@ public class CentreManager {
     public static int numberOfFullCentres = 0;
     public static int totalNumberOfTrainees = 0;
     public static Random random = new Random();
+    public static int numberOfDeletedCentres = 0;
 
     public static Centres createCentre()
     {
@@ -46,12 +47,6 @@ public class CentreManager {
         }
 
     }
-
-
-
-
-
-
 
     public static int randomGeneration()
     {
@@ -205,9 +200,9 @@ public class CentreManager {
     public static void monthlyCheck() {
         ArrayList<Centres> toDelete = getCentresToDelete();
 
-
         for(Centres centre : toDelete){
             deleteCentre(centre);
+            numberOfDeletedCentres++;
             toDelete = getCentresToDelete();
             if(toDelete.size() == 0){
                 break;
@@ -219,10 +214,9 @@ public class CentreManager {
     public static ArrayList<Centres> getCentresToDelete(){
         ArrayList<Centres> toDelete = new ArrayList<>();
 
-
         for(Centres centre :openCentres) {
             boolean canDelete = centre.getSafePeriod() < centre.getAge();
-            //System.out.println("OPEN CENTRES : " + centre.getCurrentCapacity());
+           // System.out.println("OPEN CENTRE : " + centre.getCurrentCapacity() + " AGE: " + centre.getAge()) ;
             if (centre.getCurrentCapacity() < 25 && canDelete) {
                 //and not in safe period!
                 toDelete.add(centre);
@@ -233,7 +227,7 @@ public class CentreManager {
     }
 
     public static void deleteCentre(Centres centre) {
-        //System.out.println("DELETE CALLED with centre capacity: "+ centre.getCurrentCapacity());
+        //System.out.println("DELETE CALLED with centre capacity: "+ centre.getCurrentCapacity() + " AGE: " + centre.getAge());
         LoggerClass.logTrace("DELETE CALLED with centre capacity : " + centre.getCurrentCapacity());
         HashSet<Trainee> traineesToRelocate = centre.getTrainees();
         openCentres.remove(centre);
@@ -301,5 +295,7 @@ public class CentreManager {
     }
 
 
-
+    public static int getNumberOfClosedCentres() {
+        return numberOfDeletedCentres;
+    }
 }

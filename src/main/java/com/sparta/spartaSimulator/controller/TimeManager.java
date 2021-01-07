@@ -39,7 +39,6 @@ public class TimeManager implements Runnable {
     }
 
 
-
     @Override
     public void run() {
 
@@ -64,10 +63,13 @@ public class TimeManager implements Runnable {
         while (counter < numberOfIterations) {
 
             if (monthlyOrEnd == 1) {
-
                 System.out.println("");
                 System.out.println("Month : " + counter);
 
+            }
+
+            if(CentreManager.openCentres.size() > 0){
+                CentreManager.monthlyCheck();
             }
 
             LoggerClass.logTrace("Start of iteration : " + (getSystemTime() - startTime));
@@ -96,35 +98,21 @@ public class TimeManager implements Runnable {
                     Thread.currentThread().interrupt();
                     System.out.println("Thread was interrupted due to exception");
                 }
+            }
 
-
-            // counter++
-            counter++;
 
             CentreManager.updateCentreAge();
 
 
-
-
-
-            delay = delayTime(separation, counter, startTime);
-
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                System.out.println("Thread was interrupted due to exception");
-            }
-
+            System.out.println("");
+           // UserInterface.displayResults();
         }
-
-        System.out.println("");
-        UserInterface.displayResults();
     }
 
     public static void setCentreOpeningFrequency(int centreOpeningFrequency) {
         TimeManager.centreOpeningFrequency = centreOpeningFrequency;
     }
+
     public static int getCentreFrequencyOpening() {
         return centreOpeningFrequency;
     }
