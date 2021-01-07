@@ -21,13 +21,35 @@ public class CentreManager {
         Centres centre = Factory.centreFactory(randomGeneration());
         if(centre.getClass().getSimpleName().equals("TrainingHub"))
         {
-            openCentres.add(Factory.centreFactory(1));
-            openCentres.add(Factory.centreFactory(1));
+            Centres trainingHub1 = Factory.centreFactory(1);
+            Centres trainingHub2 = Factory.centreFactory(1);
+
+            trainingHub1.setAge(0);
+            trainingHub2.setAge(0);
+
+            openCentres.add(trainingHub1);
+            openCentres.add(trainingHub2);
         }
+
+        centre.setAge(0);
         openCentres.add(centre);
         System.out.println("Centre created:  " + centre.getClass().getSimpleName());
         return centre;
     }
+
+    public static void updateCentreAge(){
+
+        for (Centres centres : CentreManager.openCentres){
+            centres.setAge(centres.getAge()+1);
+        }
+
+    }
+
+
+
+
+
+
 
     public static int randomGeneration()
     {
@@ -174,6 +196,7 @@ public class CentreManager {
     public static void monthlyCheck() {
         ArrayList<Centres> toDelete = getCentresToDelete();
 
+
         for(Centres centre : toDelete){
             deleteCentre(centre);
             toDelete = getCentresToDelete();
@@ -187,9 +210,11 @@ public class CentreManager {
     public static ArrayList<Centres> getCentresToDelete(){
         ArrayList<Centres> toDelete = new ArrayList<>();
 
+
         for(Centres centre :openCentres) {
+            boolean canDelete = centre.getSafePeriod() < centre.getAge();
             //System.out.println("OPEN CENTRES : " + centre.getCurrentCapacity());
-            if (centre.getCurrentCapacity() < 25) {
+            if (centre.getCurrentCapacity() < 25 && canDelete) {
                 //and not in safe period!
                 toDelete.add(centre);
             }
