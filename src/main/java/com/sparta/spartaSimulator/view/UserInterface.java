@@ -5,6 +5,7 @@ import com.sparta.spartaSimulator.controller.Centres;
 import com.sparta.spartaSimulator.controller.TimeManager;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.WaitingList;
+import com.sparta.spartaSimulator.model.TrainingCourse;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -104,18 +105,18 @@ public class UserInterface {
         System.out.println("  Training Hub: " + CentreManager.getNumberOfOpenCentres("TrainingHub"));
         System.out.println();
         System.out.println("Trainees in Training: " + CentreManager.getTrainees());
-        System.out.println("  Java: " + CentreManager.getTrainees(Trainee.TraineeCourse.JAVA));
-        System.out.println("  C#: " + CentreManager.getTrainees(Trainee.TraineeCourse.CSHARP));
-        System.out.println("  Data: " + CentreManager.getTrainees(Trainee.TraineeCourse.DATA));
-        System.out.println("  DevOps: " + CentreManager.getTrainees(Trainee.TraineeCourse.DEVOPS));
-        System.out.println("  Business: " + CentreManager.getTrainees(Trainee.TraineeCourse.BUSINESS));
+        System.out.println("  Java: " + CentreManager.getTrainees(TrainingCourse.CourseType.JAVA));
+        System.out.println("  C#: " + CentreManager.getTrainees(TrainingCourse.CourseType.CSHARP));
+        System.out.println("  Data: " + CentreManager.getTrainees(TrainingCourse.CourseType.DATA));
+        System.out.println("  DevOps: " + CentreManager.getTrainees(TrainingCourse.CourseType.DEVOPS));
+        System.out.println("  Business: " + CentreManager.getTrainees(TrainingCourse.CourseType.BUSINESS));
         System.out.println();
         System.out.println("Waiting List: " + WaitingList.getWaitingListSize());
-        System.out.println("  Java: " + WaitingList.getTrainees(Trainee.TraineeCourse.JAVA));
-        System.out.println("  C#: " + WaitingList.getTrainees(Trainee.TraineeCourse.CSHARP));
-        System.out.println("  Data: " + WaitingList.getTrainees(Trainee.TraineeCourse.DATA));
-        System.out.println("  DevOps: " + WaitingList.getTrainees(Trainee.TraineeCourse.DEVOPS));
-        System.out.println("  Business: " + WaitingList.getTrainees(Trainee.TraineeCourse.BUSINESS));
+        System.out.println("  Java: " + WaitingList.getTrainees(TrainingCourse.CourseType.JAVA));
+        System.out.println("  C#: " + WaitingList.getTrainees(TrainingCourse.CourseType.CSHARP));
+        System.out.println("  Data: " + WaitingList.getTrainees(TrainingCourse.CourseType.DATA));
+        System.out.println("  DevOps: " + WaitingList.getTrainees(TrainingCourse.CourseType.DEVOPS));
+        System.out.println("  Business: " + WaitingList.getTrainees(TrainingCourse.CourseType.BUSINESS));
     }//where info name included, info location has not
 
     /**

@@ -1,6 +1,7 @@
 package com.sparta.spartaSimulator;
 
 import com.sparta.spartaSimulator.model.Trainee;
+import com.sparta.spartaSimulator.model.TrainingCourse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -28,18 +29,18 @@ public class TraineeTest {
     @Test
     void doesTraineeGetAssignedCourse() {
         Trainee trainee = new Trainee();
-        Trainee.TraineeCourse testCourse;
+        TrainingCourse.CourseType testCourse;
 
-        if (trainee.getTraineeCourse().equals(Trainee.TraineeCourse.JAVA)) {
-            testCourse = Trainee.TraineeCourse.JAVA;
-        } else if (trainee.getTraineeCourse().equals(Trainee.TraineeCourse.CSHARP)) {
-            testCourse = Trainee.TraineeCourse.CSHARP;
-        } else if (trainee.getTraineeCourse().equals(Trainee.TraineeCourse.DATA)) {
-            testCourse = Trainee.TraineeCourse.DATA;
-        } else if (trainee.getTraineeCourse().equals(Trainee.TraineeCourse.DEVOPS)) {
-            testCourse = Trainee.TraineeCourse.DEVOPS;
-        } else if (trainee.getTraineeCourse().equals(Trainee.TraineeCourse.BUSINESS)) {
-            testCourse = Trainee.TraineeCourse.BUSINESS;
+        if (trainee.getTraineeCourse().equals(TrainingCourse.CourseType.JAVA)) {
+            testCourse = TrainingCourse.CourseType.JAVA;
+        } else if (trainee.getTraineeCourse().equals(TrainingCourse.CourseType.CSHARP)) {
+            testCourse = TrainingCourse.CourseType.CSHARP;
+        } else if (trainee.getTraineeCourse().equals(TrainingCourse.CourseType.DATA)) {
+            testCourse = TrainingCourse.CourseType.DATA;
+        } else if (trainee.getTraineeCourse().equals(TrainingCourse.CourseType.DEVOPS)) {
+            testCourse = TrainingCourse.CourseType.DEVOPS;
+        } else if (trainee.getTraineeCourse().equals(TrainingCourse.CourseType.BUSINESS)) {
+            testCourse = TrainingCourse.CourseType.BUSINESS;
         } else {
             testCourse = null;
         }

@@ -6,7 +6,7 @@ import java.util.Random;
 public class Client {
 
     private int traineeRequirement = 15;
-    private com.sparta.spartaSimulator.model.Trainee.TraineeCourse courseRequirement;
+    private TrainingCourse.CourseType courseRequirement;
     private ClientHappiness clientHappiness;
     private ArrayList<Trainee> clientTrainees = new ArrayList<Trainee>();
 
@@ -19,7 +19,7 @@ public class Client {
 
     public Client() {
         this.traineeRequirement += randomNumber.nextInt(30);
-        Trainee.setCentreTraineeCourse(courseRequirement);
+        this.courseRequirement = TrainingCourse.setRandomCourseType();
         this.clientHappiness = ClientHappiness.UNHAPPY;
     }
 
@@ -27,7 +27,7 @@ public class Client {
         return traineeRequirement;
     }
 
-    public Trainee.TraineeCourse getCourseRequirement() {
+    public TrainingCourse.CourseType getCourseRequirement() {
         return courseRequirement;
     }
 

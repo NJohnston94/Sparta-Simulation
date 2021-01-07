@@ -1,13 +1,12 @@
 package com.sparta.spartaSimulator.controller;
 
-import com.sparta.spartaSimulator.model.BootCamp;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
 import com.sparta.spartaSimulator.model.WaitingList;
 import com.sparta.spartaSimulator.view.LoggerClass;
+import com.sparta.spartaSimulator.model.TrainingCourse;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -99,7 +98,7 @@ public class CentreManager {
         return countTrainees;
     }
 
-    public static int getTrainees(Trainee.TraineeCourse course){
+    public static int getTrainees(TrainingCourse.CourseType course){
         int countTrainees = 0;
 
         for (Centres centre: openCentres) {
@@ -137,11 +136,11 @@ public class CentreManager {
     }
 
     public static void addTrainee(Centres openCentre) {
-
+        if (!isFull(openCentre)) {
         if (WaitingList.getWaitingListSize() > 0) {
             if (openCentre.getClass().getSimpleName().equals("TechCentre")) {
-                Trainee trainee = TraineeManager.getTraineeTechCentre(WaitingList.getWaitingList(), openCentre.getCentreSpecialism());
-                if (trainee != null && trainee.getTraineeCourse().toString().equals(openCentre.getCentreSpecialism().toString())) {
+                Trainee trainee = TraineeManager.getTraineeTechCentre(WaitingList.getWaitingList(), openCentre.getCentreCourseType());
+                if (trainee != null && trainee.getTraineeCourse() == openCentre.getCentreCourseType()) {
                     openCentre.addTrainee(trainee);
                 } else {
                     TraineeManager.getUnplacedTrainees().add(trainee);
@@ -150,13 +149,6 @@ public class CentreManager {
                 openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
             }
             //System.out.println("Trainee added from Waiting List");
-            if (!isFull(openCentre)) {
-
-                if (WaitingList.getWaitingListSize() > 0) {
-
-                    openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
-                    //System.out.println("Trainee added from Waiting List");
-
                 } else if (TraineeManager.getUnplacedTrainees().size() > 0) {
 
                     openCentre.addTrainee(TraineeManager.getTrainee(TraineeManager.getUnplacedTrainees()));
@@ -168,8 +160,6 @@ public class CentreManager {
                     LoggerClass.logTrace("No trainees available for placement");
 
                 }
-            }
-
             openCentre.checkCentreStatus();
 
         }
