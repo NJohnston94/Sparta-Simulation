@@ -21,7 +21,7 @@ public class Client {
     public Client() {
         this.traineeRequirement += randomNumber.nextInt(30);
         this.courseRequirement = TrainingCourse.setRandomCourseType();
-        this.clientHappiness = ClientHappiness.UNHAPPY;
+        this.clientHappiness = ClientHappiness.HAPPY;
     }
 
     public int getTraineeRequirement() {
