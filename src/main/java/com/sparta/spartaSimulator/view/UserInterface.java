@@ -4,7 +4,6 @@ import com.sparta.spartaSimulator.controller.CentreManager;
 import com.sparta.spartaSimulator.controller.Centres;
 import com.sparta.spartaSimulator.controller.TimeManager;
 import com.sparta.spartaSimulator.model.Trainee;
-import com.sparta.spartaSimulator.model.TraineeCentre;
 import com.sparta.spartaSimulator.model.WaitingList;
 
 import java.util.InputMismatchException;
@@ -95,7 +94,7 @@ public class UserInterface {
 //        System.out.println("  Bootcamp: " + CentreManager.getNumberOfOpenCentres("BootCamp"));
 //        System.out.println("  Training Hub: " + CentreManager.getNumberOfOpenCentres("TrainingHub"));
         System.out.println();
-        System.out.println("Closed Centres: " + CentreManager.getNumberOfClosedCentres());
+        System.out.println("Closed Centres: " + CentreManager.getNumberOfDeletedCentres());
         System.out.println();
         System.out.println("Full Centres: " + CentreManager.getNumberOfFullCentres());
         System.out.println();

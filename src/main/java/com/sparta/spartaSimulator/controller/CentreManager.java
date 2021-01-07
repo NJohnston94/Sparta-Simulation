@@ -16,6 +16,7 @@ public class CentreManager {
     public static int numberOfFullCentres = 0;
     public static int totalNumberOfTrainees = 0;
     public static Random random = new Random();
+    public static int numberOfDeletedCentres = 0;
 
     public static Centres createCentre()
     {
@@ -195,8 +196,8 @@ public class CentreManager {
         return numberOfFullCentres;
     }
 
-    public static int getNumberOfClosedCentres(){
-        return 0;
+    public static int getNumberOfDeletedCentres(){
+        return numberOfDeletedCentres;
     }
 
     //this method is purely for testing purposes
@@ -224,6 +225,7 @@ public class CentreManager {
 
         for(Centres centre : toDelete){
             deleteCentre(centre);
+            numberOfDeletedCentres++;
             toDelete = getCentresToDelete();
             if(toDelete.size() == 0){
                 break;
@@ -254,6 +256,7 @@ public class CentreManager {
         HashSet<Trainee> traineesToRelocate = centre.getTrainees();
         openCentres.remove(centre);
 
+
         relocateTrainees(traineesToRelocate);
     }
 
@@ -277,15 +280,6 @@ public class CentreManager {
 
         ArrayList<Centres> freeCentres = getFreeCentres();
         HashSet<Trainee> traineesAdded = new HashSet<>();
-
-//        for(Centres centres: openCentres){
-//            System.out.println("OPEN CENTRE : " + centres.getCurrentCapacity());
-//        }
-//
-//        for(Centres centres: freeCentres){
-//            System.out.println("FREE Centre " + centres.getCurrentCapacity());
-//        }
-
         if (freeCentres.size() > 0) {
             for (Trainee trainee : trainees) {
                 Random random = new Random();
@@ -303,10 +297,6 @@ public class CentreManager {
 
         }
 
-//        for(Centres centres: openCentres){
-//            System.out.println("OPEN CENTRE after reallocation : " + centres.getCurrentCapacity());
-//        }
-
         //add left over to waiting list
         trainees.removeAll(traineesAdded);
         if (trainees.size() > 0) {
@@ -315,7 +305,6 @@ public class CentreManager {
         }
 
     }
-
 
 
 }
