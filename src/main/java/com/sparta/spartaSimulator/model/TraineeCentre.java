@@ -1,6 +1,7 @@
 package com.sparta.spartaSimulator.model;
 
 import com.sparta.spartaSimulator.controller.CentreManager;
+import com.sparta.spartaSimulator.controller.Centres;
 
 import java.util.HashSet;
 
@@ -12,7 +13,7 @@ public abstract class TraineeCentre {
 
     public enum CentreStatus{
         FULL,
-        NEARLY_FULL,
+        //NEARLY_FULL,
         NOT_FULL
     }
 
@@ -41,9 +42,9 @@ public abstract class TraineeCentre {
     public void checkCentreStatus() {
         if(allTrainees.size() == MAX_CAPACITY) {
             setCentreStatus(CentreStatus.FULL);
-        } else if (allTrainees.size() >= 80) {
-            setCentreStatus(CentreStatus.NEARLY_FULL);
-        }
+        } //else if (allTrainees.size() >= 80) {
+//            setCentreStatus(CentreStatus.NEARLY_FULL);
+//        }
     }
 
     public void addTrainee(Trainee trainee){
