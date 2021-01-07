@@ -3,6 +3,7 @@ package com.sparta.spartaSimulator.view;
 import com.sparta.spartaSimulator.controller.CentreManager;
 import com.sparta.spartaSimulator.controller.Centres;
 import com.sparta.spartaSimulator.controller.TimeManager;
+import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
 import com.sparta.spartaSimulator.model.WaitingList;
 
@@ -26,7 +27,7 @@ public class UserInterface {
 
 
     public static void setCentreOpeningFrequency() {
-        System.out.print("How often (in months) should a new Training Centre open?  ");
+        System.out.print("How often (in months) should a new Training Centre open?  \n");
         int userInput = getUserInput();
         if(userInput > 0) {
             TimeManager.setCentreOpeningFrequency(userInput);
@@ -53,13 +54,13 @@ public class UserInterface {
                 months = scanner.nextInt();
                 //if wanting an upper limit: edit statement below to an OR statement with upper bound
                 while (months < 1) {
-                    System.out.println("Enter valid number!");
+                    System.out.println("Please enter a valid number!");
                     months = scanner.nextInt();
                 }
                 validInput = true;
 
             } catch (InputMismatchException e) {
-                System.out.println("Enter a number!");
+                System.out.println("Please enter a number!");
                 validInput = false;
             }
         }
@@ -89,15 +90,25 @@ public class UserInterface {
     }//created, not tested
 
     public static void presentData(){
-        System.out.println("Open Centres: ");
-        System.out.println("Closed Centres: ");
-        System.out.println("Full Centres: ");
-        System.out.println("Trainees: ");
-        System.out.println("  Java: ");
-        System.out.println("  C#: ");
-        System.out.println("  Data: ");
-        System.out.println("  DevOps: ");
-        System.out.println("  Business: ");
+        System.out.println("        Open Centres: " + CentreManager.getNumberOfOpenCentres());
+        System.out.println("  Tech Centres: " + CentreManager.getNumberOfOpenCentres("TechCentre"));
+        System.out.println("      Bootcamp: " + CentreManager.getNumberOfOpenCentres("BootCamp"));
+        System.out.println("  Training Hub: " + CentreManager.getNumberOfOpenCentres("TrainingHub"));
+        System.out.println("      Closed Centres: " + CentreManager.getNumberOfClosedCentres());
+        System.out.println("        Full Centres: " + CentreManager.getNumberOfFullCentres());
+        System.out.println("Trainees in Training: " + CentreManager.getTrainees());
+        System.out.println("          Java: " + CentreManager.getTrainees(Trainee.TraineeCourse.JAVA));
+        System.out.println("            C#: " + CentreManager.getTrainees(Trainee.TraineeCourse.CSHARP));
+        System.out.println("          Data: " + CentreManager.getTrainees(Trainee.TraineeCourse.DATA));
+        System.out.println("        DevOps: " + CentreManager.getTrainees(Trainee.TraineeCourse.DEVOPS));
+        System.out.println("      Business: " + CentreManager.getTrainees(Trainee.TraineeCourse.BUSINESS));
+        System.out.println();
+        System.out.println("        Waiting List: " + WaitingList.getWaitingListSize());
+        System.out.println("          Java: " + WaitingList.getTrainees(Trainee.TraineeCourse.JAVA));
+        System.out.println("            C#: " + WaitingList.getTrainees(Trainee.TraineeCourse.CSHARP));
+        System.out.println("          Data: " + WaitingList.getTrainees(Trainee.TraineeCourse.DATA));
+        System.out.println("        DevOps: " + WaitingList.getTrainees(Trainee.TraineeCourse.DEVOPS));
+        System.out.println("      Business: " + WaitingList.getTrainees(Trainee.TraineeCourse.BUSINESS));
     }//where info name included, info location has not
 
     /**
@@ -110,7 +121,7 @@ public class UserInterface {
         System.out.println("Number of open centres: " + CentreManager.openCentres.size());
 
 //        number of full centres
-        System.out.println("Number of full centres: " + CentreManager.numberOfFullCentres);
+        System.out.println("Number of full centres: " + (CentreManager.openCentres.size() - CentreManager.getFreeCentres().size()));
 
 //        number of trainees currently training
         System.out.println("Number of trainees currently training: " + CentreManager.getTrainees());
@@ -144,7 +155,8 @@ public class UserInterface {
     public static void printOpenCentresAndSize() {
 
         for (Centres centre : CentreManager.openCentres) {
-            System.out.println("Centre type : " + centre.getClass().getSimpleName() + ", Size : " + centre.getCurrentCapacity());
+            //System.out.println("Centre type : " + centre.getClass().getSimpleName() + ", Size : " + centre.getCurrentCapacity());
+            LoggerClass.logTrace("Centre type : " + centre.getClass().getSimpleName() + ", Size : " + centre.getCurrentCapacity());
         }
     }
 
