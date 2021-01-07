@@ -5,6 +5,7 @@ import com.sparta.spartaSimulator.controller.Centres;
 import com.sparta.spartaSimulator.controller.TimeManager;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
+import com.sparta.spartaSimulator.model.TrainingCourse;
 import com.sparta.spartaSimulator.model.WaitingList;
 
 import java.util.InputMismatchException;
