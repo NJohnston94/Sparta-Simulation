@@ -1,17 +1,22 @@
 package com.sparta.spartaSimulator.model;
 
 import com.sparta.spartaSimulator.controller.CentreManager;
+import com.sparta.spartaSimulator.controller.Centres;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
-public abstract class TraineeCentre {
+public abstract class TraineeCentre implements Centres {
 
     private HashSet<Trainee> allTrainees = new HashSet<>();
     private int MAX_CAPACITY;
     private CentreStatus centreStatus;
+    private int age;
+    private int safePeriod;
+
+
     private CentreSpecialism centreSpecialism;
     private static final Random RANDOM = new Random();
 
@@ -49,6 +54,26 @@ public abstract class TraineeCentre {
         }
         checkCentreStatus();
     }
+
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+
+    public int getSafePeriod() {
+        return safePeriod;
+    }
+
+    public void setSafePeriod(int safePeriod) {
+        this.safePeriod = safePeriod;
+    }
+
+
 
     public CentreStatus getCentreStatus() {
         return centreStatus;
