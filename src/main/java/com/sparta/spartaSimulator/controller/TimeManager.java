@@ -69,6 +69,10 @@ public class TimeManager implements Runnable {
 
             }
 
+            if(CentreManager.openCentres.size() > 0){
+                CentreManager.monthlyCheck();
+            }
+
             LoggerClass.logTrace("Start of iteration : " + (getSystemTime() - startTime));
 
             // Every Two months generate Centres
@@ -86,7 +90,7 @@ public class TimeManager implements Runnable {
 
             counter++;
 
-            //CentreManager.updateCentreAge();
+            CentreManager.updateCentreAge();
 
             if (monthlyOrEnd == 1) {
                 //UserInterface.displayResults();
