@@ -7,10 +7,10 @@ public class TechCentre extends TraineeCentre implements Centres {
     private final TrainingCourse.CourseType centreCourseType;
 
     public TechCentre() {
-        setMaxCapacity(200);
+        setMaxCapacity(PropertiesReader.getTechCentreMaxCapacity());
         setCentreStatus(CentreStatus.NOT_FULL);
         this.centreCourseType = TrainingCourse.setRandomCourseType();
-        setSafePeriod(6);
+        setSafePeriod(2);
 
     }
 

@@ -1,5 +1,6 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.model.PropertiesReader;
 import com.sparta.spartaSimulator.view.LoggerClass;
 import com.sparta.spartaSimulator.view.UserInterface;
 
@@ -7,8 +8,8 @@ public class TimeManager implements Runnable {
 
     private static long currentTime;
     private static long counter = 0;
-    private static int numberOfIterations;
-    private static int centreOpeningFrequency = 2;
+    private static long numberOfIterations;
+    private static long centreOpeningFrequency = PropertiesReader.getOpeningFrequency();
 
     public static long getCurrentTime() {
         return currentTime;
@@ -30,7 +31,7 @@ public class TimeManager implements Runnable {
         return (separation * iteration) - temp;
     }
 
-    public int getNumberOfIterations() {
+    public long getNumberOfIterations() {
         return numberOfIterations;
     }
 
@@ -42,19 +43,19 @@ public class TimeManager implements Runnable {
     @Override
     public void run() {
 
-        long monthlyOrEnd = UserInterface.dataPresentationTime();
+        long monthlyOrEnd = PropertiesReader.getMonthlyOrEnd();
 
         System.out.println("");
-        numberOfIterations = UserInterface.getNumberOfIterations();
+        numberOfIterations = PropertiesReader.getSimulationDuration();
         //System.out.println("");
         //long separation = UserInterface.getTimeSeparation() * 1000;
-        long separation = 1000;
+        long separation = PropertiesReader.getTimeSeparation() * 1000;
         if (monthlyOrEnd == 1) {
             System.out.println("");
             System.out.println("Each second of the simulation corresponds to 1 month of real time. \n");
         }
 
-        UserInterface.setCentreOpeningFrequency();
+//        UserInterface.setCentreOpeningFrequency();
 
 
         long startTime = getSystemTime();
@@ -117,7 +118,7 @@ public class TimeManager implements Runnable {
         TimeManager.centreOpeningFrequency = centreOpeningFrequency;
     }
 
-    public static int getCentreFrequencyOpening() {
+    public static long getCentreFrequencyOpening() {
         return centreOpeningFrequency;
     }
 }
