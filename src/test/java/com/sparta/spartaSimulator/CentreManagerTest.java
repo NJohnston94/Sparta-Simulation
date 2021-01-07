@@ -221,4 +221,19 @@ public class CentreManagerTest {
         Assertions.assertNotEquals(size, WaitingList.getWaitingListSize());
         
     }
+
+
+    @Test
+    public void doesNumberRemainBelowCapacity(){
+        Centres centres = Factory.centreFactory(2);
+
+        for (int i = 0; i < 300; i++) {
+            Trainee trainee = new Trainee();
+
+            TraineeManager.getUnplacedTrainees().add(trainee);
+            CentreManager.addTrainee(centres);
+        }
+
+        Assertions.assertEquals(200, centres.getCurrentCapacity());
+    }
 }

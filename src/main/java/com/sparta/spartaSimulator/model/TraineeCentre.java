@@ -48,14 +48,16 @@ public abstract class TraineeCentre {
     }
 
     public void addTrainee(Trainee trainee){
-        allTrainees.add(trainee);
-        checkCentreStatus();
+        if (this.getCentreStatus().equals(CentreStatus.NOT_FULL)) {
+            allTrainees.add(trainee);
+            checkCentreStatus();
+        }
     }
 
-    public void addAllTrainees(HashSet<Trainee> trainees) {
-        allTrainees.addAll(trainees);
-        checkCentreStatus();
-    }
+//    public void addAllTrainees(HashSet<Trainee> trainees) {
+//        allTrainees.addAll(trainees);
+//        checkCentreStatus();
+//    }
 
     public int getCurrentCapacity() {
         return allTrainees.size();
