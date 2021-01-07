@@ -11,8 +11,6 @@ import com.sparta.spartaSimulator.model.WaitingList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 
 public class CentreManagerTest {
@@ -29,7 +27,10 @@ public class CentreManagerTest {
     @Test
     public void centreIsFull()
     {
+
+        CentreManager.openCentres.clear();
         Centres centre = CentreManager.createCentre(1);
+        centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
         Assertions.assertNotNull(centre);
         Assertions.assertTrue(CentreManager.isFull(centre));
     }
@@ -37,17 +38,21 @@ public class CentreManagerTest {
     @Test
     public void countingCorrectly()
     {
+
         CentreManager.destroyAllCentres();
         Centres centre = CentreManager.createCentre();
         Trainee trainee = new Trainee();
         centre.addTrainee(trainee);
         Assertions.assertEquals(1, CentreManager.getTrainees());
         Centres centre2 = CentreManager.createCentre(1);
+        centre2.setCentreStatus(TraineeCentre.CentreStatus.FULL);
         Assertions.assertEquals(1, CentreManager.getNumberOfFullCentres());
     }//testing individually works fine, not all together
 
     @Test
     void getTraineesStreamTestOne() {
+
+        CentreManager.openCentres.clear();
         int count = 0;
         Centres centre = CentreManager.createCentre();
         for(int i = 0; i<20;i++){
@@ -98,17 +103,23 @@ public class CentreManagerTest {
 
     @Test
     public void deleteCentre(){
+
         Centres first = CentreManager.createCentre();
         Centres second = CentreManager.createCentre();
         Centres third = CentreManager.createCentre(32);
 
-        CentreManager.deleteCentre(second);
+        final int size = CentreManager.openCentres.size();
 
-        Assertions.assertEquals(2,CentreManager.openCentres.size());
+
+        CentreManager.deleteCentre(third);
+
+        Assertions.assertEquals(size-1, CentreManager.openCentres.size());
     }
 
     @Test
     public void relocateTrainees(){
+        CentreManager.openCentres.clear();
+
         HashSet<Trainee> toRelocate = TraineeManager.createTrainees();
 
         CentreManager.createCentre(100);
@@ -121,6 +132,9 @@ public class CentreManagerTest {
 
     @Test
     public void monthlyChecks(){
+
+        CentreManager.openCentres.clear();
+
         Centres trainingHub = Factory.centreFactory(1);
         for(int i = 0; i < 100; i++){
             trainingHub.addTrainee(new Trainee());
@@ -136,7 +150,9 @@ public class CentreManagerTest {
 
         CentreManager.addCentreToOpenCentres(trainingHub);
         CentreManager.addCentreToOpenCentres(techCentre);
+        third.setAge(3);
         CentreManager.addCentreToOpenCentres(third);
+
 
         CentreManager.monthlyCheck();
         Assertions.assertEquals(2,CentreManager.openCentres.size());
@@ -146,6 +162,10 @@ public class CentreManagerTest {
 
     @Test
     public void monthlyChecksLeftOver(){
+        CentreManager.openCentres.clear();
+        WaitingList.getWaitingList().clear();
+
+
         Centres trainingHub = Factory.centreFactory(1);
         for(int i = 0; i < 100; i++){
             trainingHub.addTrainee(new Trainee());
@@ -161,6 +181,7 @@ public class CentreManagerTest {
 
         CentreManager.addCentreToOpenCentres(trainingHub);
         CentreManager.addCentreToOpenCentres(techCentre);
+        third.setAge(3);
         CentreManager.addCentreToOpenCentres(third);
 
         CentreManager.monthlyCheck();
@@ -172,6 +193,7 @@ public class CentreManagerTest {
 
     @Test
     public void multipleCentresToDelete(){
+        CentreManager.openCentres.clear();
         Centres trainingHub = Factory.centreFactory(1);
         for(int i = 0; i < 100; i++){
             trainingHub.addTrainee(new Trainee());
@@ -192,8 +214,12 @@ public class CentreManagerTest {
 
         CentreManager.addCentreToOpenCentres(trainingHub);
         CentreManager.addCentreToOpenCentres(techCentre);
+
+        third.setAge(3);
         CentreManager.addCentreToOpenCentres(third);
+        multiple.setAge(3);
         CentreManager.addCentreToOpenCentres(multiple);
+
 
         CentreManager.monthlyCheck();
         Assertions.assertEquals(3,CentreManager.openCentres.size());
@@ -204,6 +230,7 @@ public class CentreManagerTest {
 
     @Test
     public void checkWaitingListPriority(){
+        CentreManager.openCentres.clear();
         Centres centres = CentreManager.createCentre();
         Centres centres1 = CentreManager.createCentre();
         centres.setCentreStatus(TraineeCentre.CentreStatus.FULL);
@@ -222,4 +249,25 @@ public class CentreManagerTest {
         Assertions.assertNotEquals(size, WaitingList.getWaitingListSize());
         
     }
+
+
+    @Test
+    public void doesNumberRemainBelowCapacity(){
+        Centres centres = Factory.centreFactory(2);
+
+        for (int i = 0; i < 300; i++) {
+            Trainee trainee = new Trainee();
+
+            TraineeManager.getUnplacedTrainees().add(trainee);
+            CentreManager.addTrainee(centres);
+        }
+
+        Assertions.assertEquals(200, centres.getCurrentCapacity());
+    }
+    public void checkCanSetCentreAge(){
+        Centres centres = CentreManager.createCentre();
+
+        Assertions.assertEquals(0,centres.getAge());
+    }
+
 }

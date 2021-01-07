@@ -5,12 +5,11 @@ import com.sparta.spartaSimulator.controller.TraineeManager;
 import java.util.*;
 
 public class Trainee {
-
     private TraineeStatus traineeStatus;
     private int traineeID;
     private final TrainingCourse.CourseType traineeCourse;
 
-    public enum TraineeStatus{
+    public enum TraineeStatus {
         PLACED,
         WAITING,
         UNPLACED
@@ -21,6 +20,11 @@ public class Trainee {
     public Trainee() {
         this.traineeStatus = TraineeStatus.UNPLACED;
         this.traineeCourse = TrainingCourse.setRandomCourseType();
+    }
+
+    public Trainee(TraineeCourse course) {
+        this.traineeStatus = TraineeStatus.UNPLACED;
+        this.traineeCourse = course;
     }
 
     public TrainingCourse.CourseType getTraineeCourse() {
