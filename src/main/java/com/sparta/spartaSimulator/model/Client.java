@@ -8,7 +8,8 @@ public class Client {
     private int traineeRequirement = 15;
     private com.sparta.spartaSimulator.model.Trainee.TraineeCourse courseRequirement;
     private ClientHappiness clientHappiness;
-    private ArrayList<Trainee> clientTrainees = new ArrayList<Trainee>();
+    private ArrayList<Trainee> clientCurrentTrainees = new ArrayList<Trainee>();
+    private ArrayList<ArrayList<Trainee>> previousTrainees = new ArrayList<ArrayList<Trainee>>();
 
     private Random randomNumber = new Random();
 
@@ -40,10 +41,18 @@ public class Client {
     }
 
     public ArrayList<Trainee> getClientTrainees() {
-        return clientTrainees;
+        return clientCurrentTrainees;
     }
 
     public void setClientTrainees(ArrayList<Trainee> clientTrainees) {
-        this.clientTrainees = clientTrainees;
+        this.clientCurrentTrainees = clientTrainees;
+    }
+
+    public ArrayList<ArrayList<Trainee>> getPreviousTrainees() {
+        return previousTrainees;
+    }
+
+    public void addToPreviousTrainees(ArrayList<Trainee> clientCurrentTrainees) {
+
     }
 }
