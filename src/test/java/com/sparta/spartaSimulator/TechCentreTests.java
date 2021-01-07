@@ -37,9 +37,33 @@ public class TechCentreTests {
         TraineeManager.unplacedTrainees.add(trainee3);
         CentreManager.addTrainees(CentreManager.openCentres);
         Assertions.assertEquals(2, centres.getCurrentCapacity());
-        for(Trainee train: WaitingList.getWaitingList())
-        {
-            System.out.println(train.getTraineeCourse().toString());
-        }
     }
+
+    @Test
+    public void addingFromWaitingList()
+    {
+        Centres techCentre = Factory.centreFactory(2);
+        Centres bootCamp = Factory.centreFactory(3);
+        CentreManager.addCentreToOpenCentres(techCentre);
+        CentreManager.addCentreToOpenCentres(bootCamp);
+        Trainee trainee = new Trainee(Trainee.TraineeCourse.JAVA);
+        Trainee trainee1 = new Trainee(Trainee.TraineeCourse.DATA);
+        Trainee trainee2 = new Trainee(Trainee.TraineeCourse.DATA);
+        Trainee trainee3 = new Trainee(Trainee.TraineeCourse.BUSINESS);
+        TraineeManager.unplacedTrainees.add(trainee);
+        TraineeManager.unplacedTrainees.add(trainee1);
+        TraineeManager.unplacedTrainees.add(trainee2);
+        TraineeManager.unplacedTrainees.add(trainee3);
+        CentreManager.addTrainees(CentreManager.openCentres);
+        assert techCentre != null;
+        assert bootCamp != null;
+        System.out.println("TechCentre is at: " + techCentre.getCurrentCapacity());
+        System.out.println("BootCamp is at: " + bootCamp.getCurrentCapacity());
+        System.out.println("Test waiting list is at: " + WaitingList.getWaitingList().size());
+        CentreManager.addTrainees(CentreManager.openCentres);
+        System.out.println("TechCentre is at: " + techCentre.getCurrentCapacity());
+        System.out.println("BootCamp is at: " + bootCamp.getCurrentCapacity());
+        System.out.println("Test waiting list is at: " + WaitingList.getWaitingList().size());
+    }
+
 }
