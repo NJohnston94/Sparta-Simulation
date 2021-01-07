@@ -206,6 +206,20 @@ public class CentreManager {
         relocateTrainees(traineesToRelocate);
     }
 
+    public static int getNumberOfOpenCentres(){
+        return openCentres.size();
+    }
+
+    public static int getNumberOfOpenCentres(String course){
+        int count = 0;
+        for(Centres centre: openCentres){
+            if(centre.getClass().getSimpleName()==course){
+                count++;
+            }
+        }
+        return count;
+    }
+
     public static void relocateTrainees(HashSet<Trainee> trainees) {
         //method function: takes in hashset of trainees and adds them to free centres. Left overs are added to waiting list
         //TO ADD: check if centre is tech centre (only takes a trainee of certain course)

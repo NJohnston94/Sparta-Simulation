@@ -39,5 +39,15 @@ public class WaitingList {
         return traineeCentre.getTrainees();
     }
 
+    public static int getTrainees(Trainee.TraineeCourse traineeCourse){
+        int total = 0;
+        for(Trainee trainee:waitingList){
+            if(trainee.getTraineeCourse()==traineeCourse){
+                total++;
+            }
+        }
+        return total;
+    }
+
 
 }
