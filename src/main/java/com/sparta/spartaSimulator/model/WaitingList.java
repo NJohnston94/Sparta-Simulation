@@ -7,6 +7,7 @@ import java.util.HashSet;
 
 public class WaitingList {
 
+    //made this public for tests in TechCentreTestsClass
     private static ArrayList<Trainee> waitingList = new ArrayList<>();
 
 
@@ -37,6 +38,16 @@ public class WaitingList {
 
         waitingList.removeAll(traineeCentre.getTrainees());
         return traineeCentre.getTrainees();
+    }
+
+    public static int getTrainees(Trainee.TraineeCourse traineeCourse){
+        int total = 0;
+        for(Trainee trainee:waitingList){
+            if(trainee.getTraineeCourse()==traineeCourse){
+                total++;
+            }
+        }
+        return total;
     }
 
 
