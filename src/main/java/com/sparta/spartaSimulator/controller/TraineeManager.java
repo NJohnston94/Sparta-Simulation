@@ -2,6 +2,7 @@ package com.sparta.spartaSimulator.controller;
 
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
+import com.sparta.spartaSimulator.model.TrainingCourse;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -58,11 +59,11 @@ public class TraineeManager {
         return trainee;
     }
 
-    public static Trainee getTraineeTechCentre(ArrayList<Trainee> traineeList, TraineeCentre.CentreSpecialism specialism) {
+    public static Trainee getTraineeTechCentre(ArrayList<Trainee> traineeList, TrainingCourse.CourseType trainingCourse) {
         Trainee trainee = traineeList.get(0);
         for(Trainee trainees: traineeList)
         {
-            if(trainee.getTraineeCourse().toString().equals(specialism.toString()))
+            if(trainee.getTraineeCourse() == trainingCourse)
             {
                 traineeList.remove(trainees);
                 return trainees;

@@ -12,17 +12,17 @@ public class TechCentre extends TraineeCentre implements Centres {
         this.centreCourseType = TrainingCourse.setRandomCourseType();
 
         setSafePeriod(2);
-        //This method now belongs only in the TraineeCentre class, needed to change from Trainee to remove reliance
-        //of this class only on the interface and TraineeCentre. Think its a SOLID principle maybe... I'm so tired.
-        //setCentreSpecialism(CentreSpecialism.DATA);
-       
     }
 
+    @Override
     public TrainingCourse.CourseType getCentreCourseType() {
         return centreCourseType;
     }
 
-        
-  
-
+    @Override
+    public void addTrainee(Trainee trainee) {
+        if(getCentreCourseType() == trainee.getTraineeCourse()) {
+            super.addTrainee(trainee);
+        }
+    }
 }

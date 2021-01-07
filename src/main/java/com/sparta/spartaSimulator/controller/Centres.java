@@ -3,6 +3,7 @@ package com.sparta.spartaSimulator.controller;
 
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
+import com.sparta.spartaSimulator.model.TrainingCourse;
 
 import java.util.HashSet;
 
@@ -32,7 +33,6 @@ public interface Centres {
 
     public HashSet<Trainee> getTrainees();
 
-    //Added to let the factory created centres access this in the TraineeCentre abstract class in their own
-    //concrete classes
-    public TraineeCentre.CentreSpecialism getCentreSpecialism();
+
+    public TrainingCourse.CourseType getCentreCourseType();
 }
