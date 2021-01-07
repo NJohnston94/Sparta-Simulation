@@ -17,11 +17,9 @@ public class CentreManager {
     public static int totalNumberOfTrainees = 0;
     public static Random random = new Random();
 
-    public static Centres createCentre()
-    {
+    public static Centres createCentre() {
         Centres centre = Factory.centreFactory(randomGeneration());
-        if(centre.getClass().getSimpleName().equals("TrainingHub"))
-        {
+        if (centre.getClass().getSimpleName().equals("TrainingHub")) {
             Centres trainingHub1 = Factory.centreFactory(1);
             Centres trainingHub2 = Factory.centreFactory(1);
 
@@ -39,40 +37,28 @@ public class CentreManager {
         return centre;
     }
 
-    public static void updateCentreAge(){
+    public static void updateCentreAge() {
 
-        for (Centres centres : CentreManager.openCentres){
-            centres.setAge(centres.getAge()+1);
+        for (Centres centres : CentreManager.openCentres) {
+            centres.setAge(centres.getAge() + 1);
         }
 
     }
 
-
-
-
-
-
-
-    public static int randomGeneration()
-    {
+    public static int randomGeneration() {
         int count = 0;
         int range;
-        for(Centres centre: openCentres)
-        {
-            if(centre.getClass().getSimpleName().equals("BootCamp"))
-            {
+        for (Centres centre : openCentres) {
+            if (centre.getClass().getSimpleName().equals("BootCamp")) {
                 count++;
             }
         }
-        if(count > 1)
-        {
-            range = (2-1)+1;
+        if (count > 1) {
+            range = (2 - 1) + 1;
+        } else {
+            range = (3 - 1) + 1;
         }
-        else
-        {
-            range = (3-1)+1;
-        }
-        return (int)(Math.random() * range) + 1;
+        return (int) (Math.random() * range) + 1;
     }
 
     //This Constructor is for testing purposes only
@@ -98,12 +84,12 @@ public class CentreManager {
         return countTrainees;
     }
 
-    public static int getTrainees(Trainee.TraineeCourse course){
+    public static int getTrainees(Trainee.TraineeCourse course) {
         int countTrainees = 0;
 
-        for (Centres centre: openCentres) {
-            for(Trainee trainee: centre.getTrainees()){
-                if(trainee.getTraineeCourse() == course){
+        for (Centres centre : openCentres) {
+            for (Trainee trainee : centre.getTrainees()) {
+                if (trainee.getTraineeCourse() == course) {
                     countTrainees++;
                 }
             }
@@ -118,7 +104,7 @@ public class CentreManager {
     }
 
     public static void addTrainees(ArrayList<Centres> openCentres) {
-        if (openCentres.size()!=0) {
+        if (openCentres.size() != 0) {
 
             for (Centres openCentre : openCentres) {
 
@@ -137,28 +123,19 @@ public class CentreManager {
 
     public static void addTrainee(Centres openCentre) {
 
-        if (WaitingList.getWaitingListSize() > 0) {
-            if(openCentre.getClass().getSimpleName().equals("TechCentre"))
-            {
-                Trainee trainee = TraineeManager.getTraineeTechCentre(WaitingList.getWaitingList(), openCentre.getCentreSpecialism());
-                if(trainee != null && trainee.getTraineeCourse().toString().equals(openCentre.getCentreSpecialism().toString()))
-                {
-                    openCentre.addTrainee(trainee);
-                }
-                else
-                {
-                    TraineeManager.getUnplacedTrainees().add(trainee);
-                }
-            }
-            else{
-                openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
-            }
-            //System.out.println("Trainee added from Waiting List");
         if (!isFull(openCentre)) {
 
             if (WaitingList.getWaitingListSize() > 0) {
-
-                openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
+                if (openCentre.getClass().getSimpleName().equals("TechCentre")) {
+                    Trainee trainee = TraineeManager.getTraineeTechCentre(WaitingList.getWaitingList(), openCentre.getCentreSpecialism());
+                    if (trainee != null && trainee.getTraineeCourse().toString().equals(openCentre.getCentreSpecialism().toString())) {
+                        openCentre.addTrainee(trainee);
+                    } else {
+                        TraineeManager.getUnplacedTrainees().add(trainee);
+                    }
+                } else {
+                    openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
+                }
                 //System.out.println("Trainee added from Waiting List");
 
             } else if (TraineeManager.getUnplacedTrainees().size() > 0) {
@@ -172,10 +149,8 @@ public class CentreManager {
                 LoggerClass.logTrace("No trainees available for placement");
 
             }
+            openCentre.checkCentreStatus();
         }
-
-        openCentre.checkCentreStatus();
-
     }
 
     public static void addUnplacedTraineesToWaitingList() {
@@ -200,22 +175,22 @@ public class CentreManager {
         return numberOfFullCentres;
     }
 
-    public static int getNumberOfClosedCentres(){
+    public static int getNumberOfClosedCentres() {
         return 0;
     }
 
     //this method is purely for testing purposes
-    public static void destroyAllCentres(){
+    public static void destroyAllCentres() {
         openCentres.clear();
     }
 
-    public static void addCentreToOpenCentres(Centres centre){
+    public static void addCentreToOpenCentres(Centres centre) {
         openCentres.add(centre);
     }
 
     public static ArrayList<Centres> getFreeCentres() {
         ArrayList<Centres> freeCentres = new ArrayList<>();
-        for(Centres centre :openCentres) {
+        for (Centres centre : openCentres) {
             if (!isFull(centre)) {
                 freeCentres.add(centre);
             }
@@ -227,21 +202,21 @@ public class CentreManager {
         ArrayList<Centres> toDelete = getCentresToDelete();
 
 
-        for(Centres centre : toDelete){
+        for (Centres centre : toDelete) {
             deleteCentre(centre);
             toDelete = getCentresToDelete();
-            if(toDelete.size() == 0){
+            if (toDelete.size() == 0) {
                 break;
             }
 
         }
     }
 
-    public static ArrayList<Centres> getCentresToDelete(){
+    public static ArrayList<Centres> getCentresToDelete() {
         ArrayList<Centres> toDelete = new ArrayList<>();
 
 
-        for(Centres centre :openCentres) {
+        for (Centres centre : openCentres) {
             boolean canDelete = centre.getSafePeriod() < centre.getAge();
             //System.out.println("OPEN CENTRES : " + centre.getCurrentCapacity());
             if (centre.getCurrentCapacity() < 25 && canDelete) {
@@ -262,14 +237,14 @@ public class CentreManager {
         relocateTrainees(traineesToRelocate);
     }
 
-    public static int getNumberOfOpenCentres(){
+    public static int getNumberOfOpenCentres() {
         return openCentres.size();
     }
 
-    public static int getNumberOfOpenCentres(String course){
+    public static int getNumberOfOpenCentres(String course) {
         int count = 0;
-        for(Centres centre: openCentres){
-            if(centre.getClass().getSimpleName()==course){
+        for (Centres centre : openCentres) {
+            if (centre.getClass().getSimpleName() == course) {
                 count++;
             }
         }
@@ -320,7 +295,6 @@ public class CentreManager {
         }
 
     }
-
 
 
 }
