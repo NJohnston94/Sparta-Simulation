@@ -22,7 +22,7 @@ public class Trainee {
         this.traineeCourse = TrainingCourse.setRandomCourseType();
     }
 
-    public Trainee(TraineeCourse course) {
+    public Trainee(TrainingCourse.CourseType course) {
         this.traineeStatus = TraineeStatus.UNPLACED;
         this.traineeCourse = course;
     }
