@@ -10,6 +10,7 @@ public class TechCentre extends TraineeCentre implements Centres {
         setMaxCapacity(200);
         setCentreStatus(CentreStatus.NOT_FULL);
         Trainee.setCentreTraineeCourse(centreTraineeCourse);
+        setSafePeriod(2);
     }
 
 }
