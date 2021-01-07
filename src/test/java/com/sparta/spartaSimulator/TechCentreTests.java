@@ -37,7 +37,7 @@ public class TechCentreTests {
         TraineeManager.unplacedTrainees.add(trainee3);
         CentreManager.addTrainees(CentreManager.openCentres);
         Assertions.assertEquals(2, centres.getCurrentCapacity());
-        for(Trainee train: WaitingList.waitingList)
+        for(Trainee train: WaitingList.getWaitingList())
         {
             System.out.println(train.getTraineeCourse().toString());
         }
