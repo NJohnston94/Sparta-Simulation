@@ -67,8 +67,27 @@ public class PropertiesReader {
 
     public static long getMaxNumberOfTraineeToAdd() {
         createProperties();
-        return Long.parseLong(properties.getProperty("traineesToAdd"));
+        return Long.parseLong(properties.getProperty("numberOfTraineesToAdd"));
     }
 
+    public static long getTrainingPeriod() {
+        createProperties();
+        return Long.parseLong(properties.getProperty("trainingPeriod"));
+    }
+
+    public static long getMinNumberClientRequires() {
+        createProperties();
+        return Long.parseLong(properties.getProperty("minNumberClientRequires"));
+    }
+
+    public static long getMonthWhenClientGenerated() {
+        createProperties();
+        return Long.parseLong(properties.getProperty("monthWhenClientGenerated"));
+    }
+
+    public static long getMonthsClientCollectsFor() {
+        createProperties();
+        return Long.parseLong(properties.getProperty("monthsClientCollectsFor"));
+    }
 
 }
