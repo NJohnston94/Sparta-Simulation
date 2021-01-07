@@ -89,8 +89,8 @@ public class TimeManager implements Runnable {
             //CentreManager.updateCentreAge();
 
             if (monthlyOrEnd == 1) {
-                UserInterface.displayResults();
-
+                //UserInterface.displayResults();
+                UserInterface.presentData();
                 delay = delayTime(separation, counter, startTime);
 
                 try {
@@ -105,7 +105,8 @@ public class TimeManager implements Runnable {
         }
 
         System.out.println("");
-        UserInterface.displayResults();
+        //UserInterface.displayResults();
+        UserInterface.presentData();
     }
 
     public static void setCentreOpeningFrequency(int centreOpeningFrequency) {
