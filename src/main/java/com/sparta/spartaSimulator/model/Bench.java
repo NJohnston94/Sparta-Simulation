@@ -16,15 +16,15 @@ public class Bench {
     public static int getBenchSize(){
         return benchList.size();
     }
-//    public static int getTrainees(Trainee.TraineeCourse traineeCourse){
-//        int total = 0;
-//        for(Trainee trainee:benchList){
-//            if(trainee.getTraineeCourse()==traineeCourse){
-//                total++;
-//            }
-//        }
-//        return total;
-//    }
+    public static int getTrainees(TrainingCourse.CourseType traineeCourse){
+        int total = 0;
+        for(Trainee trainee:benchList){
+            if(trainee.getTraineeCourse()==traineeCourse){
+                total++;
+            }
+        }
+        return total;
+    }
     public static void removeTraineeFromBench(int index){
         benchList.remove(index);
     }
