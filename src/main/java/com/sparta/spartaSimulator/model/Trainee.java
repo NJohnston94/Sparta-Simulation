@@ -8,7 +8,7 @@ public class Trainee {
     private TraineeStatus traineeStatus;
     private int traineeID;
     private final TrainingCourse.CourseType traineeCourse;
-    private int monthsInTraining;
+    private int monthsInTraining = 0;
 
     public enum TraineeStatus {
         PLACED,
