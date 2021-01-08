@@ -31,9 +31,9 @@ public class PropertiesReader {
         return Long.parseLong(properties.getProperty("timeSeparation"));
     }
 
-    public static long getOpeningFrequency() {
+    public static int getOpeningFrequency() {
         createProperties();
-        return Long.parseLong(properties.getProperty("centreOpeningFrequency"));
+        return Integer.parseInt(properties.getProperty("centreOpeningFrequency"));
     }
 
     public static int getBootcampMaxCapacity() {
