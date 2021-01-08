@@ -61,4 +61,12 @@ public class ClientManager {
         }
     }
 
+    public static void getNewClientRequirements(){
+        for (Client client : clients){
+            if (client.getClientHappiness() == Client.ClientHappiness.HAPPY){
+                client.setNewTraineeRequirement();
+            }
+        }
+    }
+
 }

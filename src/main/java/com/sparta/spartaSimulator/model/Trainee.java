@@ -8,6 +8,7 @@ public class Trainee {
     private TraineeStatus traineeStatus;
     private int traineeID;
     private final TrainingCourse.CourseType traineeCourse;
+    private int monthsInTraining;
 
     public enum TraineeStatus {
         PLACED,
@@ -45,5 +46,13 @@ public class Trainee {
 
     public void setTraineeID(int traineeID) {
         this.traineeID = traineeID;
+    }
+
+    public int getMonthsInTraining() {
+        return monthsInTraining;
+    }
+
+    public void setMonthsInTraining(int monthsInTraining) {
+        this.monthsInTraining = monthsInTraining;
     }
 }
