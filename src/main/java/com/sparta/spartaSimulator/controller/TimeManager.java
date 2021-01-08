@@ -93,10 +93,20 @@ public class TimeManager implements Runnable {
             counter++;
 
             CentreManager.updateCentreAge();
+            TraineeManager.updateTraineeMonthsInTraining();
+            if(counter > 12) {
+                ClientManager.createClients();
+                ClientManager.addTraineesToAllClients();
+            }
+
+            if(counter > 13) {
+                ClientManager.updateClientAge();
+                ClientManager.checkClientAge();
+            }
 
             if (monthlyOrEnd == 1) {
                 //UserInterface.displayResults();
-//                UserInterface.presentData();
+                UserInterface.presentData();
 //                UserInterface.presentDataToFile();
                 OutputToFile.appendDataToFile();
                 delay = delayTime(separation, counter, startTime);
@@ -114,8 +124,8 @@ public class TimeManager implements Runnable {
 
         System.out.println("");
         //UserInterface.displayResults();
-//        UserInterface.presentData();
-        OutputToFile.clearOutputFile();
+        UserInterface.presentData();
+        //OutputToFile.clearOutputFile();
         OutputToFile.appendDataToFile();
     }
 

@@ -1,5 +1,6 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.model.Bench;
 import com.sparta.spartaSimulator.model.PropertiesReader;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TrainingCourse;
@@ -10,7 +11,7 @@ import java.util.HashSet;
 public class TraineeManager {
 
     private static final int MIN_TRAINEES = PropertiesReader.getMinTraineesCreated();
-    private static final int MAX_TRAINEES = PropertiesReader.getMaxNumberOfBootcamps();
+    private static final int MAX_TRAINEES = PropertiesReader.getMaxTraineesCreated();
     private static final int RANGE = MAX_TRAINEES-MIN_TRAINEES+1;
 
     //Made this public for testing purposes in TechCentreTests || change back when happy
@@ -70,5 +71,19 @@ public class TraineeManager {
             }
         }
         return trainee;
+    }
+
+    public static void updateTraineeMonthsInTraining() {
+        ArrayList<Trainee> traineesToRemoveFromCentres = new ArrayList<>();
+
+        for(Trainee trainee:CentreManager.getPlacedTrainees()) {
+            trainee.setMonthsInTraining(trainee.getMonthsInTraining() + 1);
+            if(trainee.getMonthsInTraining() == 12) {
+                Bench.addTrainees(trainee);
+                traineesToRemoveFromCentres.add(trainee);
+            }
+        }
+
+        CentreManager.getPlacedTrainees().removeAll(traineesToRemoveFromCentres);
     }
 }
