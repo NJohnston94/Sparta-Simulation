@@ -1,5 +1,6 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.model.OutputToFile;
 import com.sparta.spartaSimulator.model.PropertiesReader;
 import com.sparta.spartaSimulator.view.LoggerClass;
 import com.sparta.spartaSimulator.view.UserInterface;
@@ -50,9 +51,9 @@ public class TimeManager implements Runnable {
         //System.out.println("");
         //long separation = UserInterface.getTimeSeparation() * 1000;
         long separation = PropertiesReader.getTimeSeparation() * 1000;
-        if (monthlyOrEnd == 1) {
+        if (monthlyOrEnd == PropertiesReader.getMonthlyOrEnd()) {
             System.out.println("");
-            System.out.println("Each second of the simulation corresponds to 1 month of real time. \n");
+            System.out.println("Each "+separation+" ms of the simulation corresponds to 1 month of real time. \n");
         }
 
 //        UserInterface.setCentreOpeningFrequency();
@@ -105,7 +106,9 @@ public class TimeManager implements Runnable {
 
             if (monthlyOrEnd == 1) {
                 //UserInterface.displayResults();
-                UserInterface.presentData();
+//                UserInterface.presentData();
+//                UserInterface.presentDataToFile();
+                OutputToFile.appendDataToFile();
                 delay = delayTime(separation, counter, startTime);
 
                 try {
@@ -121,7 +124,9 @@ public class TimeManager implements Runnable {
 
         System.out.println("");
         //UserInterface.displayResults();
-        UserInterface.presentData();
+//        UserInterface.presentData();
+        OutputToFile.clearOutputFile();
+        OutputToFile.appendDataToFile();
     }
 
     public static void setCentreOpeningFrequency(int centreOpeningFrequency) {
@@ -130,5 +135,9 @@ public class TimeManager implements Runnable {
 
     public static long getCentreFrequencyOpening() {
         return centreOpeningFrequency;
+    }
+
+    public static long getCounter() {
+        return counter;
     }
 }

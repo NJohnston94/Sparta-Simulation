@@ -176,6 +176,7 @@ public class CentreManager {
     }
 
     public static int getNumberOfFullCentres() {
+        numberOfFullCentres = 0;
         for (Centres centre : openCentres) {
             if (CentreManager.isFull(centre)) {
                 numberOfFullCentres++;

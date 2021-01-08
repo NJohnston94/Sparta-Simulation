@@ -5,6 +5,7 @@ import com.sparta.spartaSimulator.controller.Centres;
 import com.sparta.spartaSimulator.controller.ClientManager;
 import com.sparta.spartaSimulator.controller.TimeManager;
 import com.sparta.spartaSimulator.model.Bench;
+import com.sparta.spartaSimulator.model.PropertiesReader;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.WaitingList;
 import com.sparta.spartaSimulator.model.TrainingCourse;
@@ -15,7 +16,7 @@ import java.util.Scanner;
 public class UserInterface {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static int openingFrequency = 2;
+    private static int openingFrequency = PropertiesReader.getOpeningFrequency();
 
     public static int getUserInput(){
         try {
@@ -138,6 +139,81 @@ public class UserInterface {
         System.out.println("  DevOps: " + Bench.getTrainees(TrainingCourse.CourseType.DEVOPS));
         System.out.println("  Business: " + Bench.getTrainees(TrainingCourse.CourseType.BUSINESS));
     }//where info name included, info location has not
+
+
+    public static StringBuffer presentDataToFile(){
+        StringBuffer information = new StringBuffer();
+        information.append("Month:   ");
+        information.append(TimeManager.getCounter());
+        information.append("\n\n");
+
+        information.append("Open Centres: ");
+        information.append(CentreManager.getNumberOfOpenCentres());
+        information.append("\n\n");
+
+        information.append("Closed Centres: ");
+        information.append(CentreManager.getNumberOfDeletedCentres());
+        information.append("\n\n");
+
+        information.append("Full Centres: ");
+        information.append(CentreManager.getNumberOfFullCentres());
+        information.append("\n\n");
+
+        information.append("Open Centres: ");
+        information.append(CentreManager.getNumberOfOpenCentres());
+        information.append("\n");
+        information.append("  Tech Centres: ");
+        information.append(CentreManager.getNumberOfOpenCentres("TechCentre"));
+        information.append("\n");
+        information.append("  Bootcamp: ");
+        information.append(CentreManager.getNumberOfOpenCentres("BootCamp"));
+        information.append("\n");
+        information.append("  Training Hub: ");
+        information.append(CentreManager.getNumberOfOpenCentres("TrainingHub"));
+        information.append("\n\n");
+
+        information.append("Trainees in Training: ");
+        information.append(CentreManager.getTrainees());
+        information.append("\n");
+        information.append("  Java: ");
+        information.append(CentreManager.getTrainees(TrainingCourse.CourseType.JAVA));
+        information.append("\n");
+        information.append("  C#: ");
+        information.append(CentreManager.getTrainees(TrainingCourse.CourseType.CSHARP));
+        information.append("\n");
+        information.append("  Data: ");
+        information.append(CentreManager.getTrainees(TrainingCourse.CourseType.DATA));
+        information.append("\n");
+        information.append("  DevOps: ");
+        information.append(CentreManager.getTrainees(TrainingCourse.CourseType.DEVOPS));
+        information.append("\n");
+        information.append("  Business: ");
+        information.append(CentreManager.getTrainees(TrainingCourse.CourseType.BUSINESS));
+        information.append("\n\n");
+
+        information.append("Waiting List: ");
+        information.append(WaitingList.getWaitingListSize());
+        information.append("\n");
+        information.append("  Java: ");
+        information.append(WaitingList.getTrainees(TrainingCourse.CourseType.JAVA));
+        information.append("\n");
+        information.append("  C#: ");
+        information.append(WaitingList.getTrainees(TrainingCourse.CourseType.CSHARP));
+        information.append("\n");
+        information.append("  Data: ");
+        information.append(WaitingList.getTrainees(TrainingCourse.CourseType.DATA));
+        information.append("\n");
+        information.append("  DevOps: ");
+        information.append(WaitingList.getTrainees(TrainingCourse.CourseType.DEVOPS));
+        information.append("\n");
+        information.append("  Business: ");
+        information.append(WaitingList.getTrainees(TrainingCourse.CourseType.BUSINESS));
+        information.append("\n\n");
+        information.append("-----------------------------------");
+        information.append("\n\n");
+
+        return information;
+    }
 
     /**
      * Test via reading back in the input, if there is additional time
