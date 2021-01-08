@@ -106,7 +106,7 @@ public class TimeManager implements Runnable {
 
             if (monthlyOrEnd == 1) {
                 //UserInterface.displayResults();
-//                UserInterface.presentData();
+                UserInterface.presentData();
 //                UserInterface.presentDataToFile();
                 OutputToFile.appendDataToFile();
                 delay = delayTime(separation, counter, startTime);
@@ -125,7 +125,7 @@ public class TimeManager implements Runnable {
         System.out.println("");
         //UserInterface.displayResults();
         UserInterface.presentData();
-        OutputToFile.clearOutputFile();
+        //OutputToFile.clearOutputFile();
         OutputToFile.appendDataToFile();
     }
 
