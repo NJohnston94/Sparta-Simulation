@@ -45,10 +45,11 @@ public class TraineeCentreTest {
         Centres centres = Factory.centreFactory(1);
 
         centres.setCentreStatus(TraineeCentre.CentreStatus.FULL);
-
+        CentreManager.addCentreToOpenCentres(centres);
         Trainee trainee = new Trainee();
-
-        centres.addTrainee(trainee);
+        if(!CentreManager.isFull(centres)) {
+            centres.addTrainee(trainee);
+        }
 
         Assertions.assertEquals(0, centres.getCurrentCapacity());
 
