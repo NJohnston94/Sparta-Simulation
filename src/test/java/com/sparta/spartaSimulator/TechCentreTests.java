@@ -27,8 +27,8 @@ public class TechCentreTests {
     public void TechCentreOnlyAcceptsType()
     {
         //Due to randomisation of centres taking in Trainees, this sometimes fails, but it does work i think
-        Centres centres = Factory.centreFactory(2);
-        CentreManager.addCentreToOpenCentres(centres);
+        TechCentre techCentre = new TechCentre(TrainingCourse.CourseType.DATA);
+        CentreManager.addCentreToOpenCentres(techCentre);
         Trainee trainee = new Trainee(TrainingCourse.CourseType.JAVA);
         Trainee trainee1 = new Trainee(TrainingCourse.CourseType.DATA);
         Trainee trainee2 = new Trainee(TrainingCourse.CourseType.DATA);
@@ -39,7 +39,7 @@ public class TechCentreTests {
         TraineeManager.unplacedTrainees.add(trainee3);
         CentreManager.addTrainees(CentreManager.openCentres);
 
-        for (Trainee traineeTest : centres.getTrainees()){
+        for (Trainee traineeTest : techCentre.getTrainees()){
             System.out.println(traineeTest.getTraineeCourse().toString());
             Assertions.assertEquals("DATA", traineeTest.getTraineeCourse().toString());
         }
@@ -60,7 +60,6 @@ public class TechCentreTests {
         TraineeManager.unplacedTrainees.add(trainee2);
         TraineeManager.unplacedTrainees.add(trainee3);
         CentreManager.addTrainees(CentreManager.openCentres);
-        assert techCentre != null;
         Assertions.assertEquals(2, techCentre.getCurrentCapacity());
     }
 
