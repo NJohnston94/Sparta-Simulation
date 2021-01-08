@@ -40,6 +40,23 @@ public class ClientManager {
         }
     }
 
+    public static void updateClientAge(){
+        for (Client client : clients){
+            client.setAge(client.getAge()+1);
+        }
+    }
+
+
+    public static void checkClientAge(){
+        for (Client client : clients){
+            if (client.getAge() % 12 == 0){
+                getNewClientRequirements(client);
+            }
+        }
+    }
+
+
+
     private static void addTraineesToClient(Client client, int numberOfTrainees){
 
         Iterator iterator = Bench.getBench().iterator();
@@ -61,8 +78,7 @@ public class ClientManager {
         }
     }
 
-    public static void getNewClientRequirements(){
-        for (Client client : clients){
+    public static void getNewClientRequirements(Client client){
             if (client.getClientHappiness() == Client.ClientHappiness.HAPPY){
                 client.setNewTraineeRequirement();
             }
