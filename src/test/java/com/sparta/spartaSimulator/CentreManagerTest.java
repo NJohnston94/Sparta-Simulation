@@ -266,16 +266,17 @@ public class CentreManagerTest {
 
     @Test
     public void doesNumberRemainBelowCapacity(){
-        Centres centres = Factory.centreFactory(2);
-
+        Centres centres = Factory.centreFactory(1);
+        CentreManager.addCentreToOpenCentres(centres);
         for (int i = 0; i < 300; i++) {
             Trainee trainee = new Trainee();
-
-            //TraineeManager.getUnplacedTrainees().add(trainee);
-            centres.addTrainee(trainee);
+            
+            if(!CentreManager.isFull(centres)) {
+                centres.addTrainee(trainee);
+            }
         }
 
-        Assertions.assertEquals(200, centres.getCurrentCapacity());
+        Assertions.assertEquals(100, centres.getCurrentCapacity());
     }
 
     @Test
