@@ -15,6 +15,7 @@ public class TraineeManagerTest {
 
     @Test
     void checkLowerBound() {
+        System.out.println(TraineeManager.createTrainees().size());
         Assertions.assertTrue(TraineeManager.createTrainees().size()>=20);
     }
 

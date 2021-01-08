@@ -270,7 +270,7 @@ public class CentreManagerTest {
         CentreManager.addCentreToOpenCentres(centres);
         for (int i = 0; i < 300; i++) {
             Trainee trainee = new Trainee();
-            
+
             if(!CentreManager.isFull(centres)) {
                 centres.addTrainee(trainee);
             }

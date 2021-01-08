@@ -53,10 +53,11 @@ public class TechCentreTests {
         Trainee trainee1 = new Trainee(TrainingCourse.CourseType.DATA);
         Trainee trainee2 = new Trainee(TrainingCourse.CourseType.DATA);
         Trainee trainee3 = new Trainee(TrainingCourse.CourseType.BUSINESS);
-        TraineeManager.unplacedTrainees.add(trainee);
-        TraineeManager.unplacedTrainees.add(trainee1);
-        TraineeManager.unplacedTrainees.add(trainee2);
-        TraineeManager.unplacedTrainees.add(trainee3);
+
+        techCentre.addTrainee(trainee);
+        techCentre.addTrainee(trainee1);
+        techCentre.addTrainee(trainee2);
+        techCentre.addTrainee(trainee3);
         CentreManager.addTrainees(CentreManager.openCentres);
         Assertions.assertEquals(2, techCentre.getCurrentCapacity());
     }
