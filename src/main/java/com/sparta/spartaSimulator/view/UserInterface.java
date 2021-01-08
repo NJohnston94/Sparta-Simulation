@@ -121,6 +121,7 @@ public class UserInterface {
         System.out.println("  DevOps: " + WaitingList.getTrainees(TrainingCourse.CourseType.DEVOPS));
         System.out.println("  Business: " + WaitingList.getTrainees(TrainingCourse.CourseType.BUSINESS));
         System.out.println();
+        System.out.println();
         System.out.println("Clients: " + ClientManager.getClients().size());
         System.out.println("  Happy: " + ClientManager.getHappyClients());
         System.out.println("  Unhappy: " + ClientManager.getUnhappyClients());
@@ -209,6 +210,57 @@ public class UserInterface {
         information.append("  Business: ");
         information.append(WaitingList.getTrainees(TrainingCourse.CourseType.BUSINESS));
         information.append("\n\n");
+
+        information.append("Clients: ");
+        information.append(ClientManager.getClients().size());
+        information.append("\n");
+        information.append("  Happy: ");
+        information.append(ClientManager.getHappyClients());
+        information.append("\n");
+        information.append("  Unhappy: ");
+        information.append(ClientManager.getUnhappyClients());
+        information.append("\n\n");
+
+        information.append("Trainees with Clients: ");
+        information.append(ClientManager.getTraineesWithClient());
+        information.append("\n");
+
+        information.append("  Java: ");
+        information.append(ClientManager.getTrainees(TrainingCourse.CourseType.JAVA));
+        information.append("\n");
+        information.append("  C#: ");
+        information.append(ClientManager.getTrainees(TrainingCourse.CourseType.CSHARP));
+        information.append("\n");
+        information.append("  Data: ");
+        information.append(ClientManager.getTrainees(TrainingCourse.CourseType.DATA));
+        information.append("\n");
+        information.append("  DevOps: ");
+        information.append(ClientManager.getTrainees(TrainingCourse.CourseType.DEVOPS));
+        information.append("\n");
+        information.append("  Business: ");
+        information.append(ClientManager.getTrainees(TrainingCourse.CourseType.BUSINESS));
+        information.append("\n\n");
+
+        information.append("Bench List: ");
+        information.append(Bench.getBenchSize());
+        information.append("\n");
+
+        information.append("  Java: ");
+        information.append(Bench.getTrainees(TrainingCourse.CourseType.JAVA));
+        information.append("\n");
+        information.append("  C#: ");
+        information.append(Bench.getTrainees(TrainingCourse.CourseType.CSHARP));
+        information.append("\n");
+        information.append("  Data: ");
+        information.append(Bench.getTrainees(TrainingCourse.CourseType.DATA));
+        information.append("\n");
+        information.append("  DevOps: ");
+        information.append(Bench.getTrainees(TrainingCourse.CourseType.DEVOPS));
+        information.append("\n");
+        information.append("  Business: ");
+        information.append(Bench.getTrainees(TrainingCourse.CourseType.BUSINESS));
+        information.append("\n");
+
         information.append("-----------------------------------");
         information.append("\n\n");
 
