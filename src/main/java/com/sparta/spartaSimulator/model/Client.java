@@ -10,6 +10,7 @@ public class Client {
     private ClientHappiness clientHappiness;
     private ArrayList<Trainee> clientCurrentTrainees = new ArrayList<Trainee>();
     private ArrayList<Trainee> previousTrainees = new ArrayList<Trainee>();
+    private int age;
 
     private Random randomNumber = new Random();
 
@@ -22,6 +23,15 @@ public class Client {
         this.traineeRequirement += generateRequirements();
         this.courseRequirement = TrainingCourse.setRandomCourseType();
         this.clientHappiness = ClientHappiness.HAPPY;
+        this.age = 0;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public int getTraineeRequirement() {

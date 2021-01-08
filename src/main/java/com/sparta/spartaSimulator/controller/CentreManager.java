@@ -293,5 +293,14 @@ public class CentreManager {
 
     }
 
+    public static ArrayList<Trainee> getPlacedTrainees() {
+        ArrayList<Trainee> placedTrainees = new ArrayList<>();
+        for(Centres centre:openCentres) {
+            placedTrainees.addAll(centre.getTrainees());
+        }
+
+        return placedTrainees;
+    }
+
 
 }

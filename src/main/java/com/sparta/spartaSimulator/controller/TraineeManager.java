@@ -1,5 +1,6 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.model.Bench;
 import com.sparta.spartaSimulator.model.PropertiesReader;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TrainingCourse;
@@ -70,5 +71,14 @@ public class TraineeManager {
             }
         }
         return trainee;
+    }
+
+    public static void updateTraineeMonthsInTraining() {
+        for(Trainee trainee:CentreManager.getPlacedTrainees()) {
+            trainee.setMonthsInTraining(trainee.getMonthsInTraining() + 1);
+            if(trainee.getMonthsInTraining() == 12) {
+                Bench.addTrainees(trainee);
+            }
+        }
     }
 }

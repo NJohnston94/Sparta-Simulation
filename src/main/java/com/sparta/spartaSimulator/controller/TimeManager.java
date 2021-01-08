@@ -92,6 +92,16 @@ public class TimeManager implements Runnable {
             counter++;
 
             CentreManager.updateCentreAge();
+            TraineeManager.updateTraineeMonthsInTraining();
+            if(counter > 12) {
+                ClientManager.createClients();
+                ClientManager.checkClientAge();
+                ClientManager.addTraineesToAllClients();
+            }
+
+            if(counter > 13) {
+                ClientManager.updateClientAge();
+            }
 
             if (monthlyOrEnd == 1) {
                 //UserInterface.displayResults();
