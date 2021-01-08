@@ -1,0 +1,29 @@
+Month:   200
+
+Open Centres: 14
+
+Closed Centres: 183
+
+Full Centres: 12
+
+Open Centres: 14
+  Tech Centres: 1
+  Bootcamp: 2
+  Training Hub: 11
+
+Trainees in Training: 2066
+  Java: 409
+  C#: 395
+  Data: 395
+  DevOps: 435
+  Business: 432
+
+Waiting List: 62
+  Java: 28
+  C#: 10
+  Data: 11
+  DevOps: 10
+  Business: 3
+
+-----------------------------------
+
