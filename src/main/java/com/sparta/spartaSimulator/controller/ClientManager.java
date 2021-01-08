@@ -127,7 +127,7 @@ public class ClientManager {
 
     public static void checkClientAge(){
         for (Client client : clients){
-            if (client.getAge() % 12 == 0){
+            if (client.getAge() % 12 == 0 && client.getClientHappiness() == Client.ClientHappiness.HAPPY){
                 getNewClientRequirements();
             }
         }
