@@ -4,10 +4,7 @@ import com.sparta.spartaSimulator.controller.CentreManager;
 import com.sparta.spartaSimulator.controller.Centres;
 import com.sparta.spartaSimulator.controller.Factory;
 import com.sparta.spartaSimulator.controller.TraineeManager;
-import com.sparta.spartaSimulator.model.Trainee;
-import com.sparta.spartaSimulator.model.TraineeCentre;
-import com.sparta.spartaSimulator.model.TrainingCourse;
-import com.sparta.spartaSimulator.model.WaitingList;
+import com.sparta.spartaSimulator.model.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -64,7 +61,9 @@ public class CentreManagerTest {
 
         CentreManager.openCentres.clear();
         int count = 0;
-        Centres centre = CentreManager.createCentre();
+        TechCentre centre = new TechCentre();
+        centre.setCentreCourseType(TrainingCourse.CourseType.JAVA);
+        CentreManager.addCentreToOpenCentres(centre);
         for(int i = 0; i<20;i++){
             Trainee trainee = new Trainee();
             if(trainee.getTraineeCourse() == TrainingCourse.CourseType.JAVA ){
@@ -79,7 +78,9 @@ public class CentreManagerTest {
     void getTraineesStreamTestTwo() {
         CentreManager.destroyAllCentres();
         int count2 = 0;
-        Centres centre1 = CentreManager.createCentre();
+        TechCentre centre1 = new TechCentre();
+        centre1.setCentreCourseType(TrainingCourse.CourseType.JAVA);
+        CentreManager.addCentreToOpenCentres(centre1);
         for(int i = 0; i<20;i++){
             Trainee trainee = new Trainee();
             if(trainee.getTraineeCourse() == TrainingCourse.CourseType.JAVA ){
@@ -87,7 +88,9 @@ public class CentreManagerTest {
             }
             centre1.addTrainee(trainee);
         }
-        Centres centre2 = CentreManager.createCentre();
+        TechCentre centre2 = new TechCentre();
+        centre2.setCentreCourseType(TrainingCourse.CourseType.JAVA);
+        CentreManager.addCentreToOpenCentres(centre2);
         for(int i = 0; i<20;i++){
             Trainee trainee = new Trainee();
             if(trainee.getTraineeCourse() == TrainingCourse.CourseType.JAVA ){
@@ -268,8 +271,8 @@ public class CentreManagerTest {
         for (int i = 0; i < 300; i++) {
             Trainee trainee = new Trainee();
 
-            TraineeManager.getUnplacedTrainees().add(trainee);
-            CentreManager.addTrainee(centres);
+            //TraineeManager.getUnplacedTrainees().add(trainee);
+            centres.addTrainee(trainee);
         }
 
         Assertions.assertEquals(200, centres.getCurrentCapacity());
