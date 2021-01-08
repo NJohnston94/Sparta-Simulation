@@ -19,7 +19,17 @@ public class ClientManager {
         }
     }
 
-    public void isClientHappy(){
+
+    public static void getNewClientRequirements(){
+        for (Client client : clients){
+            if (client.getClientHappiness() == Client.ClientHappiness.HAPPY){
+                client.setTraineeRequirement();
+            }
+        }
+    }
+
+
+    public static void isClientHappy(){
         for (Client client : clients){
             int clientRequirement = client.getTraineeRequirement();
             int clientCurrentTrainees = client.getClientTrainees().size();
