@@ -124,7 +124,7 @@ public class TimeManager implements Runnable {
 
         System.out.println("");
         //UserInterface.displayResults();
-//        UserInterface.presentData();
+        UserInterface.presentData();
         OutputToFile.clearOutputFile();
         OutputToFile.appendDataToFile();
     }
