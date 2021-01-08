@@ -1,4 +1,5 @@
 package com.sparta.spartaSimulator.controller;
+
 import com.sparta.spartaSimulator.model.Bench;
 import com.sparta.spartaSimulator.model.Client;
 import com.sparta.spartaSimulator.model.Trainee;
@@ -14,7 +15,7 @@ public class ClientManager {
     private static Random random = new Random();
 
     public static void createClients() {
-        for(int i = 0; i < random.nextInt(10); i++) {
+        for (int i = 0; i < random.nextInt(10); i++) {
             Client newClient = new Client();
             clients.add(newClient);
         }
@@ -26,8 +27,8 @@ public class ClientManager {
 
     public static int getHappyClients() {
         int happyClients = 0;
-        for(Client client:getClients()) {
-            if(client.getClientHappiness() == Client.ClientHappiness.HAPPY){
+        for (Client client : getClients()) {
+            if (client.getClientHappiness() == Client.ClientHappiness.HAPPY) {
                 happyClients++;
             }
         }
@@ -37,8 +38,8 @@ public class ClientManager {
 
     public static int getUnhappyClients() {
         int unhappyClients = 0;
-        for(Client client:getClients()) {
-            if(client.getClientHappiness() == Client.ClientHappiness.UNHAPPY){
+        for (Client client : getClients()) {
+            if (client.getClientHappiness() == Client.ClientHappiness.UNHAPPY) {
                 unhappyClients++;
             }
         }
@@ -46,23 +47,23 @@ public class ClientManager {
         return unhappyClients;
     }
 
-    public static void isClientHappy(Client client){
-            int clientRequirement = client.getTraineeRequirement();
-            int clientCurrentTrainees = client.getClientTrainees().size();
+    public static void isClientHappy(Client client) {
+        int clientRequirement = client.getTraineeRequirement();
+        int clientCurrentTrainees = client.getClientTrainees().size();
 
-            if (clientCurrentTrainees < clientRequirement){
-                client.setClientHappiness(Client.ClientHappiness.UNHAPPY);
-            }else {
-                client.setClientHappiness(Client.ClientHappiness.HAPPY);
-            }
+        if (clientCurrentTrainees < clientRequirement) {
+            client.setClientHappiness(Client.ClientHappiness.UNHAPPY);
+        } else {
+            client.setClientHappiness(Client.ClientHappiness.HAPPY);
+        }
     }
 
-    public static void addTraineesToAllClients(){
-        for(Client client: clients){
-            if(client.getClientHappiness().equals(Client.ClientHappiness.HAPPY) && Bench.getBenchSize() > 0) {
+    public static void addTraineesToAllClients() {
+        for (Client client : clients) {
+            if (client.getClientHappiness().equals(Client.ClientHappiness.HAPPY) && Bench.getBenchSize() > 0) {
                 addTraineesToClient(client, random.nextInt(Bench.getBenchSize()));
             }
-            if(client.getAge() % 12 == 0) {
+            if (client.getAge() % 12 == 0 && client.getAge() >= 12) {
                 isClientHappy(client);
             }
         }
@@ -102,7 +103,7 @@ public class ClientManager {
     public static void addTraineesToClient(Client client, int numberOfTrainees) {
         ArrayList<Trainee> traineesToRemoveFromBench = new ArrayList<>();
 
-        for(int i = 0; i < numberOfTrainees; i++) {
+        for (int i = 0; i < numberOfTrainees; i++) {
             client.addToClientCurrentTrainees(Bench.getTrainee(i));
             traineesToRemoveFromBench.add(Bench.getTrainee(i));
         }
@@ -110,24 +111,24 @@ public class ClientManager {
         Bench.getBench().removeAll(traineesToRemoveFromBench);
     }
 
-    public static void getNewClientRequirements(){
-        for (Client client : clients){
-            if (client.getClientHappiness() == Client.ClientHappiness.HAPPY){
+    public static void getNewClientRequirements() {
+        for (Client client : clients) {
+            if (client.getClientHappiness() == Client.ClientHappiness.HAPPY) {
                 client.setNewTraineeRequirement();
             }
         }
     }
 
-    public static void updateClientAge(){
-        for (Client client : clients){
-            client.setAge(client.getAge()+1);
+    public static void updateClientAge() {
+        for (Client client : clients) {
+            client.setAge(client.getAge() + 1);
         }
     }
 
 
-    public static void checkClientAge(){
-        for (Client client : clients){
-            if (client.getAge() % 12 == 0 && client.getClientHappiness() == Client.ClientHappiness.HAPPY){
+    public static void checkClientAge() {
+        for (Client client : clients) {
+            if (client.getAge() % 12 == 0 && client.getClientHappiness() == Client.ClientHappiness.HAPPY) {
                 getNewClientRequirements();
             }
         }
@@ -135,7 +136,7 @@ public class ClientManager {
 
     public static int getTraineesWithClient() {
         int traineesWithClients = 0;
-        for(Client client:getClients()) {
+        for (Client client : getClients()) {
             traineesWithClients += client.getClientTrainees().size();
         }
 
@@ -145,9 +146,9 @@ public class ClientManager {
     public static int getTrainees(TrainingCourse.CourseType courseType) {
         int countTrainees = 0;
 
-        for (Client client:getClients()) {
-            for(Trainee trainee: client.getClientTrainees()){
-                if(trainee.getTraineeCourse() == courseType){
+        for (Client client : getClients()) {
+            for (Trainee trainee : client.getClientTrainees()) {
+                if (trainee.getTraineeCourse() == courseType) {
                     countTrainees++;
                 }
             }
