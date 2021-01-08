@@ -11,7 +11,14 @@ public class TechCentre extends TraineeCentre implements Centres {
         setCentreStatus(CentreStatus.NOT_FULL);
         this.centreCourseType = TrainingCourse.setRandomCourseType();
         setSafePeriod(6);
+    }
 
+    //Testing purposes only in TechCentreTests
+    public TechCentre(TrainingCourse.CourseType thisOne) {
+        setMaxCapacity(200);
+        setCentreStatus(CentreStatus.NOT_FULL);
+        this.centreCourseType = thisOne;
+        setSafePeriod(6);
     }
 
     @Override

@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 public class FactoryTests {
 
     @Test
-    public void factoryIsMade()
+    public void factoryObjectIsMade()
     {
         Assertions.assertNotNull(Factory.centreFactory(1));
     }
 
     @Test
-    public void factoryTypeTest()
+    public void factoryObjectTypeTest()
     {
         Assertions.assertEquals("TrainingHub", Factory.centreFactory(1).getClass().getSimpleName());
         Assertions.assertEquals("BootCamp", Factory.centreFactory(3).getClass().getSimpleName());

@@ -7,6 +7,7 @@ import java.util.Random;
 public class TrainingCourse {
 
     private static final Random RANDOM = new Random();
+
     private static final ArrayList<CourseType> courseTypes = new ArrayList<>(Arrays.asList(
             CourseType.JAVA,
             CourseType.CSHARP,

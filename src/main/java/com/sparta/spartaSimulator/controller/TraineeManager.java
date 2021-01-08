@@ -36,7 +36,7 @@ public class TraineeManager {
     public static HashSet<Trainee> createTrainees(){
 
         HashSet<Trainee> newTrainees = new HashSet<>();
-        int randomNumber = generateRandomNumber(MIN_TRAINEES,MAX_TRAINEES);
+        int randomNumber = RandomGenerator.generateRandomNumber(MIN_TRAINEES,MAX_TRAINEES);
 
         for(int i = 0; i < randomNumber; i++){
             newTrainees.add(new Trainee());
@@ -45,12 +45,6 @@ public class TraineeManager {
         unplacedTrainees.addAll(newTrainees);
         return newTrainees;
     }//generates between min and max inclusive new Trainees and puts them in a hashmap to be returned
-
-    private static int generateRandomNumber(int min,int max){
-        int range = (max-min)+1;
-        int randomNumber = (int)(Math.random() * range) + min;
-        return randomNumber;
-    }
 
     public static Trainee getTrainee(ArrayList<Trainee> traineeList) {
         Trainee trainee = traineeList.get(0);

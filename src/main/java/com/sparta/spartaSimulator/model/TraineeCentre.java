@@ -15,8 +15,7 @@ public abstract class TraineeCentre implements Centres {
     private int age;
     private int safePeriod;
 
-
-    private static final Random RANDOM = new Random();
+    //private static final Random RANDOM = new Random();
     private TrainingCourse.CourseType centreCourseType; //TechCentre only
 
     public enum CentreStatus {
