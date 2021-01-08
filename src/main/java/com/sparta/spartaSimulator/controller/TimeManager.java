@@ -126,4 +126,8 @@ public class TimeManager implements Runnable {
     public static long getCentreFrequencyOpening() {
         return centreOpeningFrequency;
     }
+
+    public static long getCounter() {
+        return counter;
+    }
 }

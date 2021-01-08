@@ -123,6 +123,10 @@ public class UserInterface {
 
     public static StringBuffer presentDataToFile(){
         StringBuffer information = new StringBuffer();
+        information.append("Month:   ");
+        information.append(TimeManager.getCounter());
+        information.append("\n\n");
+
         information.append("Open Centres: ");
         information.append(CentreManager.getNumberOfOpenCentres());
         information.append("\n\n");
@@ -184,7 +188,9 @@ public class UserInterface {
         information.append("\n");
         information.append("  Business: ");
         information.append(WaitingList.getTrainees(TrainingCourse.CourseType.BUSINESS));
-        information.append("\n\n\n\n");
+        information.append("\n\n");
+        information.append("-----------------------------------");
+        information.append("\n\n");
 
         return information;
     }
