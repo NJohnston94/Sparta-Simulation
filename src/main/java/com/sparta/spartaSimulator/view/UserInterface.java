@@ -3,9 +3,10 @@ package com.sparta.spartaSimulator.view;
 import com.sparta.spartaSimulator.controller.CentreManager;
 import com.sparta.spartaSimulator.controller.Centres;
 import com.sparta.spartaSimulator.controller.TimeManager;
+import com.sparta.spartaSimulator.model.PropertiesReader;
 import com.sparta.spartaSimulator.model.Trainee;
-import com.sparta.spartaSimulator.model.TraineeCentre;
 import com.sparta.spartaSimulator.model.WaitingList;
+import com.sparta.spartaSimulator.model.TrainingCourse;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ import java.util.Scanner;
 public class UserInterface {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static int openingFrequency = 2;
+    private static int openingFrequency = PropertiesReader.getOpeningFrequency();
 
     public static int getUserInput(){
         try {
@@ -91,15 +92,108 @@ public class UserInterface {
 
     public static void presentData(){
         System.out.println("Open Centres: " + CentreManager.getNumberOfOpenCentres());
-        System.out.println("Closed Centres: " + CentreManager.getNumberOfClosedCentres());
+//        System.out.println("  Tech Centres: " + CentreManager.getNumberOfOpenCentres("TechCentre"));
+//        System.out.println("  Bootcamp: " + CentreManager.getNumberOfOpenCentres("BootCamp"));
+//        System.out.println("  Training Hub: " + CentreManager.getNumberOfOpenCentres("TrainingHub"));
+        System.out.println();
+        System.out.println("Closed Centres: " + CentreManager.getNumberOfDeletedCentres());
+        System.out.println();
         System.out.println("Full Centres: " + CentreManager.getNumberOfFullCentres());
-        System.out.println("Trainees: " + CentreManager.getTotalNumberOfTrainees());
-        System.out.println("  Java: " + CentreManager.getTrainees(Trainee.TraineeCourse.JAVA));
-        System.out.println("  C#: " + CentreManager.getTrainees(Trainee.TraineeCourse.CSHARP));
-        System.out.println("  Data: " + CentreManager.getTrainees(Trainee.TraineeCourse.DATA));
-        System.out.println("  DevOps: " + CentreManager.getTrainees(Trainee.TraineeCourse.DEVOPS));
-        System.out.println("  Business: " + CentreManager.getTrainees(Trainee.TraineeCourse.BUSINESS));
+        System.out.println();
+        System.out.println("Open Centres: " + CentreManager.getNumberOfOpenCentres());
+        System.out.println("  Tech Centres: " + CentreManager.getNumberOfOpenCentres("TechCentre"));
+        System.out.println("  Bootcamp: " + CentreManager.getNumberOfOpenCentres("BootCamp"));
+        System.out.println("  Training Hub: " + CentreManager.getNumberOfOpenCentres("TrainingHub"));
+        System.out.println();
+        System.out.println("Trainees in Training: " + CentreManager.getTrainees());
+        System.out.println("  Java: " + CentreManager.getTrainees(TrainingCourse.CourseType.JAVA));
+        System.out.println("  C#: " + CentreManager.getTrainees(TrainingCourse.CourseType.CSHARP));
+        System.out.println("  Data: " + CentreManager.getTrainees(TrainingCourse.CourseType.DATA));
+        System.out.println("  DevOps: " + CentreManager.getTrainees(TrainingCourse.CourseType.DEVOPS));
+        System.out.println("  Business: " + CentreManager.getTrainees(TrainingCourse.CourseType.BUSINESS));
+        System.out.println();
+        System.out.println("Waiting List: " + WaitingList.getWaitingListSize());
+        System.out.println("  Java: " + WaitingList.getTrainees(TrainingCourse.CourseType.JAVA));
+        System.out.println("  C#: " + WaitingList.getTrainees(TrainingCourse.CourseType.CSHARP));
+        System.out.println("  Data: " + WaitingList.getTrainees(TrainingCourse.CourseType.DATA));
+        System.out.println("  DevOps: " + WaitingList.getTrainees(TrainingCourse.CourseType.DEVOPS));
+        System.out.println("  Business: " + WaitingList.getTrainees(TrainingCourse.CourseType.BUSINESS));
     }//where info name included, info location has not
+
+
+    public static StringBuffer presentDataToFile(){
+        StringBuffer information = new StringBuffer();
+        information.append("Month:   ");
+        information.append(TimeManager.getCounter());
+        information.append("\n\n");
+
+        information.append("Open Centres: ");
+        information.append(CentreManager.getNumberOfOpenCentres());
+        information.append("\n\n");
+
+        information.append("Closed Centres: ");
+        information.append(CentreManager.getNumberOfDeletedCentres());
+        information.append("\n\n");
+
+        information.append("Full Centres: ");
+        information.append(CentreManager.getNumberOfFullCentres());
+        information.append("\n\n");
+
+        information.append("Open Centres: ");
+        information.append(CentreManager.getNumberOfOpenCentres());
+        information.append("\n");
+        information.append("  Tech Centres: ");
+        information.append(CentreManager.getNumberOfOpenCentres("TechCentre"));
+        information.append("\n");
+        information.append("  Bootcamp: ");
+        information.append(CentreManager.getNumberOfOpenCentres("BootCamp"));
+        information.append("\n");
+        information.append("  Training Hub: ");
+        information.append(CentreManager.getNumberOfOpenCentres("TrainingHub"));
+        information.append("\n\n");
+
+        information.append("Trainees in Training: ");
+        information.append(CentreManager.getTrainees());
+        information.append("\n");
+        information.append("  Java: ");
+        information.append(CentreManager.getTrainees(TrainingCourse.CourseType.JAVA));
+        information.append("\n");
+        information.append("  C#: ");
+        information.append(CentreManager.getTrainees(TrainingCourse.CourseType.CSHARP));
+        information.append("\n");
+        information.append("  Data: ");
+        information.append(CentreManager.getTrainees(TrainingCourse.CourseType.DATA));
+        information.append("\n");
+        information.append("  DevOps: ");
+        information.append(CentreManager.getTrainees(TrainingCourse.CourseType.DEVOPS));
+        information.append("\n");
+        information.append("  Business: ");
+        information.append(CentreManager.getTrainees(TrainingCourse.CourseType.BUSINESS));
+        information.append("\n\n");
+
+        information.append("Waiting List: ");
+        information.append(WaitingList.getWaitingListSize());
+        information.append("\n");
+        information.append("  Java: ");
+        information.append(WaitingList.getTrainees(TrainingCourse.CourseType.JAVA));
+        information.append("\n");
+        information.append("  C#: ");
+        information.append(WaitingList.getTrainees(TrainingCourse.CourseType.CSHARP));
+        information.append("\n");
+        information.append("  Data: ");
+        information.append(WaitingList.getTrainees(TrainingCourse.CourseType.DATA));
+        information.append("\n");
+        information.append("  DevOps: ");
+        information.append(WaitingList.getTrainees(TrainingCourse.CourseType.DEVOPS));
+        information.append("\n");
+        information.append("  Business: ");
+        information.append(WaitingList.getTrainees(TrainingCourse.CourseType.BUSINESS));
+        information.append("\n\n");
+        information.append("-----------------------------------");
+        information.append("\n\n");
+
+        return information;
+    }
 
     /**
      * Test via reading back in the input, if there is additional time

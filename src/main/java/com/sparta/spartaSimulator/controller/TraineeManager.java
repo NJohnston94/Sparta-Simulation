@@ -1,16 +1,20 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.model.PropertiesReader;
 import com.sparta.spartaSimulator.model.Trainee;
+import com.sparta.spartaSimulator.model.TrainingCourse;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
 public class TraineeManager {
 
-    private static final int MIN_TRAINEES = 20;
-    private static final int MAX_TRAINEES = 30;
+    private static final int MIN_TRAINEES = PropertiesReader.getMinTraineesCreated();
+    private static final int MAX_TRAINEES = PropertiesReader.getMaxNumberOfBootcamps();
     private static final int RANGE = MAX_TRAINEES-MIN_TRAINEES+1;
-    private static ArrayList<Trainee> unplacedTrainees = new ArrayList<>();
+
+    //Made this public for testing purposes in TechCentreTests || change back when happy
+    public static ArrayList<Trainee> unplacedTrainees = new ArrayList<>();
 
     public static Trainee[] createTrainees(int randomNumber){
         //done as array as size is passed through, but can be changed to what is used in other classes
@@ -52,6 +56,19 @@ public class TraineeManager {
     public static Trainee getTrainee(ArrayList<Trainee> traineeList) {
         Trainee trainee = traineeList.get(0);
         traineeList.remove(trainee);
+        return trainee;
+    }
+
+    public static Trainee getTraineeTechCentre(ArrayList<Trainee> traineeList, TrainingCourse.CourseType trainingCourse) {
+        Trainee trainee = traineeList.get(0);
+        for(Trainee trainees: traineeList)
+        {
+            if(trainee.getTraineeCourse() == trainingCourse)
+            {
+                traineeList.remove(trainees);
+                return trainees;
+            }
+        }
         return trainee;
     }
 }
