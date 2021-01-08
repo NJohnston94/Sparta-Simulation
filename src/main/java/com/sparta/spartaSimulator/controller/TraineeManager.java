@@ -10,7 +10,7 @@ import java.util.HashSet;
 public class TraineeManager {
 
     private static final int MIN_TRAINEES = PropertiesReader.getMinTraineesCreated();
-    private static final int MAX_TRAINEES = PropertiesReader.getMaxNumberOfBootcamps();
+    private static final int MAX_TRAINEES =(int) PropertiesReader.getMaxTraineesCreated();
     private static final int RANGE = MAX_TRAINEES-MIN_TRAINEES+1;
 
     //Made this public for testing purposes in TechCentreTests || change back when happy
