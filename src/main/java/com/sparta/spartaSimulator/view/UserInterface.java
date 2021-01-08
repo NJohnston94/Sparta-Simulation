@@ -2,7 +2,9 @@ package com.sparta.spartaSimulator.view;
 
 import com.sparta.spartaSimulator.controller.CentreManager;
 import com.sparta.spartaSimulator.controller.Centres;
+import com.sparta.spartaSimulator.controller.ClientManager;
 import com.sparta.spartaSimulator.controller.TimeManager;
+import com.sparta.spartaSimulator.model.Bench;
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.WaitingList;
 import com.sparta.spartaSimulator.model.TrainingCourse;
@@ -104,7 +106,7 @@ public class UserInterface {
         System.out.println("  Bootcamp: " + CentreManager.getNumberOfOpenCentres("BootCamp"));
         System.out.println("  Training Hub: " + CentreManager.getNumberOfOpenCentres("TrainingHub"));
         System.out.println();
-        System.out.println("Trainees in Training: " + CentreManager.getTrainees());
+        System.out.println("Trainees in Training: " + CentreManager.getNumberPlacedTrainees());
         System.out.println("  Java: " + CentreManager.getTrainees(TrainingCourse.CourseType.JAVA));
         System.out.println("  C#: " + CentreManager.getTrainees(TrainingCourse.CourseType.CSHARP));
         System.out.println("  Data: " + CentreManager.getTrainees(TrainingCourse.CourseType.DATA));
@@ -117,6 +119,24 @@ public class UserInterface {
         System.out.println("  Data: " + WaitingList.getTrainees(TrainingCourse.CourseType.DATA));
         System.out.println("  DevOps: " + WaitingList.getTrainees(TrainingCourse.CourseType.DEVOPS));
         System.out.println("  Business: " + WaitingList.getTrainees(TrainingCourse.CourseType.BUSINESS));
+        System.out.println();
+        System.out.println("Clients: " + ClientManager.getClients().size());
+        System.out.println("  Happy: " + ClientManager.getHappyClients());
+        System.out.println("  Unhappy: " + ClientManager.getUnhappyClients());
+        System.out.println();
+        System.out.println("Trainees with Clients: " + ClientManager.getTraineesWithClient());
+        System.out.println("  Java: " + ClientManager.getTrainees(TrainingCourse.CourseType.JAVA));
+        System.out.println("  C#: " + ClientManager.getTrainees(TrainingCourse.CourseType.CSHARP));
+        System.out.println("  Data: " + ClientManager.getTrainees(TrainingCourse.CourseType.DATA));
+        System.out.println("  DevOps: " + ClientManager.getTrainees(TrainingCourse.CourseType.DEVOPS));
+        System.out.println("  Business: " + ClientManager.getTrainees(TrainingCourse.CourseType.BUSINESS));
+        System.out.println();
+        System.out.println("Bench List: " + Bench.getBenchSize());
+        System.out.println("  Java: " + Bench.getTrainees(TrainingCourse.CourseType.JAVA));
+        System.out.println("  C#: " + Bench.getTrainees(TrainingCourse.CourseType.CSHARP));
+        System.out.println("  Data: " + Bench.getTrainees(TrainingCourse.CourseType.DATA));
+        System.out.println("  DevOps: " + Bench.getTrainees(TrainingCourse.CourseType.DEVOPS));
+        System.out.println("  Business: " + Bench.getTrainees(TrainingCourse.CourseType.BUSINESS));
     }//where info name included, info location has not
 
     /**

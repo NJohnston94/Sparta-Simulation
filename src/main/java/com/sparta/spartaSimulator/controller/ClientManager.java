@@ -2,6 +2,7 @@ package com.sparta.spartaSimulator.controller;
 import com.sparta.spartaSimulator.model.Bench;
 import com.sparta.spartaSimulator.model.Client;
 import com.sparta.spartaSimulator.model.Trainee;
+import com.sparta.spartaSimulator.model.TrainingCourse;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,8 +24,29 @@ public class ClientManager {
         return clients;
     }
 
-    public void isClientHappy(){
-        for (Client client : clients){
+    public static int getHappyClients() {
+        int happyClients = 0;
+        for(Client client:getClients()) {
+            if(client.getClientHappiness() == Client.ClientHappiness.HAPPY){
+                happyClients++;
+            }
+        }
+
+        return happyClients;
+    }
+
+    public static int getUnhappyClients() {
+        int unhappyClients = 0;
+        for(Client client:getClients()) {
+            if(client.getClientHappiness() == Client.ClientHappiness.UNHAPPY){
+                unhappyClients++;
+            }
+        }
+
+        return unhappyClients;
+    }
+
+    public static void isClientHappy(Client client){
             int clientRequirement = client.getTraineeRequirement();
             int clientCurrentTrainees = client.getClientTrainees().size();
 
@@ -33,13 +55,15 @@ public class ClientManager {
             }else {
                 client.setClientHappiness(Client.ClientHappiness.HAPPY);
             }
-        }
     }
 
     public static void addTraineesToAllClients(){
         for(Client client: clients){
             if(client.getClientHappiness().equals(Client.ClientHappiness.HAPPY) && Bench.getBenchSize() > 0) {
                 addTraineesToClient(client, random.nextInt(Bench.getBenchSize()));
+            }
+            if(client.getAge() % 12 == 0) {
+                isClientHappy(client);
             }
         }
     }
@@ -107,6 +131,28 @@ public class ClientManager {
                 getNewClientRequirements();
             }
         }
+    }
+
+    public static int getTraineesWithClient() {
+        int traineesWithClients = 0;
+        for(Client client:getClients()) {
+            traineesWithClients += client.getClientTrainees().size();
+        }
+
+        return traineesWithClients;
+    }
+
+    public static int getTrainees(TrainingCourse.CourseType courseType) {
+        int countTrainees = 0;
+
+        for (Client client:getClients()) {
+            for(Trainee trainee: client.getClientTrainees()){
+                if(trainee.getTraineeCourse() == courseType){
+                    countTrainees++;
+                }
+            }
+        }
+        return countTrainees;
     }
 
 }

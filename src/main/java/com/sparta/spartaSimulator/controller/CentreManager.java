@@ -13,6 +13,7 @@ public class CentreManager {
     public static int totalNumberOfTrainees = 0;
     public static Random random = new Random();
     public static int numberOfDeletedCentres = 0;
+    private static HashSet<Trainee> placedTrainees = new HashSet<>();
 
     public static Centres createCentre()
     {
@@ -293,13 +294,17 @@ public class CentreManager {
 
     }
 
-    public static ArrayList<Trainee> getPlacedTrainees() {
-        ArrayList<Trainee> placedTrainees = new ArrayList<>();
+    public static HashSet<Trainee> getPlacedTrainees() {
+
         for(Centres centre:openCentres) {
             placedTrainees.addAll(centre.getTrainees());
         }
 
         return placedTrainees;
+    }
+
+    public static int getNumberPlacedTrainees() {
+        return placedTrainees.size();
     }
 
 

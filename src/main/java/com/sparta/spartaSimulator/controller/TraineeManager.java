@@ -74,11 +74,16 @@ public class TraineeManager {
     }
 
     public static void updateTraineeMonthsInTraining() {
+        ArrayList<Trainee> traineesToRemoveFromCentres = new ArrayList<>();
+
         for(Trainee trainee:CentreManager.getPlacedTrainees()) {
             trainee.setMonthsInTraining(trainee.getMonthsInTraining() + 1);
             if(trainee.getMonthsInTraining() == 12) {
                 Bench.addTrainees(trainee);
+                traineesToRemoveFromCentres.add(trainee);
             }
         }
+
+        CentreManager.getPlacedTrainees().removeAll(traineesToRemoveFromCentres);
     }
 }

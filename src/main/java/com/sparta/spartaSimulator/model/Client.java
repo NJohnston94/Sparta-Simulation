@@ -39,7 +39,7 @@ public class Client {
     }
 
     public int generateRequirements(){
-        return randomNumber.nextInt(30);
+        return randomNumber.nextInt(10);
     }
 
     public void setNewTraineeRequirement(){
