@@ -87,6 +87,10 @@ public class TimeManager implements Runnable {
             // Use centreManager to move trainees
             CentreManager.addTrainees(CentreManager.openCentres);
 
+            if (counter % 12 == 0){
+                ClientManager.getNewClientRequirements();
+            }
+
             UserInterface.printOpenCentresAndSize();
 
             counter++;
