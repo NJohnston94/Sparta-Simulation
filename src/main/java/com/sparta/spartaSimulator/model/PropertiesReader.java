@@ -61,9 +61,9 @@ public class PropertiesReader {
         return Integer.parseInt(properties.getProperty("minTrainees"));
     }
 
-    public static long getMaxTraineesCreated() {
+    public static int getMaxTraineesCreated() {
         createProperties();
-        return Long.parseLong(properties.getProperty("maxTrainees"));
+        return Integer.parseInt(properties.getProperty("maxTrainees"));
     }
 
     public static long getMaxNumberOfTraineeToAdd() {
