@@ -19,13 +19,22 @@ public class Client {
     }
 
     public Client() {
-        this.traineeRequirement += randomNumber.nextInt(30);
+        this.traineeRequirement += generateRequirements();
         this.courseRequirement = TrainingCourse.setRandomCourseType();
         this.clientHappiness = ClientHappiness.HAPPY;
     }
 
     public int getTraineeRequirement() {
         return traineeRequirement;
+    }
+
+    public int generateRequirements(){
+        return randomNumber.nextInt(30);
+    }
+
+    public void setTraineeRequirement(){
+        this.traineeRequirement = 15;
+        this.traineeRequirement += generateRequirements();
     }
 
     public TrainingCourse.CourseType getCourseRequirement() {
