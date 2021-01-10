@@ -16,7 +16,7 @@ public class Bench {
     public static int getBenchSize(){
         return benchList.size();
     }
-    public static int getTrainees(TrainingCourse.CourseType traineeCourse){
+    public static int getTrainees(Courses.CourseType traineeCourse){
         int total = 0;
         for(Trainee trainee:benchList){
             if(trainee.getTraineeCourse()==traineeCourse){

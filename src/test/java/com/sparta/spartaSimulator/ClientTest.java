@@ -25,6 +25,6 @@ public class ClientTest {
     public void checkNewClientHappiness() {
         Client client = new Client();
 
-        Assertions.assertEquals("UNHAPPY", client.getClientHappiness().toString());
+        Assertions.assertEquals("HAPPY", client.getClientHappiness().toString());
     }
 }

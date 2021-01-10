@@ -6,7 +6,7 @@ import java.util.Random;
 public class Client {
 
     private int traineeRequirement = 15;
-    private TrainingCourse.CourseType courseRequirement;
+    private Courses.CourseType courseRequirement;
     private ClientHappiness clientHappiness;
     private ArrayList<Trainee> clientCurrentTrainees = new ArrayList<Trainee>();
     private ArrayList<Trainee> previousTrainees = new ArrayList<Trainee>();
@@ -21,7 +21,7 @@ public class Client {
 
     public Client() {
         this.traineeRequirement += generateRequirements();
-        this.courseRequirement = TrainingCourse.setRandomCourseType();
+        this.courseRequirement = Courses.setRandomCourseType();
         this.clientHappiness = ClientHappiness.HAPPY;
         this.age = 0;
     }
@@ -45,10 +45,10 @@ public class Client {
     public void setNewTraineeRequirement(){
         this.traineeRequirement = 15;
         this.traineeRequirement += generateRequirements();
-        this.courseRequirement = TrainingCourse.setRandomCourseType();
+        this.courseRequirement = Courses.setRandomCourseType();
     }
 
-    public TrainingCourse.CourseType getCourseRequirement() {
+    public Courses.CourseType getCourseRequirement() {
         return courseRequirement;
     }
 
