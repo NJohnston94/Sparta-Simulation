@@ -1,13 +1,10 @@
 package com.sparta.spartaSimulator.model;
 
-import com.sparta.spartaSimulator.controller.TraineeManager;
-
-import java.util.*;
-
 public class Trainee {
     private TraineeStatus traineeStatus;
     private int traineeID;
-    private final TrainingCourse.CourseType traineeCourse;
+    private final Courses.CourseType traineeCourse;
+    private int monthsInTraining = 0;
 
     public enum TraineeStatus {
         PLACED,
@@ -15,19 +12,17 @@ public class Trainee {
         UNPLACED
     }
 
-    private static final Random RANDOM = new Random();
-
     public Trainee() {
         this.traineeStatus = TraineeStatus.UNPLACED;
-        this.traineeCourse = TrainingCourse.setRandomCourseType();
+        this.traineeCourse = Courses.setRandomCourseType();
     }
 
-    public Trainee(TrainingCourse.CourseType course) {
+    public Trainee(Courses.CourseType course) {
         this.traineeStatus = TraineeStatus.UNPLACED;
         this.traineeCourse = course;
     }
 
-    public TrainingCourse.CourseType getTraineeCourse() {
+    public Courses.CourseType getTraineeCourse() {
         return traineeCourse;
     }
 
@@ -45,5 +40,13 @@ public class Trainee {
 
     public void setTraineeID(int traineeID) {
         this.traineeID = traineeID;
+    }
+
+    public int getMonthsInTraining() {
+        return monthsInTraining;
+    }
+
+    public void setMonthsInTraining(int monthsInTraining) {
+        this.monthsInTraining = monthsInTraining;
     }
 }

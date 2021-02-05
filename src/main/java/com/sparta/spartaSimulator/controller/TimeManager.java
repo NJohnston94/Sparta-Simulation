@@ -1,5 +1,7 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.model.CentreStatusInfo;
+import com.sparta.spartaSimulator.model.OutputToFile;
 import com.sparta.spartaSimulator.model.PropertiesReader;
 import com.sparta.spartaSimulator.view.LoggerClass;
 import com.sparta.spartaSimulator.view.UserInterface;
@@ -50,9 +52,9 @@ public class TimeManager implements Runnable {
         //System.out.println("");
         //long separation = UserInterface.getTimeSeparation() * 1000;
         long separation = PropertiesReader.getTimeSeparation() * 1000;
-        if (monthlyOrEnd == 1) {
+        if (monthlyOrEnd == PropertiesReader.getMonthlyOrEnd()) {
             System.out.println("");
-            System.out.println("Each second of the simulation corresponds to 1 month of real time. \n");
+            System.out.println("Each "+separation+" ms of the simulation corresponds to 1 month of real time. \n");
         }
 
 //        UserInterface.setCentreOpeningFrequency();
@@ -70,8 +72,8 @@ public class TimeManager implements Runnable {
 
             }
 
-            if(CentreManager.openCentres.size() > 0){
-                CentreManager.monthlyCheck();
+            if(CentreStatusInfo.getOpenCentres().size() > 0){
+                Richard.monthlyCheck();
             }
 
             LoggerClass.logTrace("Start of iteration : " + (getSystemTime() - startTime));
@@ -85,17 +87,29 @@ public class TimeManager implements Runnable {
             // Every month generate employees
             TraineeManager.createTrainees();
             // Use centreManager to move trainees
-            CentreManager.addTrainees(CentreManager.openCentres);
+            CentreManager.addTrainees(CentreStatusInfo.getOpenCentres());
 
             UserInterface.printOpenCentresAndSize();
 
             counter++;
 
             CentreManager.updateCentreAge();
+            TraineeManager.updateTraineeMonthsInTraining();
+            if(counter > 12) {
+                ClientManager.createClients();
+                ClientManager.addTraineesToAllClients();
+            }
+
+            if(counter > 13) {
+                ClientManager.updateClientAge();
+                ClientManager.checkClientAge();
+            }
 
             if (monthlyOrEnd == 1) {
                 //UserInterface.displayResults();
                 UserInterface.presentData();
+//                UserInterface.presentDataToFile();
+                OutputToFile.appendDataToFile();
                 delay = delayTime(separation, counter, startTime);
 
                 try {
@@ -112,6 +126,8 @@ public class TimeManager implements Runnable {
         System.out.println("");
         //UserInterface.displayResults();
         UserInterface.presentData();
+        //OutputToFile.clearOutputFile();
+        OutputToFile.appendDataToFile();
     }
 
     public static void setCentreOpeningFrequency(int centreOpeningFrequency) {
@@ -120,5 +136,9 @@ public class TimeManager implements Runnable {
 
     public static long getCentreFrequencyOpening() {
         return centreOpeningFrequency;
+    }
+
+    public static long getCounter() {
+        return counter;
     }
 }

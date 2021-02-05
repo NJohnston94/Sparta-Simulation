@@ -3,11 +3,7 @@ package com.sparta.spartaSimulator;
 import com.sparta.spartaSimulator.controller.CentreManager;
 import com.sparta.spartaSimulator.controller.Centres;
 import com.sparta.spartaSimulator.controller.Factory;
-import com.sparta.spartaSimulator.model.BootCamp;
-import com.sparta.spartaSimulator.model.Trainee;
-import com.sparta.spartaSimulator.model.TechCentre;
-import com.sparta.spartaSimulator.model.TraineeCentre;
-import com.sparta.spartaSimulator.model.TrainingHub;
+import com.sparta.spartaSimulator.model.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -47,9 +43,10 @@ public class TraineeCentreTest {
         centres.setCentreStatus(TraineeCentre.CentreStatus.FULL);
 
         Trainee trainee = new Trainee();
+        WaitingList.addTrainees(trainee);
 
-        centres.addTrainee(trainee);
-
+        CentreManager.addTrainee(centres);
+        Assertions.assertTrue(CentreManager.isFull(centres));
         Assertions.assertEquals(0, centres.getCurrentCapacity());
 
     }

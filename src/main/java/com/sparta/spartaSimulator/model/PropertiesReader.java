@@ -31,9 +31,9 @@ public class PropertiesReader {
         return Long.parseLong(properties.getProperty("timeSeparation"));
     }
 
-    public static long getOpeningFrequency() {
+    public static int getOpeningFrequency() {
         createProperties();
-        return Long.parseLong(properties.getProperty("centreOpeningFrequency"));
+        return Integer.parseInt(properties.getProperty("centreOpeningFrequency"));
     }
 
     public static int getBootcampMaxCapacity() {
@@ -61,9 +61,9 @@ public class PropertiesReader {
         return Integer.parseInt(properties.getProperty("minTrainees"));
     }
 
-    public static long getMaxTraineesCreated() {
+    public static int getMaxTraineesCreated() {
         createProperties();
-        return Long.parseLong(properties.getProperty("maxTrainees"));
+        return Integer.parseInt(properties.getProperty("maxTrainees"));
     }
 
     public static long getMaxNumberOfTraineeToAdd() {

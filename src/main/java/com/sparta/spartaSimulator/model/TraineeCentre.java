@@ -2,10 +2,7 @@ package com.sparta.spartaSimulator.model;
 
 import com.sparta.spartaSimulator.controller.Centres;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Random;
 
 public abstract class TraineeCentre implements Centres {
 
@@ -15,13 +12,10 @@ public abstract class TraineeCentre implements Centres {
     private int age;
     private int safePeriod;
 
-
-    private static final Random RANDOM = new Random();
-    private TrainingCourse.CourseType centreCourseType; //TechCentre only
+    private Courses.CourseType centreCourseType; //TechCentre only
 
     public enum CentreStatus {
         FULL,
-        //NEARLY_FULL,
         NOT_FULL
     }
 
@@ -47,7 +41,6 @@ public abstract class TraineeCentre implements Centres {
         this.age = age;
     }
 
-
     public int getSafePeriod() {
         return safePeriod;
     }
@@ -55,7 +48,6 @@ public abstract class TraineeCentre implements Centres {
     public void setSafePeriod(int safePeriod) {
         this.safePeriod = safePeriod;
     }
-
 
     public CentreStatus getCentreStatus() {
         return centreStatus;
@@ -68,25 +60,14 @@ public abstract class TraineeCentre implements Centres {
     public void checkCentreStatus() {
         if (allTrainees.size() == MAX_CAPACITY) {
             setCentreStatus(CentreStatus.FULL);
-        } //else if (allTrainees.size() >= 80) {
-//            setCentreStatus(CentreStatus.NEARLY_FULL);
-//        }
+        }
     }
 
     //Changes to this method to check specialism against centres
     public void addTrainee(Trainee trainee) {
-//        if (this.getCentreStatus().equals(CentreStatus.NOT_FULL)) {
-//            allTrainees.add(trainee);
-//            checkCentreStatus();
-//        }
         allTrainees.add(trainee);
         checkCentreStatus();
     }
-
-//    public void addAllTrainees(HashSet<Trainee> trainees) {
-//        allTrainees.addAll(trainees);
-//        checkCentreStatus();
-//    }
 
     public int getCurrentCapacity() {
         return allTrainees.size();
@@ -104,7 +85,7 @@ public abstract class TraineeCentre implements Centres {
         return allTrainees;
     }
 
-    public TrainingCourse.CourseType getCentreCourseType() {
+    public Courses.CourseType getCentreCourseType() {
         return centreCourseType;
     }
 

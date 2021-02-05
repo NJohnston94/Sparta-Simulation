@@ -40,7 +40,7 @@ public class WaitingList {
         return traineeCentre.getTrainees();
     }
 
-    public static int getTrainees(TrainingCourse.CourseType traineeCourse){
+    public static int getTrainees(Courses.CourseType traineeCourse){
         int total = 0;
         for(Trainee trainee:waitingList){
             if(trainee.getTraineeCourse()==traineeCourse){

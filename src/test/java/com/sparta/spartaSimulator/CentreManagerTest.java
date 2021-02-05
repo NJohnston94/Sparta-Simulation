@@ -1,13 +1,7 @@
 package com.sparta.spartaSimulator;
 
-import com.sparta.spartaSimulator.controller.CentreManager;
-import com.sparta.spartaSimulator.controller.Centres;
-import com.sparta.spartaSimulator.controller.Factory;
-import com.sparta.spartaSimulator.controller.TraineeManager;
-import com.sparta.spartaSimulator.model.Trainee;
-import com.sparta.spartaSimulator.model.TraineeCentre;
-import com.sparta.spartaSimulator.model.TrainingCourse;
-import com.sparta.spartaSimulator.model.WaitingList;
+import com.sparta.spartaSimulator.controller.*;
+import com.sparta.spartaSimulator.model.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +22,7 @@ public class CentreManagerTest {
     public void centreIsFull()
     {
 
-        CentreManager.openCentres.clear();
+        CentreStatusInfo.getOpenCentres().clear();
         Centres centre = CentreManager.createCentre(1);
         centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
         Assertions.assertNotNull(centre);
@@ -55,48 +49,53 @@ public class CentreManagerTest {
 
         Centres centre2 = CentreManager.createCentre(1);
         centre2.setCentreStatus(TraineeCentre.CentreStatus.FULL);
-        Assertions.assertEquals(1, CentreManager.getNumberOfFullCentres());
+        Assertions.assertEquals(1, CentreStatusInfo.getNumberOfFullCentres());
 
     }
 
     @Test
     void getTraineesStreamTestOne() {
 
-        CentreManager.openCentres.clear();
+        CentreStatusInfo.getOpenCentres().clear();
         int count = 0;
         Centres centre = CentreManager.createCentre();
-        for(int i = 0; i<20;i++){
+        for(int i = 0; i < 20; i++){
             Trainee trainee = new Trainee();
-            if(trainee.getTraineeCourse() == TrainingCourse.CourseType.JAVA ){
+            if(trainee.getTraineeCourse() == Courses.CourseType.JAVA ){
                 count++;
             }
             centre.addTrainee(trainee);
         }
-        Assertions.assertEquals(count,CentreManager.getTrainees(TrainingCourse.CourseType.JAVA));
+        Assertions.assertEquals(count,CentreManager.getTrainees(Courses.CourseType.JAVA));
     }
 
     @Test
     void getTraineesStreamTestTwo() {
+
         CentreManager.destroyAllCentres();
         int count2 = 0;
         Centres centre1 = CentreManager.createCentre();
-        for(int i = 0; i<20;i++){
+
+        for(int i = 0; i < 20; i++){
             Trainee trainee = new Trainee();
-            if(trainee.getTraineeCourse() == TrainingCourse.CourseType.JAVA ){
+            if(trainee.getTraineeCourse() == Courses.CourseType.JAVA ){
                 count2++;
             }
             centre1.addTrainee(trainee);
         }
+
         Centres centre2 = CentreManager.createCentre();
-        for(int i = 0; i<20;i++){
+        for(int i = 0; i < 20; i++){
             Trainee trainee = new Trainee();
-            if(trainee.getTraineeCourse() == TrainingCourse.CourseType.JAVA ){
+            if(trainee.getTraineeCourse() == Courses.CourseType.JAVA ){
                 count2++;
             }
             centre2.addTrainee(trainee);
         }
-        Assertions.assertEquals(count2,CentreManager.getTrainees(TrainingCourse.CourseType.JAVA));
+        Assertions.assertEquals(count2,CentreManager.getTrainees(Courses.CourseType.JAVA));
     }//fine individually, not all together
+
+    @Test
     public void randomChecking()
     {
         Centres bootCamp1 = CentreManager.createCentre(3);
@@ -118,17 +117,17 @@ public class CentreManagerTest {
         Centres second = CentreManager.createCentre();
         Centres third = CentreManager.createCentre(32);
 
-        final int size = CentreManager.openCentres.size();
+        final int size = CentreStatusInfo.getOpenCentres().size();
 
 
-        CentreManager.deleteCentre(third);
+        Richard.deleteCentre(third);
 
-        Assertions.assertEquals(size-1, CentreManager.openCentres.size());
+        Assertions.assertEquals(size-1, CentreStatusInfo.getOpenCentres().size());
     }
 
     @Test
     public void relocateTrainees(){
-        CentreManager.openCentres.clear();
+        CentreStatusInfo.getOpenCentres().clear();
 
         HashSet<Trainee> toRelocate = TraineeManager.createTrainees();
 
@@ -143,7 +142,7 @@ public class CentreManagerTest {
     @Test
     public void monthlyChecks(){
 
-        CentreManager.openCentres.clear();
+        CentreStatusInfo.getOpenCentres().clear();
 
         Centres trainingHub = Factory.centreFactory(1);
         for(int i = 0; i < 100; i++){
@@ -164,15 +163,15 @@ public class CentreManagerTest {
         CentreManager.addCentreToOpenCentres(third);
 
 
-        CentreManager.monthlyCheck();
-        Assertions.assertEquals(2,CentreManager.openCentres.size());
-        Assertions.assertEquals(74, CentreManager.openCentres.get(1).getCurrentCapacity());
+        Richard.monthlyCheck();
+        Assertions.assertEquals(2,CentreStatusInfo.getOpenCentres().size());
+        Assertions.assertEquals(74, CentreStatusInfo.getOpenCentres().get(1).getCurrentCapacity());
 
     }
 
     @Test
     public void monthlyChecksLeftOver(){
-        CentreManager.openCentres.clear();
+        CentreStatusInfo.getOpenCentres().clear();
         WaitingList.getWaitingList().clear();
 
 
@@ -194,8 +193,8 @@ public class CentreManagerTest {
         third.setAge(3);
         CentreManager.addCentreToOpenCentres(third);
 
-        CentreManager.monthlyCheck();
-        Assertions.assertEquals(2,CentreManager.openCentres.size());
+        Richard.monthlyCheck();
+        Assertions.assertEquals(2,CentreStatusInfo.getOpenCentres().size());
 
         Assertions.assertEquals(14, WaitingList.getWaitingListSize());
 
@@ -203,7 +202,7 @@ public class CentreManagerTest {
 
     @Test
     public void multipleCentresToDelete(){
-        CentreManager.openCentres.clear();
+        CentreStatusInfo.getOpenCentres().clear();
         Centres trainingHub = Factory.centreFactory(1);
         for(int i = 0; i < 100; i++){
             trainingHub.addTrainee(new Trainee());
@@ -231,8 +230,8 @@ public class CentreManagerTest {
         CentreManager.addCentreToOpenCentres(multiple);
 
 
-        CentreManager.monthlyCheck();
-        Assertions.assertEquals(3,CentreManager.openCentres.size());
+        Richard.monthlyCheck();
+        Assertions.assertEquals(3,CentreStatusInfo.getOpenCentres().size());
 
 
     }
@@ -240,7 +239,7 @@ public class CentreManagerTest {
 
     @Test
     public void checkWaitingListPriority(){
-        CentreManager.openCentres.clear();
+        CentreStatusInfo.getOpenCentres().clear();
         Centres centres = CentreManager.createCentre();
         Centres centres1 = CentreManager.createCentre();
         centres.setCentreStatus(TraineeCentre.CentreStatus.FULL);
@@ -254,25 +253,25 @@ public class CentreManagerTest {
 
         TraineeManager.createTrainees();
 
-        CentreManager.addTrainees(CentreManager.openCentres);
+        CentreManager.addTrainees(CentreStatusInfo.getOpenCentres());
 
         Assertions.assertNotEquals(size, WaitingList.getWaitingListSize());
-        
+
     }
 
 
     @Test
     public void doesNumberRemainBelowCapacity(){
-        Centres centres = Factory.centreFactory(2);
+        Centres centres = Factory.centreFactory(1);
 
-        for (int i = 0; i < 300; i++) {
+        for (int i = 0; i < 201; i++) {
             Trainee trainee = new Trainee();
 
             TraineeManager.getUnplacedTrainees().add(trainee);
             CentreManager.addTrainee(centres);
         }
 
-        Assertions.assertEquals(200, centres.getCurrentCapacity());
+        Assertions.assertEquals(100, centres.getCurrentCapacity());
     }
 
     @Test
