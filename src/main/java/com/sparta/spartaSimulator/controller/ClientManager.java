@@ -3,10 +3,9 @@ package com.sparta.spartaSimulator.controller;
 import com.sparta.spartaSimulator.model.Bench;
 import com.sparta.spartaSimulator.model.Client;
 import com.sparta.spartaSimulator.model.Trainee;
-import com.sparta.spartaSimulator.model.TrainingCourse;
+import com.sparta.spartaSimulator.model.Courses;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 public class ClientManager {
@@ -143,7 +142,7 @@ public class ClientManager {
         return traineesWithClients;
     }
 
-    public static int getTrainees(TrainingCourse.CourseType courseType) {
+    public static int getTrainees(Courses.CourseType courseType) {
         int countTrainees = 0;
 
         for (Client client : getClients()) {

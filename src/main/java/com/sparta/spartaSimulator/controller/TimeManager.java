@@ -1,5 +1,6 @@
 package com.sparta.spartaSimulator.controller;
 
+import com.sparta.spartaSimulator.model.CentreStatusInfo;
 import com.sparta.spartaSimulator.model.OutputToFile;
 import com.sparta.spartaSimulator.model.PropertiesReader;
 import com.sparta.spartaSimulator.view.LoggerClass;
@@ -71,8 +72,8 @@ public class TimeManager implements Runnable {
 
             }
 
-            if(CentreManager.openCentres.size() > 0){
-                CentreManager.monthlyCheck();
+            if(CentreStatusInfo.getOpenCentres().size() > 0){
+                Richard.monthlyCheck();
             }
 
             LoggerClass.logTrace("Start of iteration : " + (getSystemTime() - startTime));
@@ -86,7 +87,7 @@ public class TimeManager implements Runnable {
             // Every month generate employees
             TraineeManager.createTrainees();
             // Use centreManager to move trainees
-            CentreManager.addTrainees(CentreManager.openCentres);
+            CentreManager.addTrainees(CentreStatusInfo.getOpenCentres());
 
             UserInterface.printOpenCentresAndSize();
 

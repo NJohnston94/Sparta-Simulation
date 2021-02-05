@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class TrainingCourse {
+public class Courses {
 
     private static final Random RANDOM = new Random();
     private static final ArrayList<CourseType> courseTypes = new ArrayList<>(Arrays.asList(
@@ -21,6 +21,7 @@ public class TrainingCourse {
         DEVOPS,
         BUSINESS
     }
+
 
     public static CourseType setRandomCourseType() {
         return courseTypes.get(RANDOM.nextInt(5));

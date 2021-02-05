@@ -3,7 +3,7 @@ package com.sparta.spartaSimulator.controller;
 
 import com.sparta.spartaSimulator.model.Trainee;
 import com.sparta.spartaSimulator.model.TraineeCentre;
-import com.sparta.spartaSimulator.model.TrainingCourse;
+import com.sparta.spartaSimulator.model.Courses;
 
 import java.util.HashSet;
 
@@ -25,13 +25,11 @@ public interface Centres {
 
     public void addTrainee(Trainee trainee);
 
-//    public void addAllTrainees(HashSet<Trainee> trainees);
-
     public int getCurrentCapacity();
 
     public int getMaxCapacity();
 
     public HashSet<Trainee> getTrainees();
 
-    public TrainingCourse.CourseType getCentreCourseType();
+    public Courses.CourseType getCentreCourseType();
 }

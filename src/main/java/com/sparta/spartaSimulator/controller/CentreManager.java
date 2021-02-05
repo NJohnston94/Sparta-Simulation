@@ -8,77 +8,46 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class CentreManager {
-    public static ArrayList<Centres> openCentres = new ArrayList<>();
-    public static int numberOfFullCentres = 0;
-    public static int totalNumberOfTrainees = 0;
-    public static Random random = new Random();
-    public static int numberOfDeletedCentres = 0;
-    private static HashSet<Trainee> placedTrainees = new HashSet<>();
 
-    public static Centres createCentre()
-    {
-        Centres centre = Factory.centreFactory(randomGeneration());
-        if(centre.getClass().getSimpleName().equals("TrainingHub"))
-        {
+    private static CentreStatusInfo CSI = new CentreStatusInfo();
+    private static RandomGeneratorHub randoms = new RandomGeneratorHub();
+
+    public static Centres createCentre() {
+        Centres centre = Factory.centreFactory(RandomGeneratorHub.randomFactoryGen());
+        if (centre.getClass().getSimpleName().equals("TrainingHub")) {
             Centres trainingHub1 = Factory.centreFactory(1);
             Centres trainingHub2 = Factory.centreFactory(1);
 
             trainingHub1.setAge(0);
             trainingHub2.setAge(0);
 
-            openCentres.add(trainingHub1);
-            openCentres.add(trainingHub2);
+            CentreStatusInfo.getOpenCentres().add(trainingHub1);
+            CentreStatusInfo.getOpenCentres().add(trainingHub2);
         }
 
         centre.setAge(0);
-        openCentres.add(centre);
+        CSI.getOpenCentres().add(centre);
         //System.out.println("Centre created:  " + centre.getClass().getSimpleName());
         LoggerClass.logTrace("Centre Created of type : " + centre.getClass().getSimpleName());
         return centre;
     }
 
-    public static void updateCentreAge(){
+    public static void updateCentreAge() {
 
-        for (Centres centres : CentreManager.openCentres){
-            centres.setAge(centres.getAge()+1);
+        for (Centres centres : CSI.getOpenCentres()) {
+            centres.setAge(centres.getAge() + 1);
         }
 
-    }
-
-
-
-
-
-
-
-    public static int randomGeneration()
-    {
-        int count = 0;
-        int range;
-        for(Centres centre: openCentres)
-        {
-            if(centre.getClass().getSimpleName().equals("BootCamp"))
-            {
-                count++;
-            }
-        }
-        if(count >= PropertiesReader.getMaxNumberOfBootcamps())
-        {
-            range = (2-1)+1;
-        }
-        else
-        {
-            range = (3-1)+1;
-        }
-        return (int)(Math.random() * range) + 1;
     }
 
     //This Constructor is for testing purposes only
     public static Centres createCentre(int cap) {
-        Centres centre = Factory.centreFactory(1);
+        Centres centre = null;
+        if(cap > 3){centre = Factory.centreFactory(1);}
+        else
+        {centre = Factory.centreFactory(cap);}
         //centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
-        //centre.setCentreStatus(TraineeCentre.CentreStatus.FULL);
-        openCentres.add(centre);
+        CSI.getOpenCentres().add(centre);
         return centre;
     }
 
@@ -86,22 +55,26 @@ public class CentreManager {
         return centre.getCentreStatus() == TraineeCentre.CentreStatus.FULL;
     }
 
+    public static boolean isTechCentre(Centres centre) {
+        return centre.getClass().getSimpleName().equals("TechCentre");
+    }
+
     public static int getTrainees() {
         int countTrainees = 0;
 
-        for (Centres centre : openCentres) {
+        for (Centres centre : CSI.getOpenCentres()) {
             countTrainees += centre.getCurrentCapacity();
         }
-        totalNumberOfTrainees = countTrainees;
+        CSI.setTotalNumberOfTrainees(countTrainees);
         return countTrainees;
     }
 
-    public static int getTrainees(TrainingCourse.CourseType course){
+    public static int getTrainees(Courses.CourseType course) {
         int countTrainees = 0;
 
-        for (Centres centre: openCentres) {
-            for(Trainee trainee: centre.getTrainees()){
-                if(trainee.getTraineeCourse() == course){
+        for (Centres centre : CSI.getOpenCentres()) {
+            for (Trainee trainee : centre.getTrainees()) {
+                if (trainee.getTraineeCourse() == course) {
                     countTrainees++;
                 }
             }
@@ -109,19 +82,13 @@ public class CentreManager {
         return countTrainees;
     }//returns number of trainees in a particular stream
 
-    private static int generateNumberOfTrainees() {
-        Random random = new Random();
-        int randomNumber = random.nextInt(21);
-        return randomNumber;
-    }
-
     public static void addTrainees(ArrayList<Centres> openCentres) {
-        if (openCentres.size()!=0) {
+        if (openCentres.size() != 0) {
 
             for (Centres openCentre : openCentres) {
 
                 if (!isFull(openCentre)) {
-                    for (int i = 0; i < generateNumberOfTrainees(); i++) {
+                    for (int i = 0; i < randoms.generateNumberOfTraineesForCentres(); i++) {
                         addTrainee(openCentre);
                     }
                 }
@@ -134,34 +101,35 @@ public class CentreManager {
     }
 
     public static void addTrainee(Centres openCentre) {
+
         if (!isFull(openCentre)) {
-        if (WaitingList.getWaitingListSize() > 0) {
-            if (openCentre.getClass().getSimpleName().equals("TechCentre")) {
-                Trainee trainee = TraineeManager.getTraineeTechCentre(WaitingList.getWaitingList(), openCentre.getCentreCourseType());
-                if (trainee != null && trainee.getTraineeCourse() == openCentre.getCentreCourseType()) {
-                    openCentre.addTrainee(trainee);
+
+            if (WaitingList.getWaitingListSize() > 0) {
+                if (isTechCentre(openCentre)) {
+                    Trainee trainee = TraineeManager.getTraineeTechCentre(WaitingList.getWaitingList(),
+                            openCentre.getCentreCourseType());
+                    techCentreMatch(openCentre, trainee);
                 } else {
-                    TraineeManager.getUnplacedTrainees().add(trainee);
+                    openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
                 }
+            } else if (TraineeManager.getUnplacedTrainees().size() > 0) {
+                openCentre.addTrainee(TraineeManager.getTrainee(TraineeManager.getUnplacedTrainees()));
             } else {
-                openCentre.addTrainee(TraineeManager.getTrainee(WaitingList.getWaitingList()));
+                LoggerClass.logTrace("No trainees available for placement");
+
             }
-            //System.out.println("Trainee added from Waiting List");
-                } else if (TraineeManager.getUnplacedTrainees().size() > 0) {
-
-                    openCentre.addTrainee(TraineeManager.getTrainee(TraineeManager.getUnplacedTrainees()));
-                    //System.out.println("Trainee added from Unplaced List");
-
-                } else {
-
-                    //System.out.println("No trainees available for placement");
-                    LoggerClass.logTrace("No trainees available for placement");
-
-                }
             openCentre.checkCentreStatus();
-
         }
     }
+
+    private static void techCentreMatch(Centres openCentre, Trainee trainee) {
+        if (trainee.getTraineeCourse() == openCentre.getCentreCourseType()) {
+            openCentre.addTrainee(trainee);
+        } else {
+            TraineeManager.getUnplacedTrainees().add(trainee);
+        }
+    }
+
     public static void addUnplacedTraineesToWaitingList() {
         WaitingList.addAllTrainees(TraineeManager.getUnplacedTrainees());
         TraineeManager.emptyUnplacedTrainees();
@@ -170,97 +138,28 @@ public class CentreManager {
     public static void addTrainee(Centres centre, Trainee trainee) {
 
         if (WaitingList.getWaitingListSize() != 0) {
-            WaitingList.addTraineesToCentre(centre, generateNumberOfTrainees());
+            WaitingList.addTraineesToCentre(centre, randoms.generateNumberOfTraineesForCentres());
         }
 
-    }
-
-    public static int getNumberOfFullCentres() {
-        numberOfFullCentres = 0;
-        for (Centres centre : openCentres) {
-            if (CentreManager.isFull(centre)) {
-                numberOfFullCentres++;
-            }
-        }
-        return numberOfFullCentres;
-    }
-
-    public static int getNumberOfDeletedCentres(){
-        return numberOfDeletedCentres;
     }
 
     //this method is purely for testing purposes
-    public static void destroyAllCentres(){
-        openCentres.clear();
+    public static void destroyAllCentres() {
+        CSI.getOpenCentres().clear();
     }
 
-    public static void addCentreToOpenCentres(Centres centre){
-        openCentres.add(centre);
+    public static void addCentreToOpenCentres(Centres centre) {
+        CSI.getOpenCentres().add(centre);
     }
 
     public static ArrayList<Centres> getFreeCentres() {
         ArrayList<Centres> freeCentres = new ArrayList<>();
-        for(Centres centre :openCentres) {
+        for (Centres centre : CSI.getOpenCentres()) {
             if (!isFull(centre)) {
                 freeCentres.add(centre);
             }
         }
         return freeCentres;
-    }
-
-    public static void monthlyCheck() {
-        ArrayList<Centres> toDelete = getCentresToDelete();
-
-
-        for(Centres centre : toDelete){
-            deleteCentre(centre);
-            numberOfDeletedCentres++;
-            toDelete = getCentresToDelete();
-            if(toDelete.size() == 0){
-                break;
-            }
-
-        }
-    }
-
-    public static ArrayList<Centres> getCentresToDelete(){
-        ArrayList<Centres> toDelete = new ArrayList<>();
-
-
-        for(Centres centre :openCentres) {
-            boolean canDelete = centre.getSafePeriod() < centre.getAge();
-            //System.out.println("OPEN CENTRES : " + centre.getCurrentCapacity());
-            if (centre.getCurrentCapacity() < 25 && canDelete) {
-                //and not in safe period!
-                toDelete.add(centre);
-            }
-
-        }
-        return toDelete;
-    }
-
-    public static void deleteCentre(Centres centre) {
-        //System.out.println("DELETE CALLED with centre capacity: "+ centre.getCurrentCapacity());
-        LoggerClass.logTrace("DELETE CALLED with centre capacity : " + centre.getCurrentCapacity());
-        HashSet<Trainee> traineesToRelocate = centre.getTrainees();
-        openCentres.remove(centre);
-
-
-        relocateTrainees(traineesToRelocate);
-    }
-
-    public static int getNumberOfOpenCentres(){
-        return openCentres.size();
-    }
-
-    public static int getNumberOfOpenCentres(String course){
-        int count = 0;
-        for(Centres centre: openCentres){
-            if(centre.getClass().getSimpleName().equals(course)){
-                count++;
-            }
-        }
-        return count;
     }
 
     public static void relocateTrainees(HashSet<Trainee> trainees) {
@@ -275,7 +174,7 @@ public class CentreManager {
                 int centreToAdd = random.nextInt(freeCentres.size());
 
                 //add in check is centre is suitable for trainee
-                openCentres.get(openCentres.indexOf(freeCentres.get(centreToAdd))).addTrainee(trainee);
+                CSI.getOpenCentres().get(CSI.getOpenCentres().indexOf(freeCentres.get(centreToAdd))).addTrainee(trainee);
                 traineesAdded.add(trainee);
                 freeCentres = getFreeCentres();
 
@@ -294,19 +193,4 @@ public class CentreManager {
         }
 
     }
-
-    public static HashSet<Trainee> getPlacedTrainees() {
-
-        for(Centres centre:openCentres) {
-            placedTrainees.addAll(centre.getTrainees());
-        }
-
-        return placedTrainees;
-    }
-
-    public static int getNumberPlacedTrainees() {
-        return placedTrainees.size();
-    }
-
-
 }
